@@ -100,27 +100,33 @@ nav{
 .body-text strong{font-weight:500;color:var(--dark2);}
 
 /* ══════ S0 PORTADA ══════ */
-#s0{background:var(--bur);}
-#s0 .geo{
-  position:absolute;inset:0;
-  background-image:repeating-linear-gradient(45deg,rgba(247,244,240,0.04) 0,rgba(247,244,240,0.04) 1px,transparent 1px,transparent 42px);
-}
+#s0{background:#0d0a08;}
 .p0-inner{
   position:relative;z-index:2;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   height:100%;text-align:center;padding:4vh 8vw;
 }
-.p0-logos{display:flex;align-items:center;gap:0;margin-bottom:5vh;}
+.p0-logos{display:flex;align-items:center;gap:0;margin-bottom:4vh;}
 .p0-logo-box{padding:14px 32px;display:flex;align-items:center;justify-content:center;}
-.p0-logo-box img{height:clamp(48px,7vh,80px);width:auto;filter:brightness(0) invert(1);opacity:0.92;}
-.p0-logo-sep{width:1px;height:clamp(56px,8vh,90px);background:rgba(247,244,240,0.2);}
-.p0-rule{width:56px;height:1px;background:rgba(247,244,240,0.3);margin:0 auto 3.5vh;}
-.p0-master{font-size:clamp(10px,0.92vw,13px);font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,244,240,0.5);margin-bottom:2.5vh;}
-.p0-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3.2vw,50px);font-weight:700;color:#F7F4F0;line-height:1.15;max-width:72vw;margin-bottom:4.5vh;}
-.p0-meta{display:flex;flex-direction:column;gap:1.1vh;align-items:center;}
-.p0-row{font-size:clamp(12px,1.05vw,15px);font-weight:300;color:rgba(247,244,240,0.62);}
-.p0-row span{font-weight:500;color:rgba(247,244,240,0.88);}
-.p0-year{margin-top:3vh;font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,244,240,0.38);}
+.p0-logo-box img{height:clamp(38px,5.5vh,66px);width:auto;filter:brightness(0) invert(1);opacity:0.90;}
+.p0-logo-sep{width:1px;height:clamp(46px,7vh,78px);background:rgba(247,244,240,0.2);}
+.p0-rule{width:56px;height:1px;background:rgba(155,28,28,0.7);margin:0 auto 3vh;}
+.p0-master{font-size:clamp(10px,0.88vw,12px);font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,244,240,0.45);margin-bottom:2.5vh;}
+.p0-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3.2vw,50px);font-weight:700;color:#F7F4F0;line-height:1.15;max-width:72vw;margin-bottom:4vh;}
+.p0-meta{display:flex;flex-direction:column;gap:1vh;align-items:center;}
+.p0-row{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.55);}
+.p0-row span{font-weight:500;color:rgba(247,244,240,0.85);}
+.p0-year{margin-top:2.5vh;font-size:clamp(10px,0.85vw,11px);font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,244,240,0.3);}
+/* App float */
+.p0-app{
+  position:absolute;bottom:4vh;right:4vw;z-index:3;
+  width:clamp(280px,28vw,460px);
+  border-radius:10px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5),0 4px 16px rgba(0,0,0,0.3);
+  opacity:0.18;
+  transform:perspective(800px) rotateY(-6deg) rotateX(3deg);
+}
+.p0-app img{width:100%;display:block;}
 
 /* ══════ S1 PROBLEMA ══════ */
 .p1-items{display:flex;flex-direction:column;gap:2vh;margin-top:0.5vh;}
@@ -242,7 +248,14 @@ nav{
 
 <!-- ══ S0 PORTADA ══ -->
 <div class="slide active" id="s0">
-  <div class="geo"></div>
+  <!-- Imagen de fondo aula -->
+  <div style="position:absolute;inset:0;background-image:url('images/portada.png');background-size:cover;background-position:center;"></div>
+  <!-- Gradiente oscuro dramático -->
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(13,10,8,0.82) 0%,rgba(13,10,8,0.65) 50%,rgba(13,10,8,0.78) 100%);"></div>
+  <!-- Línea granate sutil en la parte inferior -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 0%,rgba(155,28,28,0.8) 30%,rgba(155,28,28,0.8) 70%,transparent 100%);z-index:3;"></div>
+
+  <!-- Contenido centrado -->
   <div class="p0-inner">
     <div class="p0-logos">
       <div class="p0-logo-box"><img src="images/nebrija.png" alt="Universidad Nebrija"></div>
@@ -259,6 +272,11 @@ nav{
     </div>
     <p class="p0-year">Junio 2026</p>
   </div>
+
+  <!-- App flotante esquina inferior derecha -->
+  <div class="p0-app">
+    <img src="images/portada-app.png" alt="CurriculaFP app">
+  </div>
 </div>
 
 <!-- ══ S1 PROBLEMA ══ -->
@@ -266,7 +284,7 @@ nav{
   <div style="position:absolute;inset:0;background-image:url('images/slide1-desk.png');background-size:cover;background-position:center;"></div>
   <div style="position:absolute;inset:0;background:linear-gradient(100deg, rgba(247,244,240,0.97) 0%, rgba(247,244,240,0.92) 42%, rgba(247,244,240,0.4) 70%, rgba(247,244,240,0.0) 100%);"></div>
   <div style="position:absolute;inset:0;display:flex;align-items:center;padding:0 7vw 0 7vw;">
-    <div style="max-width:52%;">
+    <div style="max-width:52%;background:rgba(155,28,28,0.06);backdrop-filter:blur(1px);border-radius:10px;padding:2.5vh 2.5vw;">
       <p class="eyebrow">Justificación del proyecto</p>
       <div class="rule"></div>
       <h2 class="section-title">Complejidad normativa,<br>gestión digital <em>insuficiente</em></h2>
