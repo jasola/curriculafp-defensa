@@ -9,383 +9,219 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --bur:#9B1C1C;--bur-d:#6B1212;--bur-l:#C13333;--bur-ll:#E07070;
-  --cream:#F7F4F0;--cream-d:#EDE9E3;
-  --dark:#18100A;--dark2:#2C1A1A;--mid:#5C3D3D;
+  --cream:#F7F4F0;--cream-d:#EDE9E3;--white:#FFFFFF;
+  --dark:#18100A;--dark2:#2C1A1A;--mid:#5C3D3D;--mid-l:#8B6B6B;
   --nav-h:52px;
 }
-html,body{width:100%;height:100%;overflow:hidden;background:#111;font-family:'Inter',sans-serif;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);font-family:'Inter',sans-serif;}
 
-/* NAV */
+/* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;height:var(--nav-h);
-  background:rgba(18,8,4,0.97);backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(155,28,28,0.2);
-  display:flex;align-items:center;padding:0 2vw;z-index:1000;
+  background:rgba(247,244,240,0.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(155,28,28,0.12);
+  display:flex;align-items:center;padding:0 2.5vw;z-index:1000;
 }
 .nav-logo{display:flex;align-items:center;margin-right:2.5vw;flex-shrink:0;}
-.nav-logo img{height:20px;filter:brightness(0) invert(1);opacity:0.85;}
-.nav-div{width:1px;height:20px;background:rgba(155,28,28,0.35);margin-right:2.5vw;flex-shrink:0;}
+.nav-logo img{height:22px;}
+.nav-div{width:1px;height:18px;background:rgba(155,28,28,0.2);margin-right:2.5vw;flex-shrink:0;}
 .nav-items{display:flex;align-items:center;flex:1;overflow:hidden;}
 .nav-item{
   font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(247,244,240,0.38);padding:0 12px;height:var(--nav-h);
+  color:rgba(44,26,26,0.38);padding:0 11px;height:var(--nav-h);
   display:flex;align-items:center;cursor:pointer;white-space:nowrap;
   border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;
 }
-.nav-item:hover{color:rgba(247,244,240,0.75);}
-.nav-item.active{color:#F7F4F0;border-bottom-color:var(--bur);}
+.nav-item:hover{color:rgba(44,26,26,0.7);}
+.nav-item.active{color:var(--bur);border-bottom-color:var(--bur);}
 
-/* DECK */
+/* ── DECK ── */
 .deck{position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;}
 
-/* SLIDES */
+/* ── SLIDES ── */
 .slide{
   position:absolute;inset:0;opacity:0;pointer-events:none;
-  transition:opacity 0.5s ease;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  transition:opacity 0.5s ease;overflow:hidden;
+  background:var(--cream);
 }
 .slide.active{opacity:1;pointer-events:all;}
-.bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;}
-.ov{position:absolute;inset:0;}
-.geo{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(155,28,28,0.045) 0,rgba(155,28,28,0.045) 1px,transparent 1px,transparent 38px);}
-.body{position:relative;z-index:2;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:3.5vh 6vw 5vh;}
 
-/* ARROWS */
+/* ── EDITORIAL LAYOUT (content left, image right) ── */
+.editorial{
+  display:grid;grid-template-columns:1fr 42%;
+  height:100%;
+}
+.editorial-content{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:4vh 4vw 5vh 7vw;
+  border-right:1px solid rgba(155,28,28,0.08);
+}
+.editorial-img{
+  position:relative;overflow:hidden;
+}
+.editorial-img img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  display:block;
+}
+.editorial-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(247,244,240,0.15) 0%,transparent 100%);
+}
+
+/* ── ARROWS ── */
 .arr{
   position:fixed;top:calc(var(--nav-h) + 44%);
   z-index:500;width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(247,244,240,0.18);background:rgba(18,8,4,0.55);
-  color:rgba(247,244,240,0.55);font-size:15px;cursor:pointer;
+  border:1.5px solid rgba(155,28,28,0.25);
+  background:rgba(247,244,240,0.9);
+  color:var(--bur);font-size:15px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s;
+  transition:all 0.2s;box-shadow:0 2px 12px rgba(155,28,28,0.08);
 }
-.arr:hover{background:var(--bur);border-color:var(--bur);color:#fff;}
-.arr:disabled{opacity:0.12;cursor:default;}
-.arr.prev{left:8px;}.arr.next{right:8px;}
-.arr.cream{border-color:rgba(155,28,28,0.25);background:rgba(247,244,240,0.7);color:var(--bur);}
-.arr.cream:hover{background:var(--bur);color:#fff;border-color:var(--bur);}
+.arr:hover{background:var(--bur);color:#fff;border-color:var(--bur);}
+.arr:disabled{opacity:0.15;cursor:default;}
+.arr.prev{left:10px;}.arr.next{right:10px;}
 
-/* DOTS */
+/* ── DOTS ── */
 .dots{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:500;display:flex;gap:7px;}
-.dot{width:6px;height:6px;border-radius:50%;background:rgba(155,28,28,0.22);cursor:pointer;transition:all 0.3s;}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(155,28,28,0.18);cursor:pointer;transition:all 0.3s;}
 .dot.active{background:var(--bur);transform:scale(1.5);}
 
-/* STAMP */
-.stamp{position:absolute;bottom:3vh;left:5vw;z-index:10;display:flex;align-items:center;gap:8px;}
+/* ── STAMP ── */
+.stamp{position:absolute;bottom:3vh;left:5vw;z-index:10;display:flex;align-items:center;}
 .stamp img{height:clamp(18px,2.2vh,26px);}
-.stamp.lt img{filter:brightness(0) invert(1);opacity:0.6;}
-.stamp.dk img{filter:brightness(0) invert(0);mix-blend-mode:multiply;opacity:0.45;}
 
-/* SHARED TYPOGRAPHY */
-.eye{font-size:clamp(9.5px,0.88vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;}
-.eye-lt{color:rgba(247,244,240,0.32);}
-.eye-dk{color:rgba(155,28,28,0.5);}
+/* ── SHARED ── */
+.eyebrow{font-size:clamp(9.5px,0.85vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(155,28,28,0.5);margin-bottom:1.4vh;}
+.rule{width:40px;height:2px;background:var(--bur);margin-bottom:2.5vh;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,42px);font-weight:700;color:var(--dark2);line-height:1.15;margin-bottom:3vh;}
+.section-title em{font-style:italic;color:var(--bur);}
+.body-text{font-size:clamp(11px,1vw,14px);font-weight:300;color:var(--mid);line-height:1.7;}
+.body-text strong{font-weight:500;color:var(--dark2);}
 
-/* ═══════════════════════════════════
-   S0 — PORTADA
-═══════════════════════════════════ */
-#s0{background:var(--cream);}
-#s0 .body{flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-.p0-top{display:flex;align-items:center;gap:0;margin-bottom:4.5vh;}
-.p0-logo-wrap{padding:16px 32px;display:flex;align-items:center;justify-content:center;}
-.p0-logo-wrap img{height:clamp(56px,8vh,96px);width:auto;}
-.p0-logo-wrap.nebrija img{filter:none;}
-.p0-logo-wrap.curricula img{filter:none;}
-.p0-sep{width:1px;height:clamp(70px,10vh,110px);background:rgba(155,28,28,0.2);}
-.p0-rule{width:56px;height:2px;background:var(--bur);margin:0 auto 3.5vh;}
-.p0-master{
-  font-size:clamp(10px,0.95vw,13px);font-weight:400;letter-spacing:0.16em;
-  text-transform:uppercase;color:rgba(44,26,26,0.5);margin-bottom:2.5vh;
+/* ══════ S0 PORTADA ══════ */
+#s0{background:var(--bur);}
+#s0 .geo{
+  position:absolute;inset:0;
+  background-image:repeating-linear-gradient(45deg,rgba(247,244,240,0.04) 0,rgba(247,244,240,0.04) 1px,transparent 1px,transparent 42px);
 }
-.p0-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(22px,2.8vw,42px);font-weight:700;
-  color:var(--dark2);line-height:1.18;max-width:70vw;margin-bottom:4vh;
+.p0-inner{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;text-align:center;padding:4vh 8vw;
 }
-.p0-meta{display:flex;flex-direction:column;gap:1vh;align-items:center;}
-.p0-row{font-size:clamp(12px,1.05vw,15px);font-weight:300;color:var(--mid);}
-.p0-row span{font-weight:500;color:var(--dark2);}
-.p0-year{
-  margin-top:3vh;font-size:clamp(10px,0.9vw,12px);font-weight:500;
-  letter-spacing:0.2em;text-transform:uppercase;color:rgba(155,28,28,0.55);
-}
+.p0-logos{display:flex;align-items:center;gap:0;margin-bottom:5vh;}
+.p0-logo-box{padding:14px 32px;display:flex;align-items:center;justify-content:center;}
+.p0-logo-box img{height:clamp(48px,7vh,80px);width:auto;filter:brightness(0) invert(1);opacity:0.92;}
+.p0-logo-sep{width:1px;height:clamp(56px,8vh,90px);background:rgba(247,244,240,0.2);}
+.p0-rule{width:56px;height:1px;background:rgba(247,244,240,0.3);margin:0 auto 3.5vh;}
+.p0-master{font-size:clamp(10px,0.92vw,13px);font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,244,240,0.5);margin-bottom:2.5vh;}
+.p0-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3.2vw,50px);font-weight:700;color:#F7F4F0;line-height:1.15;max-width:72vw;margin-bottom:4.5vh;}
+.p0-meta{display:flex;flex-direction:column;gap:1.1vh;align-items:center;}
+.p0-row{font-size:clamp(12px,1.05vw,15px);font-weight:300;color:rgba(247,244,240,0.62);}
+.p0-row span{font-weight:500;color:rgba(247,244,240,0.88);}
+.p0-year{margin-top:3vh;font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,244,240,0.38);}
 
-/* ═══════════════════════════════════
-   S1 — PROBLEMA
-═══════════════════════════════════ */
-#s1{background:var(--dark);}
-#s1 .bg{background-image:url('images/slide1-desk.png');opacity:0.38;}
-#s1 .ov{background:linear-gradient(105deg,rgba(14,5,2,0.97) 38%,rgba(14,5,2,0.25) 100%);}
-#s1 .body{align-items:center;justify-content:flex-start;padding-left:8vw;padding-right:48vw;}
-.p1-eye{margin-bottom:1.8vh;}
-.p1-h{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(24px,3.2vw,48px);font-weight:700;
-  color:#F7F4F0;line-height:1.12;margin-bottom:4vh;
-}
-.p1-items{display:flex;flex-direction:column;gap:2.4vh;}
+/* ══════ S1 PROBLEMA ══════ */
+.p1-items{display:flex;flex-direction:column;gap:2vh;margin-top:0.5vh;}
 .p1-item{display:flex;gap:14px;align-items:flex-start;}
-.p1-dot{width:5px;height:5px;border-radius:50%;background:var(--bur);margin-top:8px;flex-shrink:0;}
-.p1-txt{font-size:clamp(12px,1.15vw,16px);font-weight:300;color:rgba(247,244,240,0.78);line-height:1.65;}
-.p1-txt strong{font-weight:500;color:#F7F4F0;}
+.p1-dot{width:5px;height:5px;border-radius:50%;background:var(--bur);margin-top:7px;flex-shrink:0;}
+.p1-txt{font-size:clamp(11px,1.05vw,14px);font-weight:300;color:var(--mid);line-height:1.65;}
+.p1-txt strong{font-weight:500;color:var(--dark2);}
 
-/* ═══════════════════════════════════
-   S2 — MARCO
-═══════════════════════════════════ */
-#s2{background:var(--dark);}
-#s2 .geo{opacity:1;}
-#s2 .body{flex-direction:column;align-items:center;justify-content:center;}
-.p2-eye{margin-bottom:1.5vh;text-align:center;}
-.p2-h{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:clamp(20px,2.6vw,38px);font-weight:400;
-  color:#F7F4F0;text-align:center;margin-bottom:4vh;line-height:1.25;
-}
-.p2-cols{display:grid;grid-template-columns:1fr 1px 1fr;width:88vw;max-width:1180px;}
-.p2-div{background:rgba(155,28,28,0.2);margin:0 3vw;align-self:stretch;}
-.p2-col-head{display:flex;align-items:center;gap:12px;margin-bottom:2.5vh;padding-bottom:1.5vh;border-bottom:1px solid rgba(155,28,28,0.25);}
-.p2-icon{
-  width:34px;height:34px;border-radius:6px;
-  background:rgba(155,28,28,0.15);border:1px solid rgba(155,28,28,0.3);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.p2-icon svg{width:16px;height:16px;stroke:var(--bur-l);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.p2-col-title{font-size:clamp(11px,1vw,14px);font-weight:600;color:rgba(247,244,240,0.75);letter-spacing:0.08em;}
-.p2-pts{display:flex;flex-direction:column;gap:1.8vh;}
+/* ══════ S2 MARCO ══════ */
+.p2-cols{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;width:100%;}
+.p2-div{background:rgba(155,28,28,0.1);margin:0 2.5vw;align-self:stretch;}
+.p2-col-head{display:flex;align-items:center;gap:10px;margin-bottom:2vh;padding-bottom:1.2vh;border-bottom:1.5px solid rgba(155,28,28,0.12);}
+.p2-col-icon{width:30px;height:30px;border-radius:6px;background:rgba(155,28,28,0.07);border:1px solid rgba(155,28,28,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.p2-col-icon svg{width:14px;height:14px;stroke:var(--bur);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.p2-col-title{font-size:clamp(10.5px,0.95vw,13px);font-weight:600;color:var(--bur);letter-spacing:0.06em;}
+.p2-pts{display:flex;flex-direction:column;gap:1.5vh;}
 .p2-pt{display:flex;gap:10px;align-items:flex-start;}
-.p2-pt-bar{width:2px;min-height:100%;background:rgba(155,28,28,0.3);flex-shrink:0;margin-top:3px;align-self:stretch;}
-.p2-pt-txt{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.65);line-height:1.7;}
-.p2-pt-txt strong{font-weight:500;color:rgba(247,244,240,0.9);}
+.p2-pt-bar{width:2px;min-height:100%;background:rgba(155,28,28,0.18);flex-shrink:0;margin-top:3px;align-self:stretch;}
+.p2-pt-txt{font-size:clamp(10.5px,0.95vw,13px);font-weight:300;color:var(--mid);line-height:1.65;}
+.p2-pt-txt strong{font-weight:500;color:var(--dark2);}
 
-/* ═══════════════════════════════════
-   S3 — PROPUESTA
-═══════════════════════════════════ */
-#s3{background:var(--cream);}
-#s3 .body{flex-direction:column;align-items:center;justify-content:center;}
-.p3-eye{margin-bottom:2vh;text-align:center;}
-.p3-quote-wrap{position:relative;max-width:72vw;margin-bottom:3vh;text-align:center;}
-.p3-quote-mark{
-  font-family:'Playfair Display',serif;font-size:8rem;
-  color:rgba(155,28,28,0.08);line-height:0.7;
-  position:absolute;top:0;left:-1.5rem;
-}
-.p3-quote{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:clamp(16px,2vw,28px);font-weight:400;
-  color:var(--bur);line-height:1.4;position:relative;z-index:1;
-}
-.p3-rule{width:44px;height:2px;background:var(--bur);margin:0 auto 2.5vh;}
-.p3-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2vw;width:82vw;max-width:1100px;}
-.p3-card{
-  background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:6px;
-  padding:clamp(16px,2vh,24px) clamp(16px,2vw,26px);
-}
-.p3-card-label{
-  font-size:clamp(9.5px,0.82vw,11.5px);font-weight:600;letter-spacing:0.16em;
-  text-transform:uppercase;color:var(--bur);margin-bottom:8px;
-}
-.p3-card-txt{font-size:clamp(11px,1vw,14px);font-weight:300;color:var(--mid);line-height:1.7;}
+/* ══════ S3 PROPUESTA ══════ */
+.p3-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(13px,1.3vw,18px);font-weight:400;color:var(--bur);line-height:1.5;margin-bottom:2.5vh;padding-left:1.2vw;border-left:2px solid var(--bur);}
+.p3-cards{display:grid;grid-template-columns:1fr 1fr;gap:1vw;width:100%;}
+.p3-card{background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:6px;padding:clamp(12px,1.5vh,20px) clamp(12px,1.5vw,20px);}
+.p3-card-label{font-size:clamp(9px,0.8vw,11px);font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--bur);margin-bottom:6px;}
+.p3-card-txt{font-size:clamp(10px,0.9vw,13px);font-weight:300;color:var(--mid);line-height:1.65;}
 .p3-card-txt strong{font-weight:500;color:var(--dark2);}
-.p3-tag{
-  margin-top:2.5vh;display:inline-block;border:1px solid rgba(155,28,28,0.28);
-  color:var(--bur);font-size:clamp(9.5px,0.85vw,12px);font-weight:500;
-  letter-spacing:0.14em;text-transform:uppercase;padding:6px 16px;border-radius:2px;
-}
+.p3-tag{margin-top:2vh;display:inline-block;border:1px solid rgba(155,28,28,0.25);color:var(--bur);font-size:clamp(9px,0.82vw,11px);font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:5px 14px;border-radius:2px;}
 
-/* ═══════════════════════════════════
-   S4 — ARQUITECTURA + MODELO
-═══════════════════════════════════ */
-#s4{background:var(--dark);}
-#s4 .geo{opacity:1;}
-#s4 .body{flex-direction:column;align-items:center;justify-content:center;}
-.p4-eye{margin-bottom:1.2vh;text-align:center;}
-.p4-h{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(18px,2.2vw,32px);font-weight:700;
-  color:#F7F4F0;text-align:center;margin-bottom:3vh;line-height:1.2;
+/* ══════ S4 ARQUITECTURA ══════ */
+#s4{background:var(--cream);}
+#s4 .arch-wrap{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:2vh 2vw 1vh;
 }
-.p4-diagram{width:92vw;max-width:1240px;display:flex;flex-direction:column;gap:1.4vh;}
-/* roles row */
-.p4-roles{display:grid;grid-template-columns:repeat(4,1fr);gap:1vw;margin-bottom:0.5vh;}
-.p4-role{
-  background:rgba(155,28,28,0.12);border:1px solid rgba(155,28,28,0.3);
-  border-radius:4px;padding:8px 10px;text-align:center;
-}
-.p4-role-name{font-size:clamp(10px,0.88vw,12.5px);font-weight:600;color:rgba(247,244,240,0.85);letter-spacing:0.06em;}
-.p4-role-desc{font-size:clamp(8.5px,0.75vw,11px);font-weight:300;color:rgba(247,244,240,0.4);margin-top:2px;}
-/* connector */
-.p4-conn{display:flex;align-items:center;justify-content:center;gap:0;height:20px;}
-.p4-conn-line{flex:1;height:1px;background:rgba(155,28,28,0.2);}
-.p4-conn-txt{font-size:10px;color:rgba(155,28,28,0.4);padding:0 8px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;}
-/* blocks grid */
-.p4-blocks{display:grid;grid-template-columns:repeat(4,1fr);gap:1vw;}
-.p4-block{
-  background:rgba(247,244,240,0.04);border:1px solid rgba(155,28,28,0.22);
-  border-radius:4px;padding:clamp(10px,1.3vh,18px) clamp(10px,1.2vw,16px);
-  transition:background 0.2s,border-color 0.2s;
-}
-.p4-block:hover{background:rgba(155,28,28,0.1);border-color:rgba(155,28,28,0.5);}
-.p4-block.cap1{border-top:2px solid var(--bur);}
-.p4-block.cap2{border-top:2px solid rgba(155,28,28,0.4);}
-.p4-block-n{
-  font-family:'Playfair Display',serif;font-size:clamp(18px,2vw,28px);
-  font-weight:700;color:rgba(155,28,28,0.35);line-height:1;margin-bottom:5px;
-}
-.p4-block-name{font-size:clamp(10.5px,0.95vw,14px);font-weight:500;color:#F7F4F0;margin-bottom:4px;line-height:1.3;}
-.p4-block-desc{font-size:clamp(9px,0.82vw,12px);font-weight:300;color:rgba(247,244,240,0.42);line-height:1.5;}
-.p4-block-roles{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
-.p4-role-tag{font-size:clamp(8px,0.7vw,10px);font-weight:500;padding:2px 6px;border-radius:2px;background:rgba(155,28,28,0.15);color:rgba(247,244,240,0.55);}
-/* legend */
-.p4-legend{display:flex;gap:2.5vw;margin-top:0.8vh;justify-content:center;}
-.p4-leg-item{display:flex;align-items:center;gap:6px;font-size:clamp(9px,0.82vw,11px);color:rgba(247,244,240,0.4);}
-.p4-leg-bar{width:20px;height:2px;}
-.p4-leg-bar.c1{background:var(--bur);}
-.p4-leg-bar.c2{background:rgba(155,28,28,0.4);}
+.arch-header{text-align:center;margin-bottom:1vh;}
+.arch-eye{font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(155,28,28,0.45);margin-bottom:0.5vh;}
+.arch-title{font-family:'Playfair Display',serif;font-size:clamp(16px,1.8vw,26px);font-weight:700;color:var(--dark2);}
+.arch-hint{font-size:10px;color:rgba(155,28,28,0.4);margin-top:4px;letter-spacing:0.05em;}
 
-/* ═══════════════════════════════════
-   S5 — PROTOTIPO
-═══════════════════════════════════ */
-#s5{background:var(--dark);}
-#s5 .bg{background-image:url('images/slide4-prototipo.png');background-position:top center;opacity:0.12;}
-#s5 .ov{background:linear-gradient(to bottom,rgba(18,8,4,0.75) 0%,rgba(18,8,4,0.96) 100%);}
-#s5 .body{flex-direction:column;align-items:center;justify-content:center;}
-.p5-eye{margin-bottom:1.5vh;text-align:center;}
-.p5-h{
-  font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,42px);
-  font-weight:700;color:#F7F4F0;text-align:center;margin-bottom:1.2vh;line-height:1.1;
-}
-.p5-sub{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.38);margin-bottom:3vh;text-align:center;letter-spacing:0.03em;}
-.p5-browser{
-  width:78vw;max-width:980px;border-radius:9px;overflow:hidden;
-  border:1px solid rgba(247,244,240,0.08);box-shadow:0 16px 48px rgba(0,0,0,0.55);
-}
-.p5-bar{background:#252525;padding:9px 12px;display:flex;align-items:center;gap:9px;}
+/* ══════ S5 PROTOTIPO ══════ */
+.p5-browser{border-radius:8px;overflow:hidden;border:1px solid rgba(155,28,28,0.12);box-shadow:0 8px 32px rgba(44,26,26,0.1);margin-bottom:2vh;}
+.p5-bar{background:#e8e4e0;padding:8px 12px;display:flex;align-items:center;gap:8px;}
 .p5-dots{display:flex;gap:5px;}
-.p5-d{width:9px;height:9px;border-radius:50%;}
-.p5-d:nth-child(1){background:#FF5F57;}
-.p5-d:nth-child(2){background:#FEBC2E;}
-.p5-d:nth-child(3){background:#28C840;}
-.p5-addr{flex:1;background:#1c1c1c;border-radius:3px;padding:3px 9px;font-size:10.5px;color:rgba(255,255,255,0.35);font-family:'Inter',sans-serif;}
-.p5-browser img{width:100%;display:block;max-height:36vh;object-fit:cover;object-position:top;}
-.p5-flows{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5vw;width:78vw;max-width:980px;margin-top:2.5vh;}
-.p5-flow{
-  background:rgba(247,244,240,0.04);border:1px solid rgba(155,28,28,0.2);
-  border-radius:4px;padding:12px 14px;
-}
-.p5-flow-title{font-size:clamp(10.5px,0.95vw,13px);font-weight:500;color:#F7F4F0;margin-bottom:4px;}
-.p5-flow-desc{font-size:clamp(9.5px,0.85vw,12px);font-weight:300;color:rgba(247,244,240,0.45);line-height:1.55;}
-.p5-btn{
-  margin-top:2.5vh;display:inline-flex;align-items:center;gap:8px;
-  background:var(--bur);color:#F7F4F0;font-size:clamp(11px,1vw,14px);font-weight:500;
-  letter-spacing:0.05em;padding:11px 26px;border-radius:3px;text-decoration:none;
-  border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;
-}
+.p5-d{width:8px;height:8px;border-radius:50%;}
+.p5-d:nth-child(1){background:#FF5F57;}.p5-d:nth-child(2){background:#FEBC2E;}.p5-d:nth-child(3){background:#28C840;}
+.p5-addr{flex:1;background:rgba(255,255,255,0.6);border-radius:3px;padding:3px 8px;font-size:10px;color:var(--mid-l);font-family:'Inter',sans-serif;}
+.p5-browser img{width:100%;display:block;max-height:28vh;object-fit:cover;object-position:top;}
+.p5-flows{display:grid;grid-template-columns:1fr 1fr;gap:0.8vw;}
+.p5-flow{background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:4px;padding:10px 12px;}
+.p5-flow-title{font-size:clamp(10px,0.9vw,12px);font-weight:500;color:var(--dark2);margin-bottom:3px;}
+.p5-flow-desc{font-size:clamp(9px,0.82vw,11px);font-weight:300;color:var(--mid-l);line-height:1.5;}
+.p5-btn{margin-top:1.5vh;display:inline-flex;align-items:center;gap:7px;background:var(--bur);color:#F7F4F0;font-size:clamp(11px,0.95vw,13px);font-weight:500;letter-spacing:0.05em;padding:10px 22px;border-radius:3px;text-decoration:none;transition:background 0.2s,transform 0.15s;}
 .p5-btn:hover{background:var(--bur-l);transform:translateY(-1px);}
-.p5-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.p5-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 
-/* ═══════════════════════════════════
-   S6 — VALIDACIÓN
-═══════════════════════════════════ */
-#s6{background:var(--dark);}
-#s6 .bg{background-image:url('images/slide5-docentes.png');background-position:center right;opacity:0.28;}
-#s6 .ov{background:linear-gradient(to right,rgba(14,5,2,0.97) 42%,rgba(14,5,2,0.18) 100%);}
-#s6 .body{align-items:center;justify-content:flex-start;padding-left:8vw;padding-right:50vw;}
-.p6-eye{margin-bottom:1.5vh;}
-.p6-h{
-  font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,38px);
-  font-weight:700;color:#F7F4F0;line-height:1.2;margin-bottom:3.5vh;
-}
-.p6-finds{display:flex;flex-direction:column;gap:2.8vh;}
-.p6-find{display:flex;gap:16px;align-items:flex-start;}
-.p6-n{
-  font-family:'Playfair Display',serif;font-size:clamp(20px,2.2vw,32px);
-  font-weight:700;color:var(--bur-l);line-height:1;min-width:24px;padding-top:2px;flex-shrink:0;
-}
-.p6-title{font-size:clamp(12px,1.15vw,16px);font-weight:500;color:#F7F4F0;margin-bottom:4px;line-height:1.3;}
-.p6-desc{font-size:clamp(10.5px,0.95vw,14px);font-weight:300;color:rgba(247,244,240,0.58);line-height:1.65;}
-.p6-context{
-  margin-top:3.5vh;padding:12px 16px;
-  background:rgba(155,28,28,0.1);border:1px solid rgba(155,28,28,0.25);border-radius:4px;
-  font-size:clamp(10px,0.9vw,13px);font-weight:300;color:rgba(247,244,240,0.5);line-height:1.6;font-style:italic;
-}
+/* ══════ S6 VALIDACIÓN ══════ */
+.p6-finds{display:flex;flex-direction:column;gap:2.5vh;}
+.p6-find{display:flex;gap:14px;align-items:flex-start;}
+.p6-n{font-family:'Playfair Display',serif;font-size:clamp(18px,2vw,28px);font-weight:700;color:rgba(155,28,28,0.25);line-height:1;min-width:24px;padding-top:2px;flex-shrink:0;}
+.p6-title{font-size:clamp(12px,1.1vw,15px);font-weight:500;color:var(--dark2);margin-bottom:3px;line-height:1.3;}
+.p6-desc{font-size:clamp(10px,0.9vw,13px);font-weight:300;color:var(--mid);line-height:1.65;}
+.p6-context{margin-top:2.5vh;padding:10px 14px;background:rgba(155,28,28,0.05);border:1px solid rgba(155,28,28,0.12);border-radius:4px;font-size:clamp(9.5px,0.85vw,12px);font-weight:300;color:var(--mid-l);line-height:1.6;font-style:italic;}
 
-/* ═══════════════════════════════════
-   S7 — CONCLUSIONES
-═══════════════════════════════════ */
-#s7{background:var(--dark);}
-#s7 .geo{opacity:1;}
-#s7 .body{flex-direction:column;align-items:center;justify-content:center;}
-.p7-eye{margin-bottom:2vh;text-align:center;}
-.p7-h{
-  font-family:'Playfair Display',serif;font-size:clamp(18px,2.2vw,32px);
-  font-weight:700;color:#F7F4F0;text-align:center;margin-bottom:4vh;
-}
-.p7-conclusions{display:flex;flex-direction:column;gap:2.2vh;width:82vw;max-width:1080px;}
-.p7-c{
-  display:flex;gap:2vw;align-items:center;
-  border-bottom:1px solid rgba(155,28,28,0.15);padding-bottom:2vh;
-}
+/* ══════ S7 CONCLUSIONES ══════ */
+.p7-conclusions{display:flex;flex-direction:column;gap:2.2vh;}
+.p7-c{display:flex;gap:2vw;align-items:flex-start;padding-bottom:2vh;border-bottom:1px solid rgba(155,28,28,0.1);}
 .p7-c:last-child{border-bottom:none;padding-bottom:0;}
-.p7-c-num{
-  font-family:'Playfair Display',serif;font-size:clamp(36px,4.5vw,64px);
-  font-weight:700;color:rgba(155,28,28,0.18);line-height:1;
-  flex-shrink:0;width:clamp(50px,5vw,80px);text-align:right;
-}
-.p7-c-body{}
-.p7-c-title{
-  font-family:'Playfair Display',serif;font-size:clamp(14px,1.5vw,22px);
-  font-weight:700;color:#F7F4F0;line-height:1.25;margin-bottom:4px;
-}
-.p7-c-desc{font-size:clamp(11px,0.95vw,14px);font-weight:300;color:rgba(247,244,240,0.55);line-height:1.65;}
-.p7-closing{
-  margin-top:3vh;font-family:'Playfair Display',serif;font-style:italic;
-  font-size:clamp(13px,1.3vw,19px);font-weight:400;
-  color:rgba(155,28,28,0.6);text-align:center;max-width:60vw;line-height:1.55;
-}
+.p7-c-num{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,52px);font-weight:700;color:rgba(155,28,28,0.1);line-height:1;flex-shrink:0;width:clamp(40px,4vw,64px);text-align:right;padding-top:2px;}
+.p7-c-title{font-family:'Playfair Display',serif;font-size:clamp(13px,1.3vw,19px);font-weight:700;color:var(--dark2);line-height:1.25;margin-bottom:4px;}
+.p7-c-desc{font-size:clamp(10px,0.9vw,13px);font-weight:300;color:var(--mid);line-height:1.65;}
+.p7-closing{margin-top:2.5vh;font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(11px,1.1vw,15px);font-weight:400;color:rgba(155,28,28,0.55);line-height:1.5;padding-left:1.2vw;border-left:2px solid rgba(155,28,28,0.2);}
 
-/* ═══════════════════════════════════
-   S8 — DESARROLLO
-═══════════════════════════════════ */
-#s8{background:var(--cream);}
-#s8 .body{flex-direction:column;align-items:center;justify-content:center;}
-.p8-eye{margin-bottom:1.5vh;text-align:center;}
-.p8-h{
-  font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,36px);
-  font-weight:700;color:var(--dark2);text-align:center;margin-bottom:4vh;line-height:1.2;
-}
-.p8-content{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;width:86vw;max-width:1180px;align-items:start;}
-.p8-sep{background:rgba(155,28,28,0.15);margin:0 3vw;align-self:stretch;}
-.p8-col-head{display:flex;align-items:center;gap:10px;margin-bottom:2.5vh;padding-bottom:1.5vh;border-bottom:1.5px solid rgba(155,28,28,0.12);}
-.p8-col-label{font-size:clamp(11px,1vw,14px);font-weight:500;color:var(--bur);letter-spacing:0.08em;text-transform:uppercase;}
+/* ══════ S8 DESARROLLO ══════ */
+.p8-grid{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;width:100%;}
+.p8-sep{background:rgba(155,28,28,0.1);margin:0 2.5vw;align-self:stretch;}
+.p8-col-head{display:flex;align-items:center;gap:8px;margin-bottom:2vh;padding-bottom:1.2vh;border-bottom:1.5px solid rgba(155,28,28,0.12);}
+.p8-col-label{font-size:clamp(10px,0.9vw,13px);font-weight:600;color:var(--bur);letter-spacing:0.1em;text-transform:uppercase;}
 .p8-phases{display:flex;flex-direction:column;gap:0;}
-.p8-phase{display:flex;gap:16px;align-items:flex-start;padding-bottom:2vh;position:relative;}
-.p8-phase:not(:last-child)::after{content:'';position:absolute;left:14px;top:32px;bottom:0;width:1px;background:rgba(155,28,28,0.18);}
-.p8-phase-dot{
-  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;
-  justify-content:center;flex-shrink:0;position:relative;z-index:1;
-}
-.p8-phase:nth-child(1) .p8-phase-dot{background:rgba(155,28,28,0.15);border:1.5px solid var(--bur);}
-.p8-phase:nth-child(2) .p8-phase-dot{background:rgba(155,28,28,0.08);border:1.5px solid rgba(155,28,28,0.4);}
-.p8-phase:nth-child(3) .p8-phase-dot{background:rgba(155,28,28,0.05);border:1.5px solid rgba(155,28,28,0.25);}
-.p8-phase-dot-inner{width:7px;height:7px;border-radius:50%;background:var(--bur);}
-.p8-phase:nth-child(2) .p8-phase-dot-inner{background:rgba(155,28,28,0.5);}
-.p8-phase:nth-child(3) .p8-phase-dot-inner{background:rgba(155,28,28,0.3);}
-.p8-phase-label{font-size:clamp(9px,0.82vw,11px);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--bur);margin-bottom:3px;}
-.p8-phase-title{font-size:clamp(12px,1.1vw,15px);font-weight:500;color:var(--dark2);margin-bottom:3px;line-height:1.3;}
-.p8-phase-desc{font-size:clamp(10px,0.9vw,13px);font-weight:300;color:var(--mid);line-height:1.65;}
-/* stack */
-.p8-stack{display:flex;flex-direction:column;gap:1.5vh;}
+.p8-phase{display:flex;gap:14px;align-items:flex-start;padding-bottom:2vh;position:relative;}
+.p8-phase:not(:last-child)::after{content:'';position:absolute;left:13px;top:28px;bottom:0;width:1px;background:rgba(155,28,28,0.15);}
+.p8-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:1;}
+.p8-phase:nth-child(1) .p8-dot{background:rgba(155,28,28,0.1);border:1.5px solid var(--bur);}
+.p8-phase:nth-child(2) .p8-dot{background:rgba(155,28,28,0.05);border:1.5px solid rgba(155,28,28,0.35);}
+.p8-phase:nth-child(3) .p8-dot{background:rgba(155,28,28,0.03);border:1.5px solid rgba(155,28,28,0.2);}
+.p8-dot-inner{width:7px;height:7px;border-radius:50%;background:var(--bur);}
+.p8-phase:nth-child(2) .p8-dot-inner{background:rgba(155,28,28,0.45);}
+.p8-phase:nth-child(3) .p8-dot-inner{background:rgba(155,28,28,0.25);}
+.p8-phase-label{font-size:clamp(9px,0.8vw,11px);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--bur);margin-bottom:2px;}
+.p8-phase-title{font-size:clamp(11px,1vw,14px);font-weight:500;color:var(--dark2);margin-bottom:3px;line-height:1.3;}
+.p8-phase-desc{font-size:clamp(10px,0.88vw,12px);font-weight:300;color:var(--mid);line-height:1.6;}
+.p8-stack{display:flex;flex-direction:column;gap:1.3vh;}
 .p8-stack-row{display:flex;align-items:center;gap:10px;}
-.p8-stack-label{font-size:clamp(9.5px,0.85vw,12px);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(155,28,28,0.55);width:clamp(60px,6vw,90px);flex-shrink:0;}
-.p8-stack-tags{display:flex;flex-wrap:wrap;gap:5px;}
-.p8-stack-tag{font-size:clamp(10px,0.88vw,13px);font-weight:400;padding:3px 10px;border-radius:3px;background:rgba(155,28,28,0.07);color:var(--dark2);border:1px solid rgba(155,28,28,0.12);}
-.p8-stack-tag.current{background:rgba(155,28,28,0.13);border-color:rgba(155,28,28,0.35);color:var(--bur);font-weight:500;}
-.p8-eta{
-  margin-top:2.5vh;padding:12px 16px;background:#fff;
-  border:1px solid rgba(155,28,28,0.12);border-radius:4px;
-  font-size:clamp(10.5px,0.95vw,13px);font-weight:300;color:var(--mid);line-height:1.6;
-}
-.p8-eta strong{font-weight:500;color:var(--dark2);}
+.p8-stack-lbl{font-size:clamp(9px,0.8vw,11px);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid-l);width:clamp(55px,5.5vw,80px);flex-shrink:0;}
+.p8-stack-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.p8-stack-tag{font-size:clamp(9.5px,0.85vw,12px);font-weight:400;padding:3px 9px;border-radius:3px;background:rgba(155,28,28,0.06);color:var(--dark2);border:1px solid rgba(155,28,28,0.1);}
+.p8-stack-tag.now{background:rgba(155,28,28,0.1);border-color:rgba(155,28,28,0.3);color:var(--bur);font-weight:500;}
+.p8-note{margin-top:2vh;padding:10px 14px;background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:4px;font-size:clamp(10px,0.88vw,12px);font-weight:300;color:var(--mid);line-height:1.6;}
+.p8-note strong{font-weight:500;color:var(--dark2);}
 </style>
 </head>
 <body>
@@ -408,13 +244,14 @@ nav{
 
 <div class="deck">
 
-<!-- S0 PORTADA -->
+<!-- ══ S0 PORTADA ══ -->
 <div class="slide active" id="s0">
-  <div class="body">
-    <div class="p0-top">
-      <div class="p0-logo-wrap nebrija"><img src="images/nebrija.png" alt="Universidad Nebrija"></div>
-      <div class="p0-sep"></div>
-      <div class="p0-logo-wrap curricula"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="geo"></div>
+  <div class="p0-inner">
+    <div class="p0-logos">
+      <div class="p0-logo-box"><img src="images/nebrija.png" alt="Universidad Nebrija"></div>
+      <div class="p0-logo-sep"></div>
+      <div class="p0-logo-box"><img src="images/logo.png" alt="CurriculaFP"></div>
     </div>
     <div class="p0-rule"></div>
     <p class="p0-master">Máster Universitario en Formación del Profesorado · Especialidad FP Sanidad · Universidad Nebrija</p>
@@ -428,390 +265,302 @@ nav{
   </div>
 </div>
 
-<!-- S1 PROBLEMA -->
+<!-- ══ S1 PROBLEMA ══ -->
 <div class="slide" id="s1">
-  <div class="bg"></div><div class="ov"></div>
-  <div class="body">
-    <div style="display:flex;flex-direction:column;">
-      <p class="eye eye-lt p1-eye">Justificación del proyecto</p>
-      <h2 class="p1-h">Complejidad normativa,<br>gestión digital insuficiente</h2>
+  <div class="editorial">
+    <div class="editorial-content">
+      <p class="eyebrow">Justificación del proyecto</p>
+      <div class="rule"></div>
+      <h2 class="section-title">Complejidad normativa,<br>gestión digital <em>insuficiente</em></h2>
       <div class="p1-items">
         <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>LO 3/2022 y RD 659/2023:</strong> la reforma más profunda del sistema de Formación Profesional en décadas. Situaciones de aprendizaje, modelo dual, trazabilidad por competencias, acreditación parcial acumulable.</p></div>
-        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>Complejidad técnica de la programación didáctica:</strong> resultados de aprendizaje, criterios de evaluación con ponderaciones, instrumentos, temporalización, seguimiento trimestral. Un documento de considerable exigencia estructural.</p></div>
-        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>Desajuste con las herramientas disponibles:</strong> Séneca gestiona la dimensión administrativa; Moodle gestiona el aprendizaje. Ninguna herramienta toma la jerarquía curricular normativa de la Formación Profesional como eje de diseño.</p></div>
-        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>Consecuencia práctica:</strong> los docentes gestionan la complejidad curricular con soluciones improvisadas — Word, hojas de cálculo, documentos sueltos. Trabajo que se rehace en su mayor parte cada curso académico.</p></div>
+        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>Complejidad técnica real:</strong> una programación didáctica completa incluye resultados de aprendizaje, criterios de evaluación con ponderaciones, instrumentos, temporalización y seguimiento trimestral.</p></div>
+        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>Vacío digital específico:</strong> Séneca gestiona la dimensión administrativa; Moodle gestiona el aprendizaje. Ninguna herramienta toma la jerarquía curricular normativa de la Formación Profesional como eje de diseño.</p></div>
+        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>Consecuencia práctica:</strong> los docentes gestionan la complejidad curricular con Word, hojas de cálculo y documentos sueltos. Trabajo que se rehace en su mayor parte cada curso académico.</p></div>
       </div>
     </div>
+    <div class="editorial-img"><img src="images/slide1-desk.png" alt=""></div>
   </div>
-  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
+  <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
-<!-- S2 MARCO -->
+<!-- ══ S2 MARCO ══ -->
 <div class="slide" id="s2">
-  <div class="geo"></div>
-  <div class="body">
-    <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="eye eye-lt p2-eye">Estado de la cuestión y marco teórico</p>
-      <h2 class="p2-h">Qué dice la investigación.<br>Qué exige la normativa.</h2>
+  <div class="editorial">
+    <div class="editorial-content">
+      <p class="eyebrow">Estado de la cuestión y marco teórico</p>
+      <div class="rule"></div>
+      <h2 class="section-title">Qué dice la investigación.<br>Qué exige la normativa.</h2>
       <div class="p2-cols">
         <div>
           <div class="p2-col-head">
-            <div class="p2-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-            <span class="p2-col-title">Investigación existente</span>
+            <div class="p2-col-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+            <span class="p2-col-title">Investigación</span>
           </div>
           <div class="p2-pts">
-            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">La transformación digital de la Formación Profesional es prioridad reconocida a nivel europeo <strong>(Cedefop, 2020)</strong>. Los marcos de referencia para la digitalización educativa convergen en la necesidad de sistemas específicos por modalidad.</p></div>
-            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">Existe investigación sobre gestión curricular por competencias, pero <strong>ningún sistema digital específico</strong> toma la jerarquía normativa de la Formación Profesional española como eje vertebrador de su modelo de datos.</p></div>
-            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">Los sistemas existentes se centran en <strong>gestión administrativa</strong> (Séneca) o en <strong>plataformas de aprendizaje</strong> (Moodle) — no en gestión curricular estructural. El espacio específico queda sin cubrir.</p></div>
-            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">Metodología: <strong>Design-Based Research (DBR)</strong>. Investigación aplicada que integra rigor teórico con relevancia práctica, especialmente adecuada para el desarrollo de innovaciones educativas complejas.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">Transformación digital de la Formación Profesional como prioridad europea <strong>(Cedefop, 2020)</strong>.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt"><strong>Ningún sistema digital específico</strong> toma la jerarquía normativa de la Formación Profesional española como eje de su modelo de datos.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">Sistemas existentes: <strong>gestión administrativa</strong> o <strong>plataformas de aprendizaje</strong>. El espacio curricular estructural queda sin cubrir.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">Metodología: <strong>Design-Based Research (DBR)</strong> — rigor teórico con relevancia práctica.</p></div>
           </div>
         </div>
         <div class="p2-div"></div>
         <div>
           <div class="p2-col-head">
-            <div class="p2-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M16 4v16M4 12h16"/></svg></div>
+            <div class="p2-col-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M16 4v16M4 12h16"/></svg></div>
             <span class="p2-col-title">Marco normativo</span>
           </div>
           <div class="p2-pts">
-            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt"><strong>LO 3/2022:</strong> el resultado de aprendizaje como unidad curricular operativa. Introduce la acreditación parcial acumulable como principio estructural del sistema.</p></div>
-            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt"><strong>RD 659/2023:</strong> desarrollo reglamentario. La situación de aprendizaje como unidad metodológica básica de la programación didáctica. El modelo dual como elemento estructural, no optativo.</p></div>
-            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">La <strong>trazabilidad curricular</strong> — del instrumento de evaluación aplicado en el aula a la competencia profesional del título — es una exigencia normativa. No puede añadirse a posteriori: debe estar en la arquitectura.</p></div>
-            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">La <strong>variabilidad autonómica</strong> en el desarrollo curricular de los títulos añade una capa de complejidad que los sistemas existentes no resuelven de forma general para el conjunto del territorio.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt"><strong>LO 3/2022:</strong> resultado de aprendizaje como unidad curricular operativa. Acreditación parcial acumulable.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt"><strong>RD 659/2023:</strong> situación de aprendizaje como unidad metodológica básica. Modelo dual como elemento estructural.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">La <strong>trazabilidad curricular</strong> es una exigencia normativa — debe estar en la arquitectura, no añadirse a posteriori.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt"><strong>Variabilidad autonómica</strong> que los sistemas existentes no resuelven de forma general para el conjunto del territorio.</p></div>
           </div>
         </div>
       </div>
     </div>
+    <div class="editorial-img"><img src="images/legislacion.png" alt=""></div>
   </div>
-  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
+  <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
-<!-- S3 PROPUESTA -->
+<!-- ══ S3 PROPUESTA ══ -->
 <div class="slide" id="s3">
-  <div class="body">
-    <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="eye eye-dk p3-eye">La propuesta</p>
-      <div class="p3-quote-wrap">
-        <span class="p3-quote-mark">"</span>
-        <p class="p3-quote">Diseñar y desarrollar una plataforma web que permita a los centros de Formación Profesional gestionar de forma integral, trazable y alineada con la normativa vigente toda la cadena curricular de sus ciclos formativos, desde la definición estructural del ciclo hasta la calificación individualizada de cada alumno.</p>
-      </div>
-      <div class="p3-rule"></div>
-      <div class="p3-grid">
+  <div class="editorial">
+    <div class="editorial-content">
+      <p class="eyebrow">La propuesta</p>
+      <div class="rule"></div>
+      <h2 class="section-title">CurriculaFP</h2>
+      <p class="p3-quote">Gestión curricular integral, trazable y alineada con la normativa vigente — desde la definición estructural del ciclo hasta la calificación individualizada de cada alumno.</p>
+      <div class="p3-cards">
         <div class="p3-card">
           <p class="p3-card-label">Qué es</p>
-          <p class="p3-card-txt">Una plataforma diseñada <strong>desde la jerarquía normativa propia de la Formación Profesional española</strong>. Gestiona la complejidad curricular específica del sistema: ciclos, módulos, resultados de aprendizaje, criterios de evaluación, situaciones de aprendizaje, formación en empresa y seguimiento del alumnado.</p>
+          <p class="p3-card-txt">Plataforma diseñada desde la <strong>jerarquía normativa propia de la Formación Profesional española</strong>. Gestiona ciclos, módulos, RA, criterios, SA, formación en empresa y seguimiento del alumnado.</p>
         </div>
         <div class="p3-card">
           <p class="p3-card-label">Qué no es</p>
-          <p class="p3-card-txt">No es un gestor administrativo de centro ni una plataforma de aprendizaje genérica. <strong>No replica Séneca ni Moodle.</strong> Su función principal no es facilitar la interacción docente-alumno en el proceso de aprendizaje, sino gestionar la estructura curricular normativa y su traducción en la programación de cada centro.</p>
+          <p class="p3-card-txt">No es un gestor administrativo ni una plataforma de aprendizaje genérica. <strong>No replica Séneca ni Moodle.</strong> Su función es la estructura curricular normativa.</p>
         </div>
         <div class="p3-card">
           <p class="p3-card-label">Alcance</p>
-          <p class="p3-card-txt">Válida para <strong>cualquier ciclo formativo, familia profesional y comunidad autónoma</strong> de España. El sistema proporciona la estructura curricular y permite al centro adaptarla a su contexto normativo concreto, sin imponer ningún marco autonómico específico.</p>
+          <p class="p3-card-txt">Válida para <strong>cualquier ciclo formativo, familia profesional y comunidad autónoma</strong> de España, sin adaptaciones por territorio.</p>
         </div>
         <div class="p3-card">
           <p class="p3-card-label">Metodología DBR</p>
-          <p class="p3-card-txt">Design-Based Research: <strong>análisis de necesidades del sistema → diseño del modelo de datos → desarrollo del prototipo funcional → validación con docentes en activo → resultados y líneas de desarrollo futuro.</strong> Ciclo iterativo con énfasis en la relevancia práctica.</p>
+          <p class="p3-card-txt"><strong>Análisis → diseño del modelo → prototipo → validación → resultados.</strong> Ciclo iterativo con énfasis en relevancia práctica.</p>
         </div>
       </div>
       <span class="p3-tag">Proyecto de Innovación · Modalidad Producto · Nebrija 2026</span>
     </div>
+    <div class="editorial-img"><img src="images/ordenador.png" alt=""></div>
   </div>
-  <div class="stamp dk"><img src="images/logo.png" alt=""></div>
+  <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
-<!-- S4 ARQUITECTURA -->
+<!-- ══ S4 ARQUITECTURA ══ -->
 <div class="slide" id="s4">
-  <div class="geo"></div>
-  <div class="body" style="padding:1.5vh 2vw 2vh;flex-direction:column;align-items:center;justify-content:flex-start;">
-    <div style="display:flex;flex-direction:column;align-items:center;width:100%;height:100%;">
-      <p class="eye eye-lt" style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,244,240,0.3);margin-bottom:0.8vh;text-align:center;">Arquitectura del sistema &middot; Modelo de datos</p>
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(16px,1.9vw,28px);font-weight:700;color:#F7F4F0;text-align:center;margin-bottom:1vh;line-height:1.2;">Flujo curricular de CurriculaFP</h2>
-      <div style="flex:1;width:100%;display:flex;align-items:center;justify-content:center;">
-      <svg id="diag-svg" viewBox="0 0 1050 670" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:78vh;font-family:'Inter',sans-serif;">
+  <div class="arch-wrap">
+    <div class="arch-header">
+      <p class="arch-eye">Arquitectura del sistema · Modelo de datos</p>
+      <h2 class="arch-title">Flujo curricular de CurriculaFP</h2>
+      <p class="arch-hint" id="arch-hint">Pulsa → para revelar</p>
+    </div>
+    <div style="flex:1;width:100%;display:flex;align-items:center;justify-content:center;">
+    <svg id="diag-svg" viewBox="0 0 1050 610" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:76vh;font-family:'Inter',sans-serif;">
 <defs>
-  <marker id="arr-red" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#9B1C1C"/></marker>
-  <marker id="arr-purple" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#5B3A8C"/></marker>
-  <marker id="arr-grey" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#888"/></marker>
+  <marker id="ar" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#9B1C1C"/></marker>
+  <marker id="ap" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#5B3A8C"/></marker>
+  <marker id="ag" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#999"/></marker>
 </defs>
 
-<!-- CONTENEDOR PLANIFICACIÓN -->
-<rect x="8" y="8" width="870" height="420" rx="10" fill="none" stroke="#9B1C1C" stroke-width="2"/>
-<rect x="18" y="1" width="24" height="24" rx="5" fill="#9B1C1C"/>
-<text x="30" y="17" text-anchor="middle" fill="white" font-size="13" font-weight="700">≡</text>
-<text x="48" y="18" fill="#9B1C1C" font-size="13" font-weight="700">Planificación del ciclo</text>
-<text x="218" y="18" fill="#666" font-size="12" font-weight="300"> — definición estructural permanente</text>
+<!-- Contenedores permanentes -->
+<rect x="6" y="6" width="860" height="380" rx="9" fill="none" stroke="#9B1C1C" stroke-width="1.8"/>
+<rect x="16" y="0" width="22" height="20" rx="4" fill="#9B1C1C"/>
+<text x="27" y="14" text-anchor="middle" fill="white" font-size="11" font-weight="700">≡</text>
+<text x="44" y="14" fill="#9B1C1C" font-size="12" font-weight="700">Planificación del ciclo</text>
+<text x="206" y="14" fill="#888" font-size="11"> — definición estructural permanente</text>
+<rect x="14" y="22" width="172" height="234" rx="6" fill="none" stroke="#9B1C1C" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="100" y="37" text-anchor="middle" fill="#9B1C1C" font-size="10" font-weight="500">Catálogo nacional</text>
+<rect x="196" y="22" width="658" height="234" rx="6" fill="none" stroke="#9B1C1C" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="525" y="37" text-anchor="middle" fill="#9B1C1C" font-size="10" font-weight="500">Definición en el centro</text>
+<rect x="6" y="396" width="1036" height="208" rx="9" fill="none" stroke="#5B3A8C" stroke-width="1.8"/>
+<rect x="16" y="390" width="22" height="20" rx="4" fill="#5B3A8C"/>
+<text x="27" y="404" text-anchor="middle" fill="white" font-size="11" font-weight="700">♟</text>
+<text x="44" y="404" fill="#5B3A8C" font-size="12" font-weight="700">Gestión de cursos</text>
+<text x="192" y="404" fill="#888" font-size="11"> — instancia anual</text>
 
-<!-- Catálogo nacional subzona -->
-<rect x="18" y="26" width="178" height="252" rx="7" fill="none" stroke="#9B1C1C" stroke-width="1.2" stroke-dasharray="4,3"/>
-<text x="107" y="43" text-anchor="middle" fill="#9B1C1C" font-size="11" font-weight="500">Catálogo nacional</text>
-
-<!-- Definición en el centro subzona -->
-<rect x="208" y="26" width="658" height="252" rx="7" fill="none" stroke="#9B1C1C" stroke-width="1.2" stroke-dasharray="4,3"/>
-<text x="537" y="43" text-anchor="middle" fill="#9B1C1C" font-size="11" font-weight="500">Definición en el centro</text>
-
-<!-- CONTENEDOR GESTIÓN DE CURSOS -->
-<rect x="8" y="440" width="1034" height="222" rx="10" fill="none" stroke="#5B3A8C" stroke-width="2"/>
-<rect x="18" y="433" width="24" height="24" rx="5" fill="#5B3A8C"/>
-<text x="30" y="449" text-anchor="middle" fill="white" font-size="13" font-weight="700">♟</text>
-<text x="48" y="449" fill="#5B3A8C" font-size="13" font-weight="700">Gestión de cursos</text>
-<text x="196" y="449" fill="#666" font-size="12" font-weight="300"> — instancia anual</text>
-
-<!-- LEYENDA -->
-<g transform="translate(16,652)">
-  <line x1="0" y1="6" x2="28" y2="6" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#arr-red)"/>
-  <text x="34" y="10" fill="#888" font-size="10">Relación directa</text>
-  <line x1="130" y1="6" x2="158" y2="6" stroke="#9B1C1C" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
-  <text x="164" y="10" fill="#888" font-size="10">Relación condicional</text>
-  <line x1="300" y1="6" x2="328" y2="6" stroke="#888" stroke-width="1.5" stroke-dasharray="6,2"/>
-  <text x="334" y="10" fill="#888" font-size="10">Instancia entre niveles</text>
+<!-- Leyenda -->
+<g transform="translate(12,590)">
+  <line x1="0" y1="5" x2="24" y2="5" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="30" y="9" fill="#999" font-size="9">Relación directa</text>
+  <line x1="120" y1="5" x2="144" y2="5" stroke="#9B1C1C" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <text x="150" y="9" fill="#999" font-size="9">Relación condicional</text>
+  <line x1="280" y1="5" x2="304" y2="5" stroke="#bbb" stroke-width="1.5" stroke-dasharray="5,2"/>
+  <text x="310" y="9" fill="#999" font-size="9">Instancia entre niveles</text>
 </g>
 
-<!-- INDICADOR -->
-<text id="diag-hint" x="1040" y="665" text-anchor="end" fill="rgba(155,28,28,0.5)" font-size="10">Pulsa &rarr; para revelar</text>
-
-<!-- ═══ GRUPO 1: CATÁLOGO NACIONAL ═══ -->
+<!-- GRUPO 1: CATÁLOGO NACIONAL -->
 <g id="dg1" opacity="0" style="transition:opacity 0.5s;">
-  <!-- CICLO -->
-  <rect x="28" y="54" width="148" height="44" rx="6" fill="#9B1C1C"/>
-  <circle cx="52" cy="76" r="11" fill="rgba(255,255,255,0.18)"/>
-  <text x="52" y="80" text-anchor="middle" fill="white" font-size="12">🎓</text>
-  <text x="116" y="80" text-anchor="middle" fill="white" font-size="12" font-weight="700">CICLO</text>
-  <!-- flecha CICLO→COMPETENCIA -->
-  <line x1="102" y1="98" x2="102" y2="118" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#arr-red)"/>
-  <!-- COMPETENCIA PROFESIONAL -->
-  <rect x="28" y="118" width="148" height="48" rx="6" fill="#9B1C1C"/>
-  <circle cx="52" cy="142" r="11" fill="rgba(255,255,255,0.18)"/>
-  <text x="52" y="146" text-anchor="middle" fill="white" font-size="12">👤</text>
-  <text x="116" y="137" text-anchor="middle" fill="white" font-size="11" font-weight="700">COMPETENCIA</text>
-  <text x="116" y="151" text-anchor="middle" fill="white" font-size="9">PROFESIONAL</text>
-  <!-- flecha CICLO→MÓDULO -->
-  <line x1="176" y1="76" x2="218" y2="76" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <rect x="22" y="48" width="140" height="40" rx="5" fill="#9B1C1C"/>
+  <text x="92" y="73" text-anchor="middle" fill="white" font-size="12" font-weight="700">CICLO</text>
+  <line x1="92" y1="88" x2="92" y2="108" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="22" y="108" width="140" height="44" rx="5" fill="#9B1C1C"/>
+  <text x="92" y="126" text-anchor="middle" fill="white" font-size="11" font-weight="700">COMPETENCIA</text>
+  <text x="92" y="140" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="9">PROFESIONAL</text>
+  <line x1="162" y1="68" x2="204" y2="68" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#ar)"/>
 </g>
 
-<!-- ═══ GRUPO 2: DEFINICIÓN EN EL CENTRO ═══ -->
+<!-- GRUPO 2: DEFINICIÓN EN EL CENTRO -->
 <g id="dg2" opacity="0" style="transition:opacity 0.5s;">
-  <!-- MÓDULO -->
-  <rect x="218" y="54" width="145" height="44" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="241" cy="76" r="11" fill="#FEE2E2"/>
-  <text x="241" y="80" text-anchor="middle" fill="#9B1C1C" font-size="12">📖</text>
-  <text x="305" y="80" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">MÓDULO</text>
-  <!-- flecha MÓDULO→RA -->
-  <line x1="363" y1="76" x2="490" y2="76" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#arr-red)"/>
-  <!-- RESULTADO DE APRENDIZAJE -->
-  <rect x="490" y="54" width="156" height="48" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="513" cy="78" r="11" fill="#FEE2E2"/>
-  <text x="513" y="82" text-anchor="middle" fill="#9B1C1C" font-size="12">🎯</text>
-  <text x="586" y="73" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">RESULTADO DE</text>
-  <text x="586" y="87" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
-  <!-- flecha RA→CE -->
-  <line x1="568" y1="102" x2="568" y2="122" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#arr-red)"/>
-  <!-- CRITERIO DE EVALUACIÓN -->
-  <rect x="490" y="122" width="156" height="48" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="513" cy="146" r="11" fill="#FEE2E2"/>
-  <text x="513" y="150" text-anchor="middle" fill="#9B1C1C" font-size="12">📋</text>
-  <text x="586" y="141" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">CRITERIO DE</text>
-  <text x="586" y="155" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
-  <!-- MÓDULO RESPONSABLE -->
-  <rect x="218" y="122" width="145" height="48" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="241" cy="146" r="11" fill="#FEE2E2"/>
-  <text x="241" y="150" text-anchor="middle" fill="#9B1C1C" font-size="12">👤</text>
-  <text x="305" y="141" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
-  <text x="305" y="155" text-anchor="middle" fill="#555" font-size="9">RESPONSABLE</text>
-  <!-- flecha MÓDULO RESP→BLOQUE -->
-  <line x1="291" y1="170" x2="291" y2="190" stroke="#9B1C1C" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
-  <!-- BLOQUE DIDÁCTICO -->
-  <rect x="218" y="190" width="145" height="48" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="241" cy="214" r="11" fill="#FEE2E2"/>
-  <text x="241" y="218" text-anchor="middle" fill="#9B1C1C" font-size="12">🗂</text>
-  <text x="305" y="209" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">BLOQUE</text>
-  <text x="305" y="223" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">DIDÁCTICO</text>
-  <!-- flecha BLOQUE→UNIDAD -->
-  <line x1="291" y1="238" x2="291" y2="258" stroke="#9B1C1C" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
-  <!-- UNIDAD TRABAJO -->
-  <rect x="218" y="258" width="145" height="48" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="241" cy="282" r="11" fill="#FEE2E2"/>
-  <text x="241" y="286" text-anchor="middle" fill="#9B1C1C" font-size="12">👥</text>
-  <text x="305" y="277" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">UNIDAD</text>
-  <text x="305" y="291" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">TRABAJO</text>
-  <!-- flecha UNIDAD→CONTENIDO -->
-  <line x1="291" y1="306" x2="291" y2="326" stroke="#9B1C1C" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
-  <!-- CONTENIDO -->
-  <rect x="218" y="326" width="145" height="44" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="241" cy="348" r="11" fill="#FEE2E2"/>
-  <text x="241" y="352" text-anchor="middle" fill="#9B1C1C" font-size="12">📄</text>
-  <text x="305" y="352" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">CONTENIDO</text>
-  <!-- flecha SITUACIÓN→CONTENIDO (cubre) -->
-  <line x1="490" y1="348" x2="383" y2="348" stroke="#9B1C1C" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
-  <text x="436" y="341" text-anchor="middle" fill="#9B1C1C" font-size="9" font-style="italic">cubre</text>
-  <!-- SITUACIÓN DE APRENDIZAJE -->
-  <rect x="490" y="190" width="156" height="48" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="513" cy="214" r="11" fill="#FEE2E2"/>
-  <text x="513" y="218" text-anchor="middle" fill="#9B1C1C" font-size="12">💡</text>
-  <text x="586" y="209" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">SITUACIÓN DE</text>
-  <text x="586" y="223" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
-  <!-- flecha CE→SA -->
-  <line x1="568" y1="170" x2="568" y2="190" stroke="#9B1C1C" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
-  <!-- flecha SA→SESIÓN -->
-  <line x1="568" y1="238" x2="568" y2="258" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#arr-red)"/>
-  <!-- evalúa SA→INSTRUMENTO -->
-  <path d="M646,214 Q710,214 710,286 L710,322" fill="none" stroke="#9B1C1C" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
-  <text x="718" y="264" fill="#9B1C1C" font-size="9" font-style="italic">evalúa</text>
-  <!-- SESIÓN -->
-  <rect x="490" y="258" width="126" height="48" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="513" cy="282" r="11" fill="#FEE2E2"/>
-  <text x="513" y="286" text-anchor="middle" fill="#9B1C1C" font-size="12">📅</text>
-  <text x="567" y="286" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">SESIÓN</text>
-  <!-- INSTRUMENTO DE EVALUACIÓN -->
-  <rect x="640" y="258" width="152" height="52" rx="6" fill="white" stroke="#9B1C1C" stroke-width="1.5"/>
-  <circle cx="663" cy="284" r="11" fill="#FEE2E2"/>
-  <text x="663" y="288" text-anchor="middle" fill="#9B1C1C" font-size="12">📊</text>
-  <text x="734" y="279" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">INSTRUMENTO DE</text>
-  <text x="734" y="293" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
-  <!-- flecha SESIÓN→INSTRUMENTO -->
-  <line x1="616" y1="282" x2="640" y2="282" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#arr-red)"/>
-  <!-- instancia anual ↓ líneas punteadas grises hacia gestión de cursos -->
-  <line x1="716" y1="310" x2="716" y2="432" stroke="#888" stroke-width="1.2" stroke-dasharray="5,3"/>
-  <text x="721" y="380" fill="#888" font-size="9">instancia</text>
-  <line x1="568" y1="306" x2="568" y2="432" stroke="#888" stroke-width="1.2" stroke-dasharray="5,3"/>
-  <text x="573" y="380" fill="#888" font-size="9">instancia</text>
-  <text x="642" y="428" text-anchor="middle" fill="#888" font-size="9">↓ instancia anual ↓</text>
+  <rect x="204" y="48" width="136" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="272" y="73" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">MÓDULO</text>
+  <line x1="340" y1="68" x2="464" y2="68" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="464" y="48" width="148" height="44" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="538" y="66" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">RESULTADO DE</text>
+  <text x="538" y="80" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
+  <line x1="538" y1="92" x2="538" y2="112" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="464" y="112" width="148" height="44" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="538" y="130" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">CRITERIO DE</text>
+  <text x="538" y="144" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
+  <rect x="204" y="112" width="136" height="44" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="272" y="130" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
+  <text x="272" y="144" text-anchor="middle" fill="#888" font-size="9">RESPONSABLE</text>
+  <line x1="272" y1="156" x2="272" y2="174" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <rect x="204" y="174" width="136" height="44" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="272" y="192" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">BLOQUE</text>
+  <text x="272" y="206" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">DIDÁCTICO</text>
+  <line x1="272" y1="218" x2="272" y2="236" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <rect x="204" y="236" width="136" height="44" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="272" y="254" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">UNIDAD</text>
+  <text x="272" y="268" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">TRABAJO</text>
+  <line x1="272" y1="280" x2="272" y2="298" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <rect x="204" y="298" width="136" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="272" y="322" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">CONTENIDO</text>
+  <rect x="464" y="174" width="148" height="44" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="538" y="192" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">SITUACIÓN DE</text>
+  <text x="538" y="206" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
+  <line x1="538" y1="156" x2="538" y2="174" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <line x1="538" y1="218" x2="538" y2="236" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="464" y1="318" x2="370" y2="318" stroke="#9B1C1C" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <text x="417" y="311" text-anchor="middle" fill="#9B1C1C" font-size="9" font-style="italic">cubre</text>
+  <rect x="464" y="236" width="120" height="44" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="524" y="262" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">SESIÓN</text>
+  <rect x="618" y="236" width="148" height="48" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="692" y="254" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">INSTRUMENTO DE</text>
+  <text x="692" y="268" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
+  <line x1="584" y1="258" x2="618" y2="258" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#ar)"/>
+  <path d="M612,196 Q680,196 680,240" fill="none" stroke="#9B1C1C" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <text x="688" y="220" fill="#9B1C1C" font-size="9" font-style="italic">evalúa</text>
+  <line x1="680" y1="284" x2="680" y2="386" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <line x1="538" y1="280" x2="538" y2="386" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="609" y="382" text-anchor="middle" fill="#bbb" font-size="9">↓ instancia anual ↓</text>
 </g>
 
-<!-- ═══ GRUPO 3: FORMACIÓN EN EMPRESA + CEE ═══ -->
+<!-- GRUPO 3: FORMACIÓN EN EMPRESA -->
 <g id="dg3" opacity="0" style="transition:opacity 0.5s;">
-  <!-- flecha COMPETENCIA→FCT -->
-  <line x1="102" y1="166" x2="102" y2="224" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#arr-red)"/>
-  <!-- FORMACIÓN EN EMPRESA -->
-  <rect x="28" y="224" width="148" height="48" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
-  <circle cx="52" cy="248" r="11" fill="#FDE68A"/>
-  <text x="52" y="252" text-anchor="middle" fill="#D97706" font-size="12">🏢</text>
-  <text x="116" y="243" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">FORMACIÓN EN</text>
-  <text x="116" y="257" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">EMPRESA</text>
-  <!-- flecha FCT→CEE -->
-  <line x1="102" y1="272" x2="102" y2="304" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#arr-red)"/>
-  <!-- CEE -->
-  <rect x="28" y="304" width="148" height="48" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
-  <circle cx="52" cy="328" r="11" fill="#FDE68A"/>
-  <text x="52" y="332" text-anchor="middle" fill="#D97706" font-size="12">💼</text>
-  <text x="116" y="323" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">CEE</text>
-  <text x="116" y="337" text-anchor="middle" fill="#92400E" font-size="9">Competencia en empresa</text>
+  <line x1="92" y1="152" x2="92" y2="202" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="22" y="202" width="140" height="44" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.4"/>
+  <text x="92" y="220" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">FORMACIÓN EN</text>
+  <text x="92" y="234" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">EMPRESA</text>
+  <line x1="92" y1="246" x2="92" y2="274" stroke="#9B1C1C" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="22" y="274" width="140" height="44" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.4"/>
+  <text x="92" y="292" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">CEE</text>
+  <text x="92" y="306" text-anchor="middle" fill="#92400E" font-size="9">Competencia en empresa</text>
 </g>
 
-<!-- ═══ GRUPO 4: GESTIÓN DE CURSOS ═══ -->
+<!-- GRUPO 4: GESTIÓN DE CURSOS -->
 <g id="dg4" opacity="0" style="transition:opacity 0.5s;">
-  <!-- instancias desde arriba a gestión -->
-  <line x1="716" y1="432" x2="716" y2="458" stroke="#888" stroke-width="1.2" stroke-dasharray="5,3"/>
-  <line x1="716" y1="458" x2="576" y2="458" stroke="#888" stroke-width="1.2" stroke-dasharray="5,3"/>
-  <line x1="576" y1="458" x2="484" y2="466" stroke="#888" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-grey)"/>
-  <line x1="568" y1="432" x2="568" y2="458" stroke="#888" stroke-width="1.2" stroke-dasharray="5,3"/>
-  <line x1="568" y1="458" x2="252" y2="458" stroke="#888" stroke-width="1.2" stroke-dasharray="5,3"/>
-  <line x1="252" y1="458" x2="252" y2="466" stroke="#888" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-grey)"/>
+  <!-- instancia lines -->
+  <line x1="680" y1="386" x2="680" y2="410" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <line x1="680" y1="410" x2="548" y2="410" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <line x1="548" y1="410" x2="468" y2="418" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#ag)"/>
+  <text x="620" y="406" fill="#bbb" font-size="9">instancia</text>
+  <line x1="538" y1="386" x2="538" y2="410" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <line x1="538" y1="410" x2="246" y2="410" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <line x1="246" y1="410" x2="246" y2="418" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#ag)"/>
+  <text x="380" y="406" fill="#bbb" font-size="9">instancia</text>
   <!-- GRUPO -->
-  <rect x="18" y="466" width="126" height="42" rx="6" fill="white" stroke="#5B3A8C" stroke-width="1.5"/>
-  <circle cx="40" cy="487" r="10" fill="#EDE9FE"/>
-  <text x="40" y="491" text-anchor="middle" fill="#5B3A8C" font-size="12">👥</text>
-  <text x="94" y="491" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">GRUPO</text>
-  <!-- flecha GRUPO→MÓDULO ASIGN -->
-  <line x1="82" y1="508" x2="82" y2="528" stroke="#5B3A8C" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <rect x="14" y="418" width="118" height="38" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
+  <text x="73" y="441" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">GRUPO</text>
+  <line x1="73" y1="456" x2="73" y2="474" stroke="#5B3A8C" stroke-width="1.4" marker-end="url(#ap)"/>
   <!-- MÓDULO ASIGNACIÓN -->
-  <rect x="18" y="528" width="126" height="48" rx="6" fill="white" stroke="#5B3A8C" stroke-width="1.5"/>
-  <circle cx="40" cy="552" r="10" fill="#EDE9FE"/>
-  <text x="40" y="556" text-anchor="middle" fill="#5B3A8C" font-size="12">📖</text>
-  <text x="94" y="547" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
-  <text x="94" y="561" text-anchor="middle" fill="#555" font-size="9">ASIGNACIÓN</text>
-  <!-- flecha MÓDULO ASIGN→PROGRAMACIÓN -->
-  <line x1="144" y1="552" x2="178" y2="552" stroke="#5B3A8C" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <rect x="14" y="474" width="118" height="44" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
+  <text x="73" y="492" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
+  <text x="73" y="506" text-anchor="middle" fill="#888" font-size="9">ASIGNACIÓN</text>
+  <line x1="132" y1="496" x2="162" y2="496" stroke="#5B3A8C" stroke-width="1.4" marker-end="url(#ap)"/>
   <!-- PROGRAMACIÓN -->
-  <rect x="178" y="462" width="152" height="52" rx="6" fill="white" stroke="#5B3A8C" stroke-width="1.5"/>
-  <circle cx="200" cy="488" r="10" fill="#EDE9FE"/>
-  <text x="200" y="492" text-anchor="middle" fill="#5B3A8C" font-size="12">📅</text>
-  <text x="272" y="483" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">PROGRAMACIÓN</text>
-  <text x="272" y="497" text-anchor="middle" fill="#555" font-size="9">temporalización SA</text>
-  <!-- flecha GRUPO→PROGRAMACIÓN -->
-  <line x1="144" y1="487" x2="178" y2="487" stroke="#5B3A8C" stroke-width="1.5" marker-end="url(#arr-purple)"/>
-  <!-- flecha CAL.INSTRUMENTO→PROGRAMACIÓN (condicional) -->
-  <line x1="460" y1="487" x2="330" y2="487" stroke="#5B3A8C" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-purple)"/>
+  <rect x="162" y="418" width="144" height="48" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
+  <text x="234" y="438" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">PROGRAMACIÓN</text>
+  <text x="234" y="452" text-anchor="middle" fill="#888" font-size="9">temporalización SA</text>
+  <line x1="132" y1="437" x2="162" y2="437" stroke="#5B3A8C" stroke-width="1.4" marker-end="url(#ap)"/>
   <!-- REGISTRO ASISTENCIA -->
-  <rect x="178" y="530" width="152" height="48" rx="6" fill="white" stroke="#5B3A8C" stroke-width="1.5"/>
-  <circle cx="200" cy="554" r="10" fill="#EDE9FE"/>
-  <text x="200" y="558" text-anchor="middle" fill="#5B3A8C" font-size="12">✅</text>
-  <text x="272" y="549" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">REGISTRO</text>
-  <text x="272" y="563" text-anchor="middle" fill="#555" font-size="9">ASISTENCIA</text>
-  <!-- CALIFICACIÓN INSTRUMENTO -->
-  <rect x="460" y="462" width="166" height="48" rx="6" fill="#7C3AED"/>
-  <circle cx="482" cy="486" r="10" fill="rgba(255,255,255,0.2)"/>
-  <text x="482" y="490" text-anchor="middle" fill="white" font-size="12">📊</text>
-  <text x="562" y="481" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN</text>
-  <text x="562" y="495" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="9">INSTRUMENTO</text>
-  <!-- flecha CAL.INSTR→CAL.CE -->
-  <line x1="543" y1="510" x2="543" y2="530" stroke="#5B3A8C" stroke-width="1.5" marker-end="url(#arr-purple)"/>
-  <!-- CALIFICACIÓN CE -->
-  <rect x="460" y="530" width="166" height="40" rx="6" fill="#6D28D9"/>
-  <circle cx="482" cy="550" r="10" fill="rgba(255,255,255,0.2)"/>
-  <text x="482" y="554" text-anchor="middle" fill="white" font-size="12">👤</text>
-  <text x="562" y="554" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN CE</text>
-  <!-- flecha CAL.CE→CAL.RA -->
-  <line x1="543" y1="570" x2="543" y2="588" stroke="#5B3A8C" stroke-width="1.5" marker-end="url(#arr-purple)"/>
-  <!-- CALIFICACIÓN RA -->
-  <rect x="460" y="588" width="166" height="40" rx="6" fill="#5B21B6"/>
-  <circle cx="482" cy="608" r="10" fill="rgba(255,255,255,0.2)"/>
-  <text x="482" y="612" text-anchor="middle" fill="white" font-size="12">🎯</text>
-  <text x="562" y="612" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN RA</text>
-  <!-- flecha CAL.RA→CAL.MÓDULO -->
-  <line x1="543" y1="628" x2="543" y2="644" stroke="#5B3A8C" stroke-width="1.5" marker-end="url(#arr-purple)"/>
-  <!-- CALIFICACIÓN MÓDULO -->
-  <rect x="460" y="644" width="166" height="40" rx="6" fill="#4C1D95"/>
-  <circle cx="482" cy="664" r="10" fill="rgba(255,255,255,0.2)"/>
-  <text x="482" y="668" text-anchor="middle" fill="white" font-size="12">📈</text>
-  <text x="562" y="668" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN MÓDULO</text>
+  <rect x="162" y="480" width="144" height="40" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
+  <text x="234" y="496" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">REGISTRO</text>
+  <text x="234" y="509" text-anchor="middle" fill="#888" font-size="9">ASISTENCIA</text>
+  <!-- Calificaciones en cascada vertical a la derecha -->
+  <line x1="440" y1="437" x2="400" y2="437" stroke="#5B3A8C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ap)"/>
+  <!-- CAL INSTRUMENTO -->
+  <rect x="440" y="416" width="155" height="42" rx="5" fill="#7C3AED"/>
+  <text x="518" y="432" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN</text>
+  <text x="518" y="446" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="9">INSTRUMENTO</text>
+  <line x1="518" y1="458" x2="518" y2="472" stroke="#5B3A8C" stroke-width="1.4" marker-end="url(#ap)"/>
+  <!-- CAL CE -->
+  <rect x="440" y="472" width="155" height="36" rx="5" fill="#6D28D9"/>
+  <text x="518" y="494" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN CE</text>
+  <line x1="518" y1="508" x2="518" y2="520" stroke="#5B3A8C" stroke-width="1.4" marker-end="url(#ap)"/>
+  <!-- CAL RA -->
+  <rect x="440" y="520" width="155" height="36" rx="5" fill="#5B21B6"/>
+  <text x="518" y="542" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN RA</text>
+  <line x1="518" y1="556" x2="518" y2="568" stroke="#5B3A8C" stroke-width="1.4" marker-end="url(#ap)"/>
+  <!-- CAL MÓDULO -->
+  <rect x="440" y="568" width="155" height="36" rx="5" fill="#4C1D95"/>
+  <text x="518" y="590" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN MÓDULO</text>
 </g>
-
-      </svg>
-      </div>
+    </svg>
     </div>
   </div>
-  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
+  <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
-<!-- S5 PROTOTIPO -->
+<!-- ══ S5 PROTOTIPO ══ -->
 <div class="slide" id="s5">
-  <div class="bg"></div><div class="ov"></div>
-  <div class="body">
-    <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="eye eye-lt p5-eye">Resultado — Prototipo funcional navegable</p>
-      <h2 class="p5-h">Demostración de viabilidad</h2>
-      <p class="p5-sub">jasola.github.io/curriculafp-prototipo</p>
+  <div class="editorial">
+    <div class="editorial-content">
+      <p class="eyebrow">Resultado — Prototipo funcional navegable</p>
+      <div class="rule"></div>
+      <h2 class="section-title">Demostración<br>de viabilidad</h2>
       <div class="p5-browser">
         <div class="p5-bar">
           <div class="p5-dots"><div class="p5-d"></div><div class="p5-d"></div><div class="p5-d"></div></div>
           <div class="p5-addr">jasola.github.io/curriculafp-prototipo</div>
         </div>
-        <img src="images/slide4-prototipo.png" alt="CurriculaFP — Planificación del ciclo">
+        <img src="images/slide4-prototipo.png" alt="Prototipo CurriculaFP">
       </div>
       <div class="p5-flows">
-        <div class="p5-flow"><div class="p5-flow-title">Configuración normativa</div><div class="p5-flow-desc">Catálogo nacional, implantación del ciclo en el centro, especialidades docentes y espacios mínimos.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Planificación del ciclo completa</div><div class="p5-flow-desc">Estructura normativa y programación del docente con SA vinculadas a RA y criterios de evaluación.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Gestión académica anual</div><div class="p5-flow-desc">Grupos, horarios, registro de asistencia, calificaciones con consolidación automática hacia el módulo.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Formación en empresa</div><div class="p5-flow-desc">Asignación de alumno a empresa y tutor, registro de visitas, calificación dual y exenciones individuales.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Seguimiento del alumnado</div><div class="p5-flow-desc">Expediente acumulable por DNI entre centros. Estado de unidades de competencia del CNCP en tiempo real.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Proyecto Intermodular</div><div class="p5-flow-desc">Reto del ciclo, módulos implicados, resultados de aprendizaje asociados. Aplicable a cualquier título.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Configuración normativa</div><div class="p5-flow-desc">Catálogo nacional, implantación del ciclo, especialidades y espacios.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Planificación completa</div><div class="p5-flow-desc">SA vinculadas a RA y criterios de evaluación con ponderaciones.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Gestión académica anual</div><div class="p5-flow-desc">Grupos, horarios, asistencia y calificaciones consolidadas.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Formación en empresa</div><div class="p5-flow-desc">Asignación, tutorías, calificación dual y exenciones individuales.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Expediente del alumno</div><div class="p5-flow-desc">Historial acumulable por DNI entre centros. Competencias CNCP.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Proyecto Intermodular</div><div class="p5-flow-desc">Reto del ciclo, módulos y RA asociados. Aplicable a cualquier título.</div></div>
       </div>
       <a class="p5-btn" href="https://jasola.github.io/curriculafp-prototipo" target="_blank" rel="noopener">
         Abrir prototipo
         <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
     </div>
+    <div class="editorial-img"><img src="images/slide4-prototipo.png" alt="" style="object-position:top;"></div>
   </div>
-  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
+  <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
-<!-- S6 VALIDACIÓN -->
+<!-- ══ S6 VALIDACIÓN ══ -->
 <div class="slide" id="s6">
-  <div class="bg"></div><div class="ov"></div>
-  <div class="body">
-    <div style="display:flex;flex-direction:column;">
-      <p class="eye eye-lt p6-eye">Evaluación del prototipo</p>
-      <h2 class="p6-h">Evaluación del prototipo con docentes<br>de Formación Profesional Sanidad</h2>
+  <div class="editorial">
+    <div class="editorial-content">
+      <p class="eyebrow">Evaluación del prototipo</p>
+      <div class="rule"></div>
+      <h2 class="section-title">Evaluación con docentes de<br>Formación Profesional Sanidad</h2>
       <div class="p6-finds">
         <div class="p6-find">
           <div class="p6-n">1</div>
@@ -823,92 +572,95 @@ nav{
         <div class="p6-find">
           <div class="p6-n">2</div>
           <div>
-            <p class="p6-title">Funcionalidad más valorada: SA vinculadas a RA y criterios de evaluación</p>
-            <p class="p6-desc">La cadena situación de aprendizaje → resultado de aprendizaje → criterio de evaluación fue la funcionalidad con mayor valoración. Hace visible la trazabilidad de evidencias del aprendizaje que la normativa exige.</p>
+            <p class="p6-title">Funcionalidad más valorada: SA → RA → criterios de evaluación</p>
+            <p class="p6-desc">La cadena situación de aprendizaje → resultado → criterio hace visible la trazabilidad de evidencias del aprendizaje que la normativa exige. La más compleja de diseñar, la más valorada.</p>
           </div>
         </div>
         <div class="p6-find">
           <div class="p6-n">3</div>
           <div>
             <p class="p6-title">Orientación concreta para el desarrollo siguiente</p>
-            <p class="p6-desc">Catálogos predefinidos de instrumentos de evaluación como mejora de mayor impacto percibido. Demanda real no identificada en el análisis previo — coherente con el modelo de aceptación tecnológica.</p>
+            <p class="p6-desc">Catálogos predefinidos de instrumentos de evaluación como mejora prioritaria — demanda real no identificada en el análisis previo.</p>
           </div>
         </div>
       </div>
-      <div class="p6-context">Proceso de evaluación realizado con dos docentes en activo de ciclos formativos de la familia Sanidad, en el contexto del CIFP Salud Jerez. La evaluación se centró en la adecuación funcional del prototipo a la realidad de la gestión curricular de ese ciclo y centro concretos.</div>
+      <div class="p6-context">Evaluación realizada con dos docentes en activo de ciclos formativos de la familia Sanidad, en el contexto del CIFP Salud Jerez. Centrada en la adecuación funcional del prototipo a ese ciclo y centro concretos.</div>
     </div>
+    <div class="editorial-img"><img src="images/slide5-docentes.png" alt=""></div>
   </div>
-  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
+  <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
-<!-- S7 CONCLUSIONES -->
+<!-- ══ S7 CONCLUSIONES ══ -->
 <div class="slide" id="s7">
-  <div class="geo"></div>
-  <div class="body">
-    <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="eye eye-lt p7-eye">Conclusiones</p>
-      <h2 class="p7-h">Lo que el proyecto demuestra</h2>
+  <div class="editorial">
+    <div class="editorial-content">
+      <p class="eyebrow">Conclusiones</p>
+      <div class="rule"></div>
+      <h2 class="section-title">Lo que el proyecto<br>demuestra</h2>
       <div class="p7-conclusions">
         <div class="p7-c">
           <div class="p7-c-num">01</div>
-          <div class="p7-c-body">
+          <div>
             <p class="p7-c-title">La separación entre capas de gestión es el eje que ordena la complejidad</p>
-            <p class="p7-c-desc">Distinguir lo que es permanente — la estructura curricular del ciclo — de lo que es anual — los grupos, las asignaciones y las calificaciones de ese curso — elimina el trabajo repetido y hace visible una distinción que la práctica docente maneja implícitamente pero que ninguna herramienta había formalizado.</p>
+            <p class="p7-c-desc">Distinguir lo permanente — la estructura curricular del ciclo — de lo anual — grupos, asignaciones y calificaciones — elimina trabajo repetido y formaliza una distinción que la práctica docente maneja implícitamente.</p>
           </div>
         </div>
         <div class="p7-c">
           <div class="p7-c-num">02</div>
-          <div class="p7-c-body">
+          <div>
             <p class="p7-c-title">La trazabilidad no se añade: emerge de la arquitectura</p>
-            <p class="p7-c-desc">Cuando el modelo de datos refleja fielmente la jerarquía normativa del sistema, la trazabilidad aparece de forma natural. No es una funcionalidad que se implementa por separado: es la consecuencia de tomar esa jerarquía como estructura central.</p>
+            <p class="p7-c-desc">Cuando el modelo de datos refleja la jerarquía normativa del sistema, la trazabilidad aparece de forma natural. No es una funcionalidad que se implementa por separado.</p>
           </div>
         </div>
         <div class="p7-c">
           <div class="p7-c-num">03</div>
-          <div class="p7-c-body">
+          <div>
             <p class="p7-c-title">Complejidad del modelo no implica complejidad de interfaz</p>
-            <p class="p7-c-desc">El prototipo refuta la hipótesis implícita de que un modelo de datos complejo produce inevitablemente una interfaz difícil de usar. La pantalla más compleja del sistema fue también la más valorada en la evaluación con docentes.</p>
+            <p class="p7-c-desc">La pantalla más compleja del sistema fue también la más valorada en la evaluación con docentes. Las decisiones de diseño pueden reducir la carga cognitiva sin sacrificar profundidad.</p>
           </div>
         </div>
       </div>
-      <p class="p7-closing">"CurriculaFP nació de un diagnóstico concreto. El trabajo desarrollado ha permitido verificar que el diagnóstico era correcto y que la respuesta propuesta es viable."</p>
+      <p class="p7-closing">"CurriculaFP nació de un diagnóstico concreto. El trabajo ha permitido verificar que el diagnóstico era correcto y que la respuesta propuesta es viable."</p>
     </div>
+    <div class="editorial-img"><img src="images/resultados.png" alt=""></div>
   </div>
-  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
+  <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
-<!-- S8 DESARROLLO -->
+<!-- ══ S8 DESARROLLO ══ -->
 <div class="slide" id="s8">
-  <div class="body">
-    <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="eye eye-dk p8-eye">Estado actual del desarrollo</p>
-      <h2 class="p8-h">Del prototipo a la aplicación real</h2>
-      <div class="p8-content">
+  <div class="editorial">
+    <div class="editorial-content">
+      <p class="eyebrow">Estado actual del desarrollo</p>
+      <div class="rule"></div>
+      <h2 class="section-title">Del prototipo a la<br>aplicación real</h2>
+      <div class="p8-grid">
         <div>
           <div class="p8-col-head"><span class="p8-col-label">Hoja de ruta</span></div>
           <div class="p8-phases">
             <div class="p8-phase">
-              <div class="p8-phase-dot"><div class="p8-phase-dot-inner"></div></div>
+              <div class="p8-dot"><div class="p8-dot-inner"></div></div>
               <div>
                 <p class="p8-phase-label">En curso</p>
                 <p class="p8-phase-title">Fase 1 — Fundamentos de programación</p>
-                <p class="p8-phase-desc">Python iniciado con datos reales de CurriculaFP — variables, listas, diccionarios, funciones. Entorno configurado: Python 3.11.9, VS Code. Recursos: Píldoras Informáticas (Python), Midudev (SQL).</p>
+                <p class="p8-phase-desc">Python iniciado con datos reales de CurriculaFP. Entorno configurado: Python 3.11.9, VS Code.</p>
               </div>
             </div>
             <div class="p8-phase">
-              <div class="p8-phase-dot"><div class="p8-phase-dot-inner"></div></div>
+              <div class="p8-dot"><div class="p8-dot-inner"></div></div>
               <div>
                 <p class="p8-phase-label">Siguiente</p>
-                <p class="p8-phase-title">Fases 2-4 — Backend, API y frontend</p>
-                <p class="p8-phase-desc">PostgreSQL con el modelo de datos de CurriculaFP → Django (Fazt, tutorial oficial) → Django REST Framework (Codigofacilito) → React (Midudev). Estimación: 4-5 meses a 1-2 horas diarias.</p>
+                <p class="p8-phase-title">Fases 2–4 — Backend, API y frontend</p>
+                <p class="p8-phase-desc">PostgreSQL → Django → Django REST Framework → React. Estimación: 4–5 meses a 1–2 horas diarias.</p>
               </div>
             </div>
             <div class="p8-phase">
-              <div class="p8-phase-dot"><div class="p8-phase-dot-inner"></div></div>
+              <div class="p8-dot"><div class="p8-dot-inner"></div></div>
               <div>
                 <p class="p8-phase-label">Horizonte</p>
                 <p class="p8-phase-title">Fase 5 — MVP y primer piloto</p>
-                <p class="p8-phase-desc">Despliegue en Railway o Render. Primer piloto con centro educativo de referencia ya identificado. Modelo de suscripción para centros de Formación Profesional.</p>
+                <p class="p8-phase-desc">Despliegue en Railway o Render. Primer piloto con centro educativo ya identificado.</p>
               </div>
             </div>
           </div>
@@ -917,155 +669,119 @@ nav{
         <div>
           <div class="p8-col-head"><span class="p8-col-label">Stack tecnológico</span></div>
           <div class="p8-stack">
-            <div class="p8-stack-row">
-              <div class="p8-stack-label">En curso</div>
-              <div class="p8-stack-tags">
-                <span class="p8-stack-tag current">Python 3.11</span>
-              </div>
-            </div>
-            <div class="p8-stack-row">
-              <div class="p8-stack-label">Base de datos</div>
-              <div class="p8-stack-tags">
-                <span class="p8-stack-tag">PostgreSQL</span>
-              </div>
-            </div>
-            <div class="p8-stack-row">
-              <div class="p8-stack-label">Backend</div>
-              <div class="p8-stack-tags">
-                <span class="p8-stack-tag">Django</span>
-                <span class="p8-stack-tag">Django REST Framework</span>
-              </div>
-            </div>
-            <div class="p8-stack-row">
-              <div class="p8-stack-label">Frontend</div>
-              <div class="p8-stack-tags">
-                <span class="p8-stack-tag">React</span>
-              </div>
-            </div>
-            <div class="p8-stack-row">
-              <div class="p8-stack-label">SaaS</div>
-              <div class="p8-stack-tags">
-                <span class="p8-stack-tag">django-tenants</span>
-                <span class="p8-stack-tag">Stripe</span>
-              </div>
-            </div>
-            <div class="p8-stack-row">
-              <div class="p8-stack-label">Despliegue</div>
-              <div class="p8-stack-tags">
-                <span class="p8-stack-tag">Railway / Render</span>
-              </div>
-            </div>
+            <div class="p8-stack-row"><div class="p8-stack-lbl">En curso</div><div class="p8-stack-tags"><span class="p8-stack-tag now">Python 3.11</span></div></div>
+            <div class="p8-stack-row"><div class="p8-stack-lbl">Base datos</div><div class="p8-stack-tags"><span class="p8-stack-tag">PostgreSQL</span></div></div>
+            <div class="p8-stack-row"><div class="p8-stack-lbl">Backend</div><div class="p8-stack-tags"><span class="p8-stack-tag">Django</span><span class="p8-stack-tag">DRF</span></div></div>
+            <div class="p8-stack-row"><div class="p8-stack-lbl">Frontend</div><div class="p8-stack-tags"><span class="p8-stack-tag">React</span></div></div>
+            <div class="p8-stack-row"><div class="p8-stack-lbl">SaaS</div><div class="p8-stack-tags"><span class="p8-stack-tag">django-tenants</span><span class="p8-stack-tag">Stripe</span></div></div>
+            <div class="p8-stack-row"><div class="p8-stack-lbl">Despliegue</div><div class="p8-stack-tags"><span class="p8-stack-tag">Railway / Render</span></div></div>
           </div>
-          <div class="p8-eta">
-            <strong>Punto de partida:</strong> analista funcional con experiencia en prototipado de aplicaciones, aprendiendo a programar desde cero para construir el producto directamente. Cada ejercicio de aprendizaje usa datos reales de CurriculaFP desde el primer día.
-          </div>
+          <div class="p8-note"><strong>Punto de partida:</strong> analista funcional aprendiendo a programar desde cero para construir el producto directamente. Cada ejercicio usa datos reales de CurriculaFP desde el primer día.</div>
         </div>
       </div>
     </div>
+    <div class="editorial-img"><img src="images/slide6-planta.png" alt=""></div>
   </div>
-  <div class="stamp dk"><img src="images/logo.png" alt=""></div>
+  <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
 </div><!-- /deck -->
 
-<button class="arr prev" id="arrPrev" onclick="navigate(-1)" disabled>&#8592;</button>
-<button class="arr next" id="arrNext" onclick="navigate(1)">&#8594;</button>
+<button class="arr prev" id="arrPrev" onclick="handlePrev()" disabled>&#8592;</button>
+<button class="arr next" id="arrNext" onclick="handleNext()">&#8594;</button>
 <div class="dots" id="dotsEl"></div>
 
 <script>
-const slides=document.querySelectorAll('.slide');
-const navItems=document.querySelectorAll('.nav-item');
-const total=slides.length;
-let cur=0;
-const creamSlides=new Set([0,3,8]);
+const slides = document.querySelectorAll('.slide');
+const navItems = document.querySelectorAll('.nav-item');
+const total = slides.length;
+let cur = 0;
 
-const dotsEl=document.getElementById('dotsEl');
-for(let i=0;i<total;i++){
-  const d=document.createElement('div');
-  d.className='dot'+(i===0?' active':'');
-  d.onclick=()=>goTo(i);
-  dotsEl.appendChild(d);
-}
-
-function goTo(n){
-  slides[cur].classList.remove('active');
-  navItems[cur].classList.remove('active');
-  dotsEl.children[cur].classList.remove('active');
-  cur=n;
-  slides[cur].classList.add('active');
-  navItems[cur].classList.add('active');
-  dotsEl.children[cur].classList.add('active');
-  document.getElementById('arrPrev').disabled=cur===0;
-  document.getElementById('arrNext').disabled=cur===total-1;
-  updateArrows();
-}
-
-function updateArrows(){
-  const c=creamSlides.has(cur);
-  const p=document.getElementById('arrPrev');
-  const n=document.getElementById('arrNext');
-  p.className='arr prev'+(c?' cream':'');
-  n.className='arr next'+(c?' cream':'');
-}
-
-function navigate(dir){const n=cur+dir;if(n>=0&&n<total)goTo(n);}
-
-document.addEventListener('keydown',e=>{
-  // If on slide 4 (arquitectura) and diagram not complete, advance diagram instead of slide
-  if((e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') && cur===4 && diagStep<4){
-    e.preventDefault();
-    advanceDiagram();
-    return;
-  }
-  if(e.key==='ArrowRight'||e.key==='ArrowDown') navigate(1);
-  if(e.key==='ArrowLeft'||e.key==='ArrowUp') navigate(-1);
-});
-
-// Diagram step control
+// Diagram state
 let diagStep = 0;
 const diagGroups = ['dg1','dg2','dg3','dg4'];
 const diagHints = [
   'Pulsa → para revelar',
-  'Catálogo nacional — pulsa →',
-  'Definición en el centro — pulsa →',
-  'Formación en empresa — pulsa →',
-  'Diagrama completo — pulsa → para continuar'
+  'Catálogo nacional — pulsa → para continuar',
+  'Definición en el centro — pulsa → para continuar',
+  'Formación en empresa — pulsa → para continuar',
+  'Diagrama completo — pulsa → para avanzar'
 ];
+
+function resetDiagram(){
+  diagStep = 0;
+  diagGroups.forEach(id => {
+    const el = document.getElementById(id);
+    if(el){ el.style.opacity = '0'; el.style.transition = 'none'; }
+  });
+  const hint = document.getElementById('arch-hint');
+  if(hint) hint.textContent = diagHints[0];
+}
 
 function advanceDiagram(){
   if(diagStep < diagGroups.length){
     const el = document.getElementById(diagGroups[diagStep]);
-    if(el) el.style.opacity='1';
+    if(el){ el.style.transition = 'opacity 0.5s'; el.style.opacity = '1'; }
     diagStep++;
-    const hint = document.getElementById('diag-hint');
+    const hint = document.getElementById('arch-hint');
     if(hint) hint.textContent = diagHints[diagStep];
+    return true; // consumed
+  }
+  return false; // diagram complete, let navigation proceed
+}
+
+function handleNext(){
+  if(cur === 4 && diagStep < diagGroups.length){
+    advanceDiagram();
+  } else {
+    navigate(1);
   }
 }
 
-// Reset diagram when leaving/returning to slide 4
-const origGoTo = goTo;
-function goTo(n){
-  if(n !== 4 && cur === 4){
-    // leaving diagram slide — reset
-    diagStep = 0;
-    diagGroups.forEach(id => {
-      const el = document.getElementById(id);
-      if(el) el.style.opacity='0';
-    });
-    const hint = document.getElementById('diag-hint');
-    if(hint) hint.textContent = diagHints[0];
+function handlePrev(){
+  if(cur === 4 && diagStep > 0){
+    // step back one group
+    diagStep--;
+    const el = document.getElementById(diagGroups[diagStep]);
+    if(el){ el.style.transition = 'opacity 0.3s'; el.style.opacity = '0'; }
+    const hint = document.getElementById('arch-hint');
+    if(hint) hint.textContent = diagHints[diagStep];
+  } else {
+    navigate(-1);
   }
+}
+
+// Dots
+const dotsEl = document.getElementById('dotsEl');
+for(let i=0;i<total;i++){
+  const d = document.createElement('div');
+  d.className = 'dot'+(i===0?' active':'');
+  d.onclick = ()=>goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n){
+  if(n !== 4) resetDiagram();
   slides[cur].classList.remove('active');
   navItems[cur].classList.remove('active');
   dotsEl.children[cur].classList.remove('active');
-  cur=n;
+  cur = n;
   slides[cur].classList.add('active');
   navItems[cur].classList.add('active');
   dotsEl.children[cur].classList.add('active');
-  document.getElementById('arrPrev').disabled=cur===0;
-  document.getElementById('arrNext').disabled=cur===total-1;
-  updateArrows();
+  document.getElementById('arrPrev').disabled = cur===0;
+  document.getElementById('arrNext').disabled = cur===total-1 && (cur!==4 || diagStep>=diagGroups.length);
 }
+
+function navigate(dir){
+  const n = cur + dir;
+  if(n >= 0 && n < total) goTo(n);
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){ e.preventDefault(); handleNext(); }
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); handlePrev(); }
+});
 </script>
 </body>
 </html>
