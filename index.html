@@ -188,7 +188,9 @@ nav{
 
 /* ══════ S8 DESARROLLO ══════ */
 .p8-grid{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;width:100%;}
-.p8-sep{background:rgba(155,28,28,0.15);margin:0 3vw;align-self:stretch;}
+.p8-grid > div:first-child{padding-right:3vw;}
+.p8-grid > div:last-child{padding-left:3vw;}
+.p8-sep{background:rgba(155,28,28,0.15);flex-shrink:0;align-self:stretch;}
 .p8-col-head{display:flex;align-items:center;gap:8px;margin-bottom:2.5vh;padding-bottom:1.2vh;border-bottom:1.5px solid rgba(155,28,28,0.15);}
 .p8-col-label{font-size:clamp(10px,0.9vw,13px);font-weight:600;color:var(--bur);letter-spacing:0.1em;text-transform:uppercase;}
 .p8-phases{display:flex;flex-direction:column;gap:0;}
@@ -692,9 +694,9 @@ nav{
 <!-- ══ S8 DESARROLLO ══ -->
 <div class="slide" id="s8">
   <!-- Imagen de fondo servidor -->
-  <div style="position:absolute;inset:0;background-image:url('images/slide8-servidor.png');background-size:cover;background-position:center;opacity:0.18;"></div>
+  <div style="position:absolute;inset:0;background-color:#0d1a2b;background-image:url('images/slide8-servidor.png');background-size:cover;background-position:center;opacity:0.22;"></div>
   <!-- Overlay suave para legibilidad -->
-  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(247,244,240,0.72) 0%,rgba(247,244,240,0.55) 100%);"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(247,244,240,0.88) 0%,rgba(247,244,240,0.75) 100%);"></div>
 
   <div style="position:relative;z-index:2;display:flex;align-items:center;height:100%;padding:0 6vw;">
     <div style="width:100%;max-width:1020px;margin:0 auto;">
@@ -720,7 +722,7 @@ nav{
               <div class="p8-dot"><div class="p8-dot-inner"></div></div>
               <div>
                 <p class="p8-phase-title">Fases 2–4 — Backend, API y frontend</p>
-                <p class="p8-phase-desc">PostgreSQL → Django → Django REST Framework → React. Estimación: 4–5 meses a 1–2 horas diarias.</p>
+                <p class="p8-phase-desc">PostgreSQL → Django → Django REST Framework → React.</p>
               </div>
             </div>
             <div class="p8-phase">
