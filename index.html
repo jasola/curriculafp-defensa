@@ -358,256 +358,244 @@ nav{
 </div>
 
 <!-- ══ S4 ARQUITECTURA ══ -->
-<div class="slide" id="s4">
-  <div style="display:flex;flex-direction:column;align-items:center;height:100%;padding:1.5vh 1.5vw 1vh;">
-    <div style="text-align:center;flex-shrink:0;margin-bottom:0.8vh;">
-      <p style="font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(155,28,28,0.45);margin-bottom:4px;">Arquitectura del sistema · Modelo de datos</p>
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(15px,1.7vw,24px);font-weight:700;color:#2C1A1A;line-height:1.2;">Flujo curricular de CurriculaFP</h2>
-      <p id="arch-hint" style="font-size:10px;color:rgba(155,28,28,0.4);margin-top:3px;letter-spacing:0.05em;">Pulsa → para revelar</p>
-    </div>
-    <!-- SVG fills remaining space exactly -->
-    <div id="arch-svg-wrap" style="flex:1;width:100%;min-height:0;">
-      <svg id="diag-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet"
-           xmlns="http://www.w3.org/2000/svg"
-           style="width:100%;height:100%;display:block;font-family:'Inter',sans-serif;">
+<div class="slide" id="s4" style="background:var(--cream);">
+  <svg id="diag-svg"
+       viewBox="0 0 1000 580"
+       preserveAspectRatio="xMidYMid meet"
+       xmlns="http://www.w3.org/2000/svg"
+       style="position:absolute;inset:0;width:100%;height:100%;display:block;font-family:'Inter',sans-serif;">
 <defs>
   <marker id="ar" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#9B1C1C"/></marker>
   <marker id="ap" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#5B3A8C"/></marker>
   <marker id="ag" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#bbb"/></marker>
 </defs>
 
-<!-- ═══ LAYOUT PLAN (viewBox 1000x500) ═══
-  Superior container: x4 y14 w992 h298  → bottom y312
-  Inferior container: x4 y320 w992 h164 → bottom y484
-  Legend:                              y490
-  Total used: 500px ✓
+<!-- TITLE BLOCK: y0..44 -->
+<text x="500" y="16" text-anchor="middle" fill="rgba(155,28,28,0.45)" font-size="9.5" font-weight="500" letter-spacing="2">ARQUITECTURA DEL SISTEMA · MODELO DE DATOS</text>
+<text x="500" y="36" text-anchor="middle" fill="#2C1A1A" font-size="20" font-weight="700" font-family="'Playfair Display',serif">Flujo curricular de CurriculaFP</text>
+<text id="arch-hint" x="500" y="50" text-anchor="middle" fill="rgba(155,28,28,0.38)" font-size="9" letter-spacing="1">Pulsa → para revelar</text>
 
-  Superior internal rows (inside y14..312, content starts y28):
-    Catnacional zone: x10 y26 w168 h278
-    Defcentro zone:   x188 y26 w800 h278
+<!-- ═══════════════════════════════════════
+     LAYOUT inside viewBox 1000x580:
+     Title:             y 0 - 56
+     Superior rect:     y 56, h 280  → bottom y336
+     gap:               8px
+     Inferior rect:     y 344, h 196 → bottom y540
+     Legend:            y 550
+     Total:             580 ✓
 
-  Row heights: box H=36, gap=10
-    R1 y=40  (CICLO, MÓDULO, RA)
-    R2 y=90  (COMP, MOD.RESP, CE)
-    R3 y=156 (FCT, BLOQUE, SA)
-    R4 y=210 (CEE, UNIDAD, SESIÓN+INSTRUMENTO)
-    R5 y=260 (CONTENIDO)
+     Superior internal:
+       Cat.nac zone:    x8   y68  w170 h260
+       Def.centro zone: x186 y68  w806 h260
 
-  Inferior rows (content starts y334):
-    GRUPO        x14  y334 w118 h34
-    MOD.ASIG     x14  y382 w118 h38
-    PROGRAMACIÓN x146 y334 w152 h44
-    REGISTRO     x146 y390 w152 h36
-    CAL.INSTR    x460 y334 w180 h36 → y370
-    CAL.CE       x460 y378 w180 h32 → y410
-    CAL.RA       x460 y420 w180 h32 → y452
-    CAL.MOD      x460 y462 w180 h32 → y494 < y484... 
-    ADJUST: compress cal boxes
-    CAL.INSTR    x460 y334 w180 h34 → y368
-    CAL.CE       x460 y374 w180 h30 → y404
-    CAL.RA       x460 y410 w180 h30 → y440
-    CAL.MOD      x460 y446 w180 h30 → y476 < y484 ✓
-═══════════════════════════════════════════ -->
+     Row tops (box H=38, gap=8 between rows):
+       R1: y=76   CICLO | MÓDULO | RA
+       R2: y=122  COMP  | MOD.RESP | CE
+       R3: y=180  FCT   | BLOQUE | SA
+       R4: y=226  CEE   | UNIDAD | SESIÓN+INSTR
+       R5: y=272  —     | CONTENIDO
 
-<!-- SUPERIOR CONTAINER -->
-<rect x="4" y="14" width="992" height="298" rx="7" fill="none" stroke="#9B1C1C" stroke-width="1.8"/>
-<rect x="12" y="7" width="20" height="18" rx="3" fill="#9B1C1C"/>
-<text x="22" y="19" text-anchor="middle" fill="white" font-size="10" font-weight="700">≡</text>
-<text x="38" y="19" fill="#9B1C1C" font-size="11" font-weight="700">Planificación del ciclo</text>
-<text x="196" y="19" fill="#aaa" font-size="10"> — definición estructural permanente</text>
+     Inferior internal (content y=358..536):
+       GRUPO        x12  y358 w120 h36 →y394
+       MOD.ASIG     x12  y400 w120 h36 →y436
+       PROGRAMACIÓN x142 y358 w150 h44 →y402
+       REGISTRO     x142 y406 w150 h34 →y440
+       CAL.INSTR    x450 y358 w170 h36 →y394
+       CAL.CE       x450 y400 w170 h32 →y432
+       CAL.RA       x450 y438 w170 h32 →y470
+       CAL.MOD      x450 y476 w170 h32 →y508 < y540 ✓
+═══════════════════════════════════════ -->
 
-<!-- Catálogo nacional subzone -->
-<rect x="10" y="26" width="168" height="278" rx="5" fill="none" stroke="#9B1C1C" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="94" y="38" text-anchor="middle" fill="#9B1C1C" font-size="9.5" font-weight="500">Catálogo nacional</text>
+<!-- SUPERIOR CONTAINER: x4 y56 w992 h280 -->
+<rect x="4" y="56" width="992" height="280" rx="7" fill="none" stroke="#9B1C1C" stroke-width="1.8"/>
+<rect x="12" y="49" width="20" height="18" rx="3" fill="#9B1C1C"/>
+<text x="22" y="61" text-anchor="middle" fill="white" font-size="10" font-weight="700">≡</text>
+<text x="38" y="61" fill="#9B1C1C" font-size="11" font-weight="700">Planificación del ciclo</text>
+<text x="198" y="61" fill="#aaa" font-size="10"> — definición estructural permanente</text>
 
-<!-- Definición en el centro subzone -->
-<rect x="188" y="26" width="800" height="278" rx="5" fill="none" stroke="#9B1C1C" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="588" y="38" text-anchor="middle" fill="#9B1C1C" font-size="9.5" font-weight="500">Definición en el centro</text>
+<!-- Cat.nac subzone: x8 y68 w170 h260 -->
+<rect x="8" y="68" width="170" height="260" rx="5" fill="none" stroke="#9B1C1C" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="93" y="80" text-anchor="middle" fill="#9B1C1C" font-size="9.5" font-weight="500">Catálogo nacional</text>
 
-<!-- INFERIOR CONTAINER -->
-<rect x="4" y="320" width="992" height="164" rx="7" fill="none" stroke="#5B3A8C" stroke-width="1.8"/>
-<rect x="12" y="313" width="20" height="18" rx="3" fill="#5B3A8C"/>
-<text x="22" y="325" text-anchor="middle" fill="white" font-size="10" font-weight="700">♟</text>
-<text x="38" y="325" fill="#5B3A8C" font-size="11" font-weight="700">Gestión de cursos</text>
-<text x="172" y="325" fill="#aaa" font-size="10"> — instancia anual</text>
+<!-- Def.centro subzone: x186 y68 w806 h260 -->
+<rect x="186" y="68" width="806" height="260" rx="5" fill="none" stroke="#9B1C1C" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="589" y="80" text-anchor="middle" fill="#9B1C1C" font-size="9.5" font-weight="500">Definición en el centro</text>
 
-<!-- LEGEND -->
-<g transform="translate(4,490)">
-  <line x1="0" y1="5" x2="20" y2="5" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+<!-- INFERIOR CONTAINER: x4 y344 w992 h196 -->
+<rect x="4" y="344" width="992" height="196" rx="7" fill="none" stroke="#5B3A8C" stroke-width="1.8"/>
+<rect x="12" y="337" width="20" height="18" rx="3" fill="#5B3A8C"/>
+<text x="22" y="349" text-anchor="middle" fill="white" font-size="10" font-weight="700">♟</text>
+<text x="38" y="349" fill="#5B3A8C" font-size="11" font-weight="700">Gestión de cursos</text>
+<text x="174" y="349" fill="#aaa" font-size="10"> — instancia anual</text>
+
+<!-- LEGEND: y550 -->
+<g transform="translate(4,552)">
+  <line x1="0" y1="5" x2="20" y2="5" stroke="#9B1C1C" stroke-width="1.3" marker-end="url(#ar)"/>
   <text x="26" y="9" fill="#bbb" font-size="8.5">Relación directa</text>
-  <line x1="120" y1="5" x2="140" y2="5" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <line x1="120" y1="5" x2="140" y2="5" stroke="#9B1C1C" stroke-width="1.3" stroke-dasharray="4,2" marker-end="url(#ar)"/>
   <text x="146" y="9" fill="#bbb" font-size="8.5">Relación condicional</text>
-  <line x1="270" y1="5" x2="290" y2="5" stroke="#ccc" stroke-width="1.4" stroke-dasharray="5,2"/>
-  <text x="296" y="9" fill="#bbb" font-size="8.5">Instancia entre niveles</text>
+  <line x1="268" y1="5" x2="288" y2="5" stroke="#ccc" stroke-width="1.3" stroke-dasharray="5,2"/>
+  <text x="294" y="9" fill="#bbb" font-size="8.5">Instancia entre niveles</text>
 </g>
 
 <!-- ═══ GRUPO 1: CATÁLOGO NACIONAL ═══ -->
 <g id="dg1" opacity="0" style="transition:opacity 0.5s;">
-  <!-- CICLO y=40 h=36 -->
-  <rect x="18" y="44" width="152" height="36" rx="5" fill="#9B1C1C"/>
-  <text x="94" y="66" text-anchor="middle" fill="white" font-size="12" font-weight="700">CICLO</text>
-  <!-- CICLO→COMPETENCIA -->
-  <line x1="94" y1="80" x2="94" y2="94" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <!-- COMPETENCIA PROFESIONAL y=94 h=40 -->
-  <rect x="18" y="94" width="152" height="40" rx="5" fill="#9B1C1C"/>
-  <text x="94" y="110" text-anchor="middle" fill="white" font-size="11" font-weight="700">COMPETENCIA</text>
-  <text x="94" y="124" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8.5">PROFESIONAL</text>
+  <!-- CICLO: x18 y76 w154 h38 -->
+  <rect x="18" y="76" width="154" height="38" rx="5" fill="#9B1C1C"/>
+  <text x="95" y="99" text-anchor="middle" fill="white" font-size="12" font-weight="700">CICLO</text>
+  <!-- CICLO→COMP -->
+  <line x1="95" y1="114" x2="95" y2="122" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+  <!-- COMPETENCIA: x18 y122 w154 h42 -->
+  <rect x="18" y="122" width="154" height="42" rx="5" fill="#9B1C1C"/>
+  <text x="95" y="138" text-anchor="middle" fill="white" font-size="11" font-weight="700">COMPETENCIA</text>
+  <text x="95" y="153" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8.5">PROFESIONAL</text>
   <!-- CICLO→MÓDULO -->
-  <line x1="170" y1="62" x2="196" y2="62" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+  <line x1="172" y1="95" x2="194" y2="95" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
 </g>
 
 <!-- ═══ GRUPO 2: DEFINICIÓN EN EL CENTRO ═══ -->
 <g id="dg2" opacity="0" style="transition:opacity 0.5s;">
-  <!-- Col A: x196..348 center=272 box w=152 -->
-  <!-- MÓDULO y=44 -->
-  <rect x="196" y="44" width="152" height="36" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="272" y="66" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">MÓDULO</text>
-  <!-- MÓDULO→RA -->
-  <line x1="348" y1="62" x2="420" y2="62" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <!-- MÓDULO RESPONSABLE y=94 -->
-  <rect x="196" y="94" width="152" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="272" y="109" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
-  <text x="272" y="123" text-anchor="middle" fill="#aaa" font-size="8.5">RESPONSABLE</text>
-  <!-- MOD.RESP→BLOQUE -->
-  <line x1="272" y1="134" x2="272" y2="152" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
-  <!-- BLOQUE DIDÁCTICO y=152 -->
-  <rect x="196" y="152" width="152" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="272" y="167" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">BLOQUE</text>
-  <text x="272" y="181" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">DIDÁCTICO</text>
-  <!-- BLOQUE→UNIDAD -->
-  <line x1="272" y1="192" x2="272" y2="208" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
-  <!-- UNIDAD TRABAJO y=208 -->
-  <rect x="196" y="208" width="152" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="272" y="223" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">UNIDAD</text>
-  <text x="272" y="237" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">TRABAJO</text>
-  <!-- UNIDAD→CONTENIDO -->
-  <line x1="272" y1="248" x2="272" y2="264" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
-  <!-- CONTENIDO y=264 -->
-  <rect x="196" y="264" width="152" height="36" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="272" y="286" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">CONTENIDO</text>
+  <!-- Col A center=271, x194..348 w=154 -->
+  <rect x="194" y="76" width="154" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="271" y="99" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">MÓDULO</text>
+  <line x1="348" y1="95" x2="414" y2="95" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
 
-  <!-- Col B: x420..590 center=505 box w=170 -->
-  <!-- RA y=44 -->
-  <rect x="420" y="44" width="170" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="505" y="60" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">RESULTADO DE</text>
-  <text x="505" y="74" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
-  <!-- RA→CE -->
-  <line x1="505" y1="84" x2="505" y2="98" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <!-- CE y=98 -->
-  <rect x="420" y="98" width="170" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="505" y="113" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">CRITERIO DE</text>
-  <text x="505" y="127" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
-  <!-- CE→SA -->
-  <line x1="505" y1="138" x2="505" y2="152" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
-  <!-- SA y=152 -->
-  <rect x="420" y="152" width="170" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="505" y="167" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">SITUACIÓN DE</text>
-  <text x="505" y="181" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
-  <!-- SA→SESIÓN -->
-  <line x1="505" y1="192" x2="505" y2="208" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <!-- SESIÓN y=208 -->
-  <rect x="420" y="208" width="170" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="505" y="232" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">SESIÓN</text>
-  <!-- SESIÓN→INSTRUMENTO -->
-  <line x1="590" y1="228" x2="634" y2="228" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <!-- SA→CONTENIDO (cubre) -->
-  <line x1="420" y1="282" x2="372" y2="282" stroke="#9B1C1C" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#ar)"/>
-  <text x="396" y="275" text-anchor="middle" fill="#9B1C1C" font-size="8.5" font-style="italic">cubre</text>
+  <rect x="194" y="122" width="154" height="42" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="271" y="138" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
+  <text x="271" y="153" text-anchor="middle" fill="#aaa" font-size="8.5">RESPONSABLE</text>
+  <line x1="271" y1="164" x2="271" y2="180" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
 
-  <!-- Col C: x634..820 center=727 box w=186 -->
-  <!-- INSTRUMENTO y=208 -->
-  <rect x="634" y="208" width="186" height="40" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="727" y="224" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">INSTRUMENTO DE</text>
-  <text x="727" y="238" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
-  <!-- evalúa arco SA→INSTRUMENTO -->
-  <path d="M590,172 Q660,172 660,208" fill="none" stroke="#9B1C1C" stroke-width="1.1" stroke-dasharray="4,2" marker-end="url(#ar)"/>
-  <text x="668" y="192" fill="#9B1C1C" font-size="8.5" font-style="italic">evalúa</text>
+  <rect x="194" y="180" width="154" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="271" y="194" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">BLOQUE</text>
+  <text x="271" y="208" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">DIDÁCTICO</text>
+  <line x1="271" y1="218" x2="271" y2="226" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
 
-  <!-- instancia vertical lines to inferior -->
-  <line x1="727" y1="248" x2="727" y2="312" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="505" y1="248" x2="505" y2="312" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <text x="616" y="308" text-anchor="middle" fill="#ccc" font-size="8.5">↓ instancia anual ↓</text>
-  <text x="732" y="284" fill="#ccc" font-size="8.5">instancia</text>
-  <text x="510" y="284" fill="#ccc" font-size="8.5">instancia</text>
+  <rect x="194" y="226" width="154" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="271" y="240" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">UNIDAD</text>
+  <text x="271" y="254" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">TRABAJO</text>
+  <line x1="271" y1="264" x2="271" y2="272" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+
+  <rect x="194" y="272" width="154" height="36" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="271" y="294" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">CONTENIDO</text>
+
+  <!-- Col B center=501, x414..588 w=174 -->
+  <rect x="414" y="76" width="174" height="42" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="501" y="93" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">RESULTADO DE</text>
+  <text x="501" y="107" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
+  <line x1="501" y1="118" x2="501" y2="122" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+
+  <rect x="414" y="122" width="174" height="42" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="501" y="138" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">CRITERIO DE</text>
+  <text x="501" y="153" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
+  <line x1="501" y1="164" x2="501" y2="180" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+
+  <rect x="414" y="180" width="174" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="501" y="194" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">SITUACIÓN DE</text>
+  <text x="501" y="208" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
+  <line x1="501" y1="218" x2="501" y2="226" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+
+  <rect x="414" y="226" width="174" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="501" y="249" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">SESIÓN</text>
+  <line x1="588" y1="245" x2="634" y2="245" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+
+  <!-- SA→CONTENIDO cubre -->
+  <line x1="414" y1="290" x2="372" y2="290" stroke="#9B1C1C" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <text x="393" y="283" text-anchor="middle" fill="#9B1C1C" font-size="8.5" font-style="italic">cubre</text>
+
+  <!-- Col C center=727, x634..820 w=186 -->
+  <rect x="634" y="226" width="186" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
+  <text x="727" y="241" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">INSTRUMENTO DE</text>
+  <text x="727" y="255" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
+
+  <!-- evalúa arco SA→INSTR -->
+  <path d="M588,199 Q660,199 660,226" fill="none" stroke="#9B1C1C" stroke-width="1.1" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <text x="668" y="216" fill="#9B1C1C" font-size="8.5" font-style="italic">evalúa</text>
+
+  <!-- instancia verticals -->
+  <line x1="727" y1="264" x2="727" y2="336" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
+  <line x1="501" y1="264" x2="501" y2="336" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
+  <text x="614" y="332" text-anchor="middle" fill="#ccc" font-size="8.5">↓ instancia anual ↓</text>
+  <text x="732" y="304" fill="#ccc" font-size="8.5">instancia</text>
+  <text x="506" y="304" fill="#ccc" font-size="8.5">instancia</text>
 </g>
 
 <!-- ═══ GRUPO 3: FORMACIÓN EN EMPRESA ═══ -->
 <g id="dg3" opacity="0" style="transition:opacity 0.5s;">
-  <line x1="94" y1="134" x2="94" y2="152" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <rect x="18" y="152" width="152" height="40" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.4"/>
-  <text x="94" y="167" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">FORMACIÓN EN</text>
-  <text x="94" y="181" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">EMPRESA</text>
-  <line x1="94" y1="192" x2="94" y2="208" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <rect x="18" y="208" width="152" height="40" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.4"/>
-  <text x="94" y="223" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">CEE</text>
-  <text x="94" y="237" text-anchor="middle" fill="#92400E" font-size="8.5">Competencia en empresa</text>
+  <line x1="95" y1="164" x2="95" y2="180" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+  <rect x="18" y="180" width="154" height="38" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.4"/>
+  <text x="95" y="194" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">FORMACIÓN EN</text>
+  <text x="95" y="208" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">EMPRESA</text>
+  <line x1="95" y1="218" x2="95" y2="226" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+  <rect x="18" y="226" width="154" height="38" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.4"/>
+  <text x="95" y="241" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">CEE</text>
+  <text x="95" y="255" text-anchor="middle" fill="#92400E" font-size="8.5">Competencia en empresa</text>
 </g>
 
 <!-- ═══ GRUPO 4: GESTIÓN DE CURSOS ═══
-  Container interior: y334..484 (164px)
-  Left boxes fit in y334..476
-  Cal boxes: CAL.INSTR y334, CAL.CE y374, CAL.RA y410, CAL.MOD y446 → y476 ✓
+  Container: x4 y344 w992 h196 → bottom y540
+  Content rows start y358
+  Left:  GRUPO y358 h36→y394 | MOD.ASIG y400 h36→y436
+         PROG  y358 h44→y402 | REGISTRO y408 h34→y442
+  Cal:   CAL.INSTR y358 h36→y394
+         CAL.CE    y400 h32→y432
+         CAL.RA    y438 h32→y470
+         CAL.MOD   y476 h32→y508 → inside y540 ✓
 ═══ -->
 <g id="dg4" opacity="0" style="transition:opacity 0.5s;">
-  <!-- instancia connections -->
-  <line x1="727" y1="312" x2="727" y2="322" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="727" y1="322" x2="616" y2="322" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="616" y1="322" x2="580" y2="334" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#ag)"/>
-  <line x1="505" y1="312" x2="505" y2="322" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="505" y1="322" x2="224" y2="322" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="224" y1="322" x2="224" y2="334" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#ag)"/>
+  <!-- instancia connections from superior -->
+  <line x1="727" y1="336" x2="727" y2="346" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
+  <line x1="727" y1="346" x2="596" y2="346" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
+  <line x1="596" y1="346" x2="562" y2="358" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#ag)"/>
+  <line x1="501" y1="336" x2="501" y2="346" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
+  <line x1="501" y1="346" x2="224" y2="346" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
+  <line x1="224" y1="346" x2="224" y2="358" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#ag)"/>
 
-  <!-- GRUPO x14 y334 w118 h34 -->
-  <rect x="14" y="334" width="118" height="34" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
-  <text x="73" y="355" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">GRUPO</text>
-  <!-- GRUPO→MOD.ASIG -->
-  <line x1="73" y1="368" x2="73" y2="384" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
-  <!-- GRUPO→PROGRAMACIÓN -->
-  <line x1="132" y1="351" x2="148" y2="351" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
+  <!-- GRUPO x12 y358 w120 h36 -->
+  <rect x="12" y="358" width="120" height="36" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
+  <text x="72" y="380" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">GRUPO</text>
+  <line x1="72" y1="394" x2="72" y2="400" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
+  <line x1="132" y1="376" x2="148" y2="376" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
 
-  <!-- MÓDULO ASIGNACIÓN x14 y384 w118 h38 -->
-  <rect x="14" y="384" width="118" height="38" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
-  <text x="73" y="399" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
-  <text x="73" y="413" text-anchor="middle" fill="#888" font-size="8.5">ASIGNACIÓN</text>
-  <!-- MOD.ASIG→PROGRAMACIÓN -->
-  <line x1="132" y1="403" x2="148" y2="403" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
+  <!-- MOD.ASIG x12 y400 w120 h36 -->
+  <rect x="12" y="400" width="120" height="36" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
+  <text x="72" y="414" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
+  <text x="72" y="427" text-anchor="middle" fill="#888" font-size="8.5">ASIGNACIÓN</text>
+  <line x1="132" y1="418" x2="148" y2="418" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
 
-  <!-- PROGRAMACIÓN x148 y334 w152 h44 -->
-  <rect x="148" y="334" width="152" height="44" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
-  <text x="224" y="352" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">PROGRAMACIÓN</text>
-  <text x="224" y="366" text-anchor="middle" fill="#888" font-size="8.5">temporalización SA</text>
-  <!-- CAL.INSTR→PROGRAMACIÓN condicional -->
-  <line x1="460" y1="351" x2="300" y2="351" stroke="#5B3A8C" stroke-width="1.3" stroke-dasharray="4,2" marker-end="url(#ap)"/>
+  <!-- PROGRAMACIÓN x148 y358 w150 h44 -->
+  <rect x="148" y="358" width="150" height="44" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
+  <text x="223" y="376" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">PROGRAMACIÓN</text>
+  <text x="223" y="390" text-anchor="middle" fill="#888" font-size="8.5">temporalización SA</text>
+  <!-- CAL.INSTR→PROG condicional -->
+  <line x1="450" y1="376" x2="298" y2="376" stroke="#5B3A8C" stroke-width="1.3" stroke-dasharray="4,2" marker-end="url(#ap)"/>
 
-  <!-- REGISTRO x148 y390 w152 h36 -->
-  <rect x="148" y="390" width="152" height="36" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
-  <text x="224" y="404" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">REGISTRO</text>
-  <text x="224" y="417" text-anchor="middle" fill="#888" font-size="8.5">ASISTENCIA</text>
+  <!-- REGISTRO x148 y408 w150 h34 -->
+  <rect x="148" y="408" width="150" height="34" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
+  <text x="223" y="421" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">REGISTRO</text>
+  <text x="223" y="433" text-anchor="middle" fill="#888" font-size="8.5">ASISTENCIA</text>
 
-  <!-- CAL INSTRUMENTO x460 y334 w180 h34 → bottom y368 -->
-  <rect x="460" y="334" width="180" height="34" rx="5" fill="#7C3AED"/>
-  <text x="550" y="347" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN</text>
-  <text x="550" y="360" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="8.5">INSTRUMENTO</text>
-  <line x1="550" y1="368" x2="550" y2="380" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
+  <!-- CAL.INSTR x450 y358 w180 h36 → bottom y394 -->
+  <rect x="450" y="358" width="180" height="36" rx="5" fill="#7C3AED"/>
+  <text x="540" y="372" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN</text>
+  <text x="540" y="385" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="8.5">INSTRUMENTO</text>
+  <line x1="540" y1="394" x2="540" y2="400" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
 
-  <!-- CAL CE x460 y380 w180 h30 → bottom y410 -->
-  <rect x="460" y="380" width="180" height="30" rx="5" fill="#6D28D9"/>
-  <text x="550" y="399" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN CE</text>
-  <line x1="550" y1="410" x2="550" y2="420" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
+  <!-- CAL.CE x450 y400 w180 h32 → bottom y432 -->
+  <rect x="450" y="400" width="180" height="32" rx="5" fill="#6D28D9"/>
+  <text x="540" y="420" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN CE</text>
+  <line x1="540" y1="432" x2="540" y2="438" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
 
-  <!-- CAL RA x460 y420 w180 h30 → bottom y450 -->
-  <rect x="460" y="420" width="180" height="30" rx="5" fill="#5B21B6"/>
-  <text x="550" y="439" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN RA</text>
-  <line x1="550" y1="450" x2="550" y2="460" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
+  <!-- CAL.RA x450 y438 w180 h32 → bottom y470 -->
+  <rect x="450" y="438" width="180" height="32" rx="5" fill="#5B21B6"/>
+  <text x="540" y="458" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN RA</text>
+  <line x1="540" y1="470" x2="540" y2="476" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
 
-  <!-- CAL MÓDULO x460 y460 w180 h30 → bottom y490 < container bottom y484... adjust to y452 -->
-  <rect x="460" y="452" width="180" height="30" rx="5" fill="#4C1D95"/>
-  <text x="550" y="471" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN MÓDULO</text>
+  <!-- CAL.MOD x450 y476 w180 h32 → bottom y508 < container y540 ✓ -->
+  <rect x="450" y="476" width="180" height="32" rx="5" fill="#4C1D95"/>
+  <text x="540" y="496" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN MÓDULO</text>
 </g>
 
-      </svg>
-    </div>
-  </div>
+  </svg>
   <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
