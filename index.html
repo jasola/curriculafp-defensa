@@ -371,17 +371,17 @@ nav{
 .ao-zhdr-s{font-size:clamp(7.5px,0.68vw,9.5px);font-weight:300;color:rgba(255,255,255,0.55);}
 
 /* Zone bodies */
-.ao-zbody{flex:1;min-height:0;display:flex;padding:clamp(6px,0.9vh,12px) clamp(8px,1vw,14px);align-items:flex-start;}
+.ao-zbody{flex:1;min-height:0;display:flex;padding:clamp(6px,0.9vh,12px) clamp(8px,1vw,14px);align-items:stretch;}
 .ao-zone2-plan .ao-zbody{background:#fff;}
 .ao-zone2-gest .ao-zbody{background:#EEF3FA;}
 
 /* PLANNING: 3 col layout */
-.ao-pgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.4fr);gap:0;width:100%;height:100%;align-items:start;}
+.ao-pgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.4fr);gap:0;width:100%;height:100%;align-items:stretch;}
 
 /* Divider between cols */
-.ao-coldiv{width:1px;background:rgba(155,28,28,0.1);margin:0 0.6vw;align-self:stretch;}
+.ao-coldiv{width:1px;background:rgba(155,28,28,0.1);margin:0 0.6vw;}
 
-.ao-col2{display:flex;flex-direction:column;align-items:center;padding:0 0.5vw;}
+.ao-col2{display:flex;flex-direction:column;align-items:center;padding:0 0.5vw;justify-content:space-evenly;height:100%;}
 .ao-collbl{font-size:clamp(7px,0.62vw,9px);font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(155,28,28,0.45);margin-bottom:0.5vh;padding-bottom:0.3vh;border-bottom:1px solid rgba(155,28,28,0.12);width:100%;text-align:center;flex-shrink:0;}
 .ao-collbl.bl{color:rgba(30,58,95,0.45);border-color:rgba(30,58,95,0.12);}
 
@@ -412,10 +412,10 @@ nav{
 .ao-inst-row{display:flex;justify-content:flex-end;padding-right:4vw;gap:6vw;flex-shrink:0;height:0.8vh;position:relative;}
 
 /* GEST grid */
-.ao-ggrid{display:grid;grid-template-columns:1fr 1px 1.2fr;gap:0;width:100%;height:100%;align-items:center;}
-.ao-gleft{display:grid;grid-template-columns:1fr 1fr;gap:0.8vw;padding-right:0.5vw;align-content:center;justify-items:center;}
+.ao-ggrid{display:grid;grid-template-columns:1fr 1px 1.2fr;gap:0;width:100%;height:100%;align-items:stretch;}
+.ao-gleft{display:grid;grid-template-columns:1fr 1fr;gap:0.8vw;padding-right:0.5vw;align-content:space-evenly;justify-items:center;height:100%;}
 .ao-gdiv{background:rgba(30,58,95,0.1);margin:0 0.8vw;align-self:stretch;}
-.ao-gright{display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:0.5vw;gap:0;}
+.ao-gright{display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;padding-left:0.5vw;height:100%;}
 
 /* Legend */
 .ao-leg2{flex-shrink:0;display:flex;gap:1.8vw;justify-content:center;padding-top:0.3vh;}
