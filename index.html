@@ -7,782 +7,808 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-
 :root{
-  --bur:#9B1C1C;
-  --bur-d:#6B1212;
-  --bur-l:#C13333;
-  --bur-ll:#E07070;
-  --cream:#F7F4F0;
-  --cream-d:#EDE9E3;
-  --dark:#18100A;
-  --dark2:#2C1A1A;
-  --mid:#5C3D3D;
-  --nav-h:56px;
+  --bur:#9B1C1C;--bur-d:#6B1212;--bur-l:#C13333;--bur-ll:#E07070;
+  --cream:#F7F4F0;--cream-d:#EDE9E3;
+  --dark:#18100A;--dark2:#2C1A1A;--mid:#5C3D3D;
+  --nav-h:52px;
 }
+html,body{width:100%;height:100%;overflow:hidden;background:#111;font-family:'Inter',sans-serif;}
 
-html,body{width:100%;height:100%;overflow:hidden;background:#0a0a0a;font-family:'Inter',sans-serif;}
-
-/* ── NAV ── */
+/* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;height:var(--nav-h);
-  background:rgba(24,16,10,0.96);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(155,28,28,0.25);
-  display:flex;align-items:center;
-  padding:0 2vw;gap:0;
-  z-index:1000;
+  background:rgba(18,8,4,0.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(155,28,28,0.2);
+  display:flex;align-items:center;padding:0 2vw;z-index:1000;
 }
-.nav-logo{
-  display:flex;align-items:center;gap:10px;
-  margin-right:3vw;flex-shrink:0;
-}
-.nav-logo img{height:22px;filter:brightness(0) invert(1);opacity:0.9;}
-.nav-divider{width:1px;height:24px;background:rgba(155,28,28,0.4);margin-right:3vw;flex-shrink:0;}
-.nav-items{display:flex;align-items:center;gap:0;flex:1;}
+.nav-logo{display:flex;align-items:center;margin-right:2.5vw;flex-shrink:0;}
+.nav-logo img{height:20px;filter:brightness(0) invert(1);opacity:0.85;}
+.nav-div{width:1px;height:20px;background:rgba(155,28,28,0.35);margin-right:2.5vw;flex-shrink:0;}
+.nav-items{display:flex;align-items:center;flex:1;overflow:hidden;}
 .nav-item{
-  font-family:'Inter',sans-serif;
-  font-size:11px;font-weight:500;
-  letter-spacing:0.08em;
-  color:rgba(247,244,240,0.45);
-  padding:0 14px;height:var(--nav-h);
-  display:flex;align-items:center;
-  cursor:pointer;
-  border-bottom:2px solid transparent;
-  transition:color 0.2s,border-color 0.2s;
-  white-space:nowrap;
-  text-transform:uppercase;
+  font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(247,244,240,0.38);padding:0 12px;height:var(--nav-h);
+  display:flex;align-items:center;cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;
 }
-.nav-item:hover{color:rgba(247,244,240,0.8);}
+.nav-item:hover{color:rgba(247,244,240,0.75);}
 .nav-item.active{color:#F7F4F0;border-bottom-color:var(--bur);}
 
-/* ── DECK ── */
-.deck{width:100vw;height:100vh;position:relative;overflow:hidden;padding-top:var(--nav-h);}
+/* DECK */
+.deck{position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;}
 
-/* ── SLIDES ── */
+/* SLIDES */
 .slide{
-  position:absolute;
-  top:var(--nav-h);left:0;right:0;
-  bottom:0;
-  opacity:0;pointer-events:none;
-  transition:opacity 0.55s ease;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
+  position:absolute;inset:0;opacity:0;pointer-events:none;
+  transition:opacity 0.5s ease;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
 }
 .slide.active{opacity:1;pointer-events:all;}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;}
+.ov{position:absolute;inset:0;}
+.geo{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(155,28,28,0.045) 0,rgba(155,28,28,0.045) 1px,transparent 1px,transparent 38px);}
+.body{position:relative;z-index:2;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:3.5vh 6vw 5vh;}
 
-.slide-bg{
-  position:absolute;inset:0;
-  background-size:cover;background-position:center;
-  background-repeat:no-repeat;
-}
-.slide-overlay{position:absolute;inset:0;}
-
-.slide-body{
-  position:relative;z-index:2;
-  width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  padding:4vh 6vw 6vh;
-}
-
-/* ── NAV ARROWS ── */
+/* ARROWS */
 .arr{
-  position:fixed;top:50%;transform:translateY(-50%);
-  z-index:500;
-  width:42px;height:42px;border-radius:50%;
-  border:1px solid rgba(247,244,240,0.2);
-  background:rgba(24,16,10,0.5);
-  color:rgba(247,244,240,0.6);
-  font-size:16px;cursor:pointer;
+  position:fixed;top:calc(var(--nav-h) + 44%);
+  z-index:500;width:40px;height:40px;border-radius:50%;
+  border:1px solid rgba(247,244,240,0.18);background:rgba(18,8,4,0.55);
+  color:rgba(247,244,240,0.55);font-size:15px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   transition:all 0.2s;
 }
-.arr:hover{background:rgba(155,28,28,0.6);border-color:rgba(155,28,28,0.6);color:#fff;}
-.arr:disabled{opacity:0.15;cursor:default;}
-.arr.prev{left:10px;}
-.arr.next{right:10px;}
-.arr.on-cream{border-color:rgba(155,28,28,0.3);background:rgba(247,244,240,0.6);color:var(--bur);}
-.arr.on-cream:hover{background:var(--bur);color:#fff;border-color:var(--bur);}
+.arr:hover{background:var(--bur);border-color:var(--bur);color:#fff;}
+.arr:disabled{opacity:0.12;cursor:default;}
+.arr.prev{left:8px;}.arr.next{right:8px;}
+.arr.cream{border-color:rgba(155,28,28,0.25);background:rgba(247,244,240,0.7);color:var(--bur);}
+.arr.cream:hover{background:var(--bur);color:#fff;border-color:var(--bur);}
 
-/* ── DOTS ── */
-.dots{
-  position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
-  z-index:500;display:flex;gap:7px;
-}
-.dot{
-  width:6px;height:6px;border-radius:50%;
-  background:rgba(155,28,28,0.25);cursor:pointer;
-  transition:all 0.3s;
-}
+/* DOTS */
+.dots{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:500;display:flex;gap:7px;}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(155,28,28,0.22);cursor:pointer;transition:all 0.3s;}
 .dot.active{background:var(--bur);transform:scale(1.5);}
 
-/* ══════════════════════════════════════
-   SLIDE 0 — PORTADA
-══════════════════════════════════════ */
-#s0{background:var(--dark);}
-#s0 .geo{
-  position:absolute;inset:0;
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      rgba(155,28,28,0.04) 0px,
-      rgba(155,28,28,0.04) 1px,
-      transparent 1px,
-      transparent 40px
-    );
+/* STAMP */
+.stamp{position:absolute;bottom:3vh;left:5vw;z-index:10;display:flex;align-items:center;gap:8px;}
+.stamp img{height:clamp(18px,2.2vh,26px);}
+.stamp.lt img{filter:brightness(0) invert(1);opacity:0.6;}
+.stamp.dk img{filter:brightness(0) invert(0);mix-blend-mode:multiply;opacity:0.45;}
+
+/* SHARED TYPOGRAPHY */
+.eye{font-size:clamp(9.5px,0.88vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;}
+.eye-lt{color:rgba(247,244,240,0.32);}
+.eye-dk{color:rgba(155,28,28,0.5);}
+
+/* ═══════════════════════════════════
+   S0 — PORTADA
+═══════════════════════════════════ */
+#s0{background:var(--cream);}
+#s0 .body{flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.p0-top{display:flex;align-items:center;gap:0;margin-bottom:4.5vh;}
+.p0-logo-wrap{padding:16px 28px;display:flex;align-items:center;justify-content:center;}
+.p0-logo-wrap img{height:clamp(44px,6vh,72px);}
+.p0-logo-wrap.nebrija img{filter:none;}
+.p0-logo-wrap.curricula img{mix-blend-mode:multiply;}
+.p0-sep{width:1px;height:clamp(50px,8vh,90px);background:rgba(155,28,28,0.2);}
+.p0-rule{width:56px;height:2px;background:var(--bur);margin:0 auto 3.5vh;}
+.p0-master{
+  font-size:clamp(10px,0.95vw,13px);font-weight:400;letter-spacing:0.16em;
+  text-transform:uppercase;color:rgba(44,26,26,0.5);margin-bottom:2.5vh;
 }
-#s0 .slide-body{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:0;}
-.s0-logos{display:flex;align-items:center;gap:5vw;margin-bottom:5vh;}
-.s0-logos img.nebrija{height:clamp(40px,5vh,64px);filter:brightness(0) invert(1);opacity:0.85;}
-.s0-logos .logo-sep{width:1px;height:50px;background:rgba(247,244,240,0.15);}
-.s0-logos img.curricula{height:clamp(34px,4.5vh,56px);filter:brightness(0) invert(1);opacity:0.9;}
-.s0-rule{width:60px;height:1px;background:rgba(155,28,28,0.6);margin:0 auto 4vh;}
-.s0-master{
-  font-family:'Inter',sans-serif;font-size:clamp(11px,1vw,13px);
-  font-weight:400;letter-spacing:0.18em;text-transform:uppercase;
-  color:rgba(247,244,240,0.45);margin-bottom:1.5vh;
-}
-.s0-title{
+.p0-title{
   font-family:'Playfair Display',serif;
-  font-size:clamp(22px,3vw,44px);font-weight:700;
-  color:#F7F4F0;line-height:1.15;
-  max-width:72vw;margin-bottom:4.5vh;
+  font-size:clamp(22px,2.8vw,42px);font-weight:700;
+  color:var(--dark2);line-height:1.18;max-width:70vw;margin-bottom:4vh;
 }
-.s0-meta{
-  display:flex;flex-direction:column;gap:1vh;
-  align-items:center;
-}
-.s0-meta-row{
-  font-family:'Inter',sans-serif;font-size:clamp(12px,1.1vw,15px);
-  color:rgba(247,244,240,0.6);font-weight:300;
-}
-.s0-meta-row span{color:rgba(247,244,240,0.85);font-weight:400;}
-.s0-year{
-  margin-top:3vh;
-  font-family:'Inter',sans-serif;font-size:clamp(11px,0.9vw,13px);
-  font-weight:400;letter-spacing:0.15em;
-  color:rgba(155,28,28,0.7);text-transform:uppercase;
+.p0-meta{display:flex;flex-direction:column;gap:1vh;align-items:center;}
+.p0-row{font-size:clamp(12px,1.05vw,15px);font-weight:300;color:var(--mid);}
+.p0-row span{font-weight:500;color:var(--dark2);}
+.p0-year{
+  margin-top:3vh;font-size:clamp(10px,0.9vw,12px);font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:rgba(155,28,28,0.55);
 }
 
-/* ══════════════════════════════════════
-   SLIDE 1 — EL PROBLEMA
-══════════════════════════════════════ */
+/* ═══════════════════════════════════
+   S1 — PROBLEMA
+═══════════════════════════════════ */
 #s1{background:var(--dark);}
-#s1 .slide-bg{background-image:url('images/slide1-desk.png');opacity:0.4;}
-#s1 .slide-overlay{background:linear-gradient(100deg,rgba(18,8,4,0.97) 40%,rgba(18,8,4,0.3) 100%);}
-#s1 .slide-body{align-items:center;justify-content:flex-start;padding-left:8vw;padding-right:50vw;}
-.s1-inner{display:flex;flex-direction:column;gap:0;}
-.s1-eye{font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,244,240,0.35);margin-bottom:1.8vh;}
-.s1-h{
+#s1 .bg{background-image:url('images/slide1-desk.png');opacity:0.38;}
+#s1 .ov{background:linear-gradient(105deg,rgba(14,5,2,0.97) 38%,rgba(14,5,2,0.25) 100%);}
+#s1 .body{align-items:center;justify-content:flex-start;padding-left:8vw;padding-right:48vw;}
+.p1-eye{margin-bottom:1.8vh;}
+.p1-h{
   font-family:'Playfair Display',serif;
-  font-size:clamp(28px,3.8vw,54px);font-weight:700;
-  color:#F7F4F0;line-height:1.1;margin-bottom:4vh;
+  font-size:clamp(24px,3.2vw,48px);font-weight:700;
+  color:#F7F4F0;line-height:1.12;margin-bottom:4vh;
 }
-.s1-h em{font-style:italic;color:var(--bur-ll);}
-.s1-items{display:flex;flex-direction:column;gap:2.2vh;}
-.s1-item{display:flex;gap:14px;align-items:flex-start;}
-.s1-dot{width:5px;height:5px;border-radius:50%;background:var(--bur);margin-top:8px;flex-shrink:0;}
-.s1-txt{font-size:clamp(12px,1.2vw,16px);font-weight:300;color:rgba(247,244,240,0.78);line-height:1.6;}
-.s1-txt strong{font-weight:500;color:#F7F4F0;}
+.p1-items{display:flex;flex-direction:column;gap:2.4vh;}
+.p1-item{display:flex;gap:14px;align-items:flex-start;}
+.p1-dot{width:5px;height:5px;border-radius:50%;background:var(--bur);margin-top:8px;flex-shrink:0;}
+.p1-txt{font-size:clamp(12px,1.15vw,16px);font-weight:300;color:rgba(247,244,240,0.78);line-height:1.65;}
+.p1-txt strong{font-weight:500;color:#F7F4F0;}
 
-/* ══════════════════════════════════════
-   SLIDE 2 — ESTADO DE LA CUESTIÓN
-══════════════════════════════════════ */
-#s2{background:var(--cream);}
-#s2 .slide-body{flex-direction:column;align-items:center;justify-content:center;gap:0;}
-.s2-eye{font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(155,28,28,0.45);margin-bottom:1.5vh;text-align:center;}
-.s2-h{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,36px);font-weight:700;color:var(--dark2);text-align:center;margin-bottom:4vh;line-height:1.2;}
-.s2-cols{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;width:88vw;max-width:1200px;align-items:start;}
-.s2-sep{background:rgba(155,28,28,0.15);align-self:stretch;margin:0 3vw;}
-.s2-col{}
-.s2-col-head{
-  display:flex;align-items:center;gap:10px;
-  margin-bottom:2.5vh;
-  padding-bottom:1.5vh;
-  border-bottom:1.5px solid rgba(155,28,28,0.15);
-}
-.s2-col-icon{
-  width:36px;height:36px;border-radius:8px;
-  background:rgba(155,28,28,0.08);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.s2-col-icon svg{width:18px;height:18px;stroke:var(--bur);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.s2-col-title{font-family:'Inter',sans-serif;font-size:clamp(12px,1.1vw,15px);font-weight:600;color:var(--bur);}
-.s2-pts{display:flex;flex-direction:column;gap:1.8vh;}
-.s2-pt{display:flex;gap:10px;align-items:flex-start;}
-.s2-pt-dot{width:4px;height:4px;border-radius:50%;background:var(--bur);margin-top:8px;flex-shrink:0;opacity:0.6;}
-.s2-pt-txt{font-size:clamp(11px,1.05vw,14px);font-weight:300;color:var(--mid);line-height:1.65;}
-.s2-pt-txt strong{font-weight:500;color:var(--dark2);}
-
-/* ══════════════════════════════════════
-   SLIDE 3 — LA PROPUESTA
-══════════════════════════════════════ */
-#s3{background:var(--cream);}
-#s3 .slide-body{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:0;}
-.s3-eye{font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(155,28,28,0.45);margin-bottom:2vh;}
-.s3-quote{
+/* ═══════════════════════════════════
+   S2 — MARCO
+═══════════════════════════════════ */
+#s2{background:var(--dark);}
+#s2 .geo{opacity:1;}
+#s2 .body{flex-direction:column;align-items:center;justify-content:center;}
+.p2-eye{margin-bottom:1.5vh;text-align:center;}
+.p2-h{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:clamp(20px,2.8vw,40px);font-weight:400;
-  color:var(--bur);line-height:1.3;
-  max-width:72vw;margin-bottom:1.5vh;
-  position:relative;padding:0 2vw;
+  font-size:clamp(20px,2.6vw,38px);font-weight:400;
+  color:#F7F4F0;text-align:center;margin-bottom:4vh;line-height:1.25;
 }
-.s3-quote::before{
-  content:'\201C';
-  position:absolute;left:-1vw;top:-0.2em;
-  font-size:4em;color:rgba(155,28,28,0.12);
+.p2-cols{display:grid;grid-template-columns:1fr 1px 1fr;width:88vw;max-width:1180px;}
+.p2-div{background:rgba(155,28,28,0.2);margin:0 3vw;align-self:stretch;}
+.p2-col-head{display:flex;align-items:center;gap:12px;margin-bottom:2.5vh;padding-bottom:1.5vh;border-bottom:1px solid rgba(155,28,28,0.25);}
+.p2-icon{
+  width:34px;height:34px;border-radius:6px;
+  background:rgba(155,28,28,0.15);border:1px solid rgba(155,28,28,0.3);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.p2-icon svg{width:16px;height:16px;stroke:var(--bur-l);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.p2-col-title{font-size:clamp(11px,1vw,14px);font-weight:600;color:rgba(247,244,240,0.75);letter-spacing:0.08em;}
+.p2-pts{display:flex;flex-direction:column;gap:1.8vh;}
+.p2-pt{display:flex;gap:10px;align-items:flex-start;}
+.p2-pt-bar{width:2px;min-height:100%;background:rgba(155,28,28,0.3);flex-shrink:0;margin-top:3px;align-self:stretch;}
+.p2-pt-txt{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.65);line-height:1.7;}
+.p2-pt-txt strong{font-weight:500;color:rgba(247,244,240,0.9);}
+
+/* ═══════════════════════════════════
+   S3 — PROPUESTA
+═══════════════════════════════════ */
+#s3{background:var(--cream);}
+#s3 .body{flex-direction:column;align-items:center;justify-content:center;}
+.p3-eye{margin-bottom:2vh;text-align:center;}
+.p3-quote-wrap{position:relative;max-width:72vw;margin-bottom:3vh;text-align:center;}
+.p3-quote-mark{
+  font-family:'Playfair Display',serif;font-size:8rem;
+  color:rgba(155,28,28,0.08);line-height:0.7;
+  position:absolute;top:0;left:-1.5rem;
+}
+.p3-quote{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(16px,2vw,28px);font-weight:400;
+  color:var(--bur);line-height:1.4;position:relative;z-index:1;
+}
+.p3-rule{width:44px;height:2px;background:var(--bur);margin:0 auto 2.5vh;}
+.p3-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2vw;width:82vw;max-width:1100px;}
+.p3-card{
+  background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:6px;
+  padding:clamp(16px,2vh,24px) clamp(16px,2vw,26px);
+}
+.p3-card-label{
+  font-size:clamp(9.5px,0.82vw,11.5px);font-weight:600;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--bur);margin-bottom:8px;
+}
+.p3-card-txt{font-size:clamp(11px,1vw,14px);font-weight:300;color:var(--mid);line-height:1.7;}
+.p3-card-txt strong{font-weight:500;color:var(--dark2);}
+.p3-tag{
+  margin-top:2.5vh;display:inline-block;border:1px solid rgba(155,28,28,0.28);
+  color:var(--bur);font-size:clamp(9.5px,0.85vw,12px);font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;padding:6px 16px;border-radius:2px;
+}
+
+/* ═══════════════════════════════════
+   S4 — ARQUITECTURA + MODELO
+═══════════════════════════════════ */
+#s4{background:var(--dark);}
+#s4 .geo{opacity:1;}
+#s4 .body{flex-direction:column;align-items:center;justify-content:center;}
+.p4-eye{margin-bottom:1.2vh;text-align:center;}
+.p4-h{
   font-family:'Playfair Display',serif;
-  line-height:1;
+  font-size:clamp(18px,2.2vw,32px);font-weight:700;
+  color:#F7F4F0;text-align:center;margin-bottom:3vh;line-height:1.2;
 }
-.s3-rule{width:48px;height:2px;background:var(--bur);margin:2.5vh auto;}
-.s3-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5vw;width:80vw;max-width:1100px;margin-top:1vh;}
-.s3-card{
-  background:#fff;border:1px solid rgba(155,28,28,0.12);
-  border-radius:6px;padding:clamp(16px,2vh,28px) clamp(16px,2vw,28px);
-  text-align:left;
+.p4-diagram{width:92vw;max-width:1240px;display:flex;flex-direction:column;gap:1.4vh;}
+/* roles row */
+.p4-roles{display:grid;grid-template-columns:repeat(4,1fr);gap:1vw;margin-bottom:0.5vh;}
+.p4-role{
+  background:rgba(155,28,28,0.12);border:1px solid rgba(155,28,28,0.3);
+  border-radius:4px;padding:8px 10px;text-align:center;
 }
-.s3-card-label{font-size:clamp(10px,0.85vw,12px);font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--bur);margin-bottom:8px;}
-.s3-card-txt{font-size:clamp(11px,1vw,14px);font-weight:300;color:var(--mid);line-height:1.65;}
-.s3-card-txt strong{font-weight:500;color:var(--dark2);}
-.s3-tag{
-  margin-top:3vh;
-  display:inline-block;border:1px solid rgba(155,28,28,0.3);
-  color:var(--bur);font-size:clamp(10px,0.9vw,12px);font-weight:500;
-  letter-spacing:0.15em;text-transform:uppercase;
-  padding:7px 18px;border-radius:2px;
-}
-
-/* ══════════════════════════════════════
-   SLIDE 4 — ARQUITECTURA
-══════════════════════════════════════ */
-#s4{background:var(--cream);}
-#s4 .slide-body{flex-direction:column;align-items:center;justify-content:center;gap:0;}
-.s4-eye{font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(155,28,28,0.45);margin-bottom:1.5vh;text-align:center;}
-.s4-h{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,36px);font-weight:700;color:var(--dark2);text-align:center;margin-bottom:4vh;line-height:1.2;}
-.s4-arch{display:flex;gap:2.5vw;align-items:stretch;width:84vw;max-width:1100px;}
-.s4-block{
-  flex:1;border-radius:6px;
-  padding:clamp(20px,3vh,36px) clamp(20px,2.5vw,36px);
-  opacity:0;transform:translateY(16px);
-  transition:opacity 0.5s ease,transform 0.5s ease;
-}
-.s4-block.visible{opacity:1;transform:translateY(0);}
-.s4-b1{background:rgba(155,28,28,0.07);border:1.5px solid var(--bur);}
-.s4-b2{background:rgba(155,28,28,0.03);border:1.5px solid rgba(155,28,28,0.3);}
-.s4-blabel{font-size:clamp(10px,0.85vw,12px);font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1vh;}
-.s4-b1 .s4-blabel{color:var(--bur);}
-.s4-b2 .s4-blabel{color:rgba(155,28,28,0.55);}
-.s4-btitle{font-family:'Playfair Display',serif;font-size:clamp(16px,1.9vw,26px);font-weight:700;color:var(--dark2);margin-bottom:1.5vh;line-height:1.2;}
-.s4-bdesc{font-size:clamp(11px,1vw,14px);font-weight:300;color:var(--mid);line-height:1.65;margin-bottom:1.8vh;}
-.s4-btags{display:flex;flex-wrap:wrap;gap:5px;}
-.s4-btag{font-size:clamp(9px,0.8vw,11px);font-weight:500;padding:3px 9px;border-radius:2px;}
-.s4-b1 .s4-btag{background:rgba(155,28,28,0.1);color:var(--bur-d);}
-.s4-b2 .s4-btag{background:rgba(155,28,28,0.06);color:var(--mid);}
-.s4-mid{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:8px;padding:0 0.5vw;flex-shrink:0;
-  opacity:0;transition:opacity 0.5s ease 0.4s;
-}
-.s4-mid.visible{opacity:1;}
-.s4-mid-line{width:1px;flex:1;background:rgba(155,28,28,0.2);min-height:30px;}
-.s4-mid-ico{font-size:16px;color:rgba(155,28,28,0.4);line-height:1;}
-.s4-insight{
-  margin-top:3vh;font-size:clamp(11px,1vw,14px);font-weight:300;
-  color:var(--mid);text-align:center;max-width:64vw;line-height:1.6;font-style:italic;
-  opacity:0;transition:opacity 0.5s ease 0.6s;
-}
-.s4-insight.visible{opacity:1;}
-.s4-insight strong{font-weight:500;color:var(--dark2);font-style:normal;}
-
-/* ══════════════════════════════════════
-   SLIDE 5 — MODELO DE DATOS
-══════════════════════════════════════ */
-#s5{background:var(--dark);}
-#s5 .geo{
-  position:absolute;inset:0;
-  background-image:repeating-linear-gradient(45deg,rgba(155,28,28,0.04) 0px,rgba(155,28,28,0.04) 1px,transparent 1px,transparent 40px);
-}
-#s5 .slide-body{flex-direction:column;align-items:center;justify-content:center;gap:0;}
-.s5-eye{font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,244,240,0.3);margin-bottom:1.2vh;text-align:center;}
-.s5-h{font-family:'Playfair Display',serif;font-size:clamp(18px,2.2vw,32px);font-weight:700;color:#F7F4F0;text-align:center;margin-bottom:0.8vh;line-height:1.2;}
-.s5-sub{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.45);text-align:center;margin-bottom:3vh;font-style:italic;}
-.s5-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:1vw;width:90vw;max-width:1200px;
-}
-.s5-card{
-  background:rgba(247,244,240,0.04);
-  border:1px solid rgba(155,28,28,0.3);
-  border-radius:6px;
-  padding:clamp(12px,1.5vh,20px) clamp(12px,1.5vw,20px);
+.p4-role-name{font-size:clamp(10px,0.88vw,12.5px);font-weight:600;color:rgba(247,244,240,0.85);letter-spacing:0.06em;}
+.p4-role-desc{font-size:clamp(8.5px,0.75vw,11px);font-weight:300;color:rgba(247,244,240,0.4);margin-top:2px;}
+/* connector */
+.p4-conn{display:flex;align-items:center;justify-content:center;gap:0;height:20px;}
+.p4-conn-line{flex:1;height:1px;background:rgba(155,28,28,0.2);}
+.p4-conn-txt{font-size:10px;color:rgba(155,28,28,0.4);padding:0 8px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;}
+/* blocks grid */
+.p4-blocks{display:grid;grid-template-columns:repeat(4,1fr);gap:1vw;}
+.p4-block{
+  background:rgba(247,244,240,0.04);border:1px solid rgba(155,28,28,0.22);
+  border-radius:4px;padding:clamp(10px,1.3vh,18px) clamp(10px,1.2vw,16px);
   transition:background 0.2s,border-color 0.2s;
 }
-.s5-card:hover{background:rgba(155,28,28,0.1);border-color:rgba(155,28,28,0.6);}
-.s5-card-n{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(22px,2.5vw,34px);font-weight:700;
-  color:rgba(155,28,28,0.5);line-height:1;margin-bottom:6px;
+.p4-block:hover{background:rgba(155,28,28,0.1);border-color:rgba(155,28,28,0.5);}
+.p4-block.cap1{border-top:2px solid var(--bur);}
+.p4-block.cap2{border-top:2px solid rgba(155,28,28,0.4);}
+.p4-block-n{
+  font-family:'Playfair Display',serif;font-size:clamp(18px,2vw,28px);
+  font-weight:700;color:rgba(155,28,28,0.35);line-height:1;margin-bottom:5px;
 }
-.s5-card-name{font-size:clamp(11px,1vw,14px);font-weight:500;color:#F7F4F0;margin-bottom:4px;line-height:1.3;}
-.s5-card-desc{font-size:clamp(9px,0.85vw,12px);font-weight:300;color:rgba(247,244,240,0.45);line-height:1.5;}
-.s5-footer{
-  margin-top:2.5vh;display:flex;gap:4vw;
-}
-.s5-stat{text-align:center;}
-.s5-stat-n{font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,42px);font-weight:700;color:var(--bur-ll);line-height:1;}
-.s5-stat-l{font-size:clamp(10px,0.9vw,13px);font-weight:300;color:rgba(247,244,240,0.4);margin-top:4px;letter-spacing:0.05em;}
+.p4-block-name{font-size:clamp(10.5px,0.95vw,14px);font-weight:500;color:#F7F4F0;margin-bottom:4px;line-height:1.3;}
+.p4-block-desc{font-size:clamp(9px,0.82vw,12px);font-weight:300;color:rgba(247,244,240,0.42);line-height:1.5;}
+.p4-block-roles{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.p4-role-tag{font-size:clamp(8px,0.7vw,10px);font-weight:500;padding:2px 6px;border-radius:2px;background:rgba(155,28,28,0.15);color:rgba(247,244,240,0.55);}
+/* legend */
+.p4-legend{display:flex;gap:2.5vw;margin-top:0.8vh;justify-content:center;}
+.p4-leg-item{display:flex;align-items:center;gap:6px;font-size:clamp(9px,0.82vw,11px);color:rgba(247,244,240,0.4);}
+.p4-leg-bar{width:20px;height:2px;}
+.p4-leg-bar.c1{background:var(--bur);}
+.p4-leg-bar.c2{background:rgba(155,28,28,0.4);}
 
-/* ══════════════════════════════════════
-   SLIDE 6 — PROTOTIPO
-══════════════════════════════════════ */
+/* ═══════════════════════════════════
+   S5 — PROTOTIPO
+═══════════════════════════════════ */
+#s5{background:var(--dark);}
+#s5 .bg{background-image:url('images/slide4-prototipo.png');background-position:top center;opacity:0.12;}
+#s5 .ov{background:linear-gradient(to bottom,rgba(18,8,4,0.75) 0%,rgba(18,8,4,0.96) 100%);}
+#s5 .body{flex-direction:column;align-items:center;justify-content:center;}
+.p5-eye{margin-bottom:1.5vh;text-align:center;}
+.p5-h{
+  font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,42px);
+  font-weight:700;color:#F7F4F0;text-align:center;margin-bottom:1.2vh;line-height:1.1;
+}
+.p5-sub{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.38);margin-bottom:3vh;text-align:center;letter-spacing:0.03em;}
+.p5-browser{
+  width:78vw;max-width:980px;border-radius:9px;overflow:hidden;
+  border:1px solid rgba(247,244,240,0.08);box-shadow:0 16px 48px rgba(0,0,0,0.55);
+}
+.p5-bar{background:#252525;padding:9px 12px;display:flex;align-items:center;gap:9px;}
+.p5-dots{display:flex;gap:5px;}
+.p5-d{width:9px;height:9px;border-radius:50%;}
+.p5-d:nth-child(1){background:#FF5F57;}
+.p5-d:nth-child(2){background:#FEBC2E;}
+.p5-d:nth-child(3){background:#28C840;}
+.p5-addr{flex:1;background:#1c1c1c;border-radius:3px;padding:3px 9px;font-size:10.5px;color:rgba(255,255,255,0.35);font-family:'Inter',sans-serif;}
+.p5-browser img{width:100%;display:block;max-height:36vh;object-fit:cover;object-position:top;}
+.p5-flows{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5vw;width:78vw;max-width:980px;margin-top:2.5vh;}
+.p5-flow{
+  background:rgba(247,244,240,0.04);border:1px solid rgba(155,28,28,0.2);
+  border-radius:4px;padding:12px 14px;
+}
+.p5-flow-title{font-size:clamp(10.5px,0.95vw,13px);font-weight:500;color:#F7F4F0;margin-bottom:4px;}
+.p5-flow-desc{font-size:clamp(9.5px,0.85vw,12px);font-weight:300;color:rgba(247,244,240,0.45);line-height:1.55;}
+.p5-btn{
+  margin-top:2.5vh;display:inline-flex;align-items:center;gap:8px;
+  background:var(--bur);color:#F7F4F0;font-size:clamp(11px,1vw,14px);font-weight:500;
+  letter-spacing:0.05em;padding:11px 26px;border-radius:3px;text-decoration:none;
+  border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;
+}
+.p5-btn:hover{background:var(--bur-l);transform:translateY(-1px);}
+.p5-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ═══════════════════════════════════
+   S6 — VALIDACIÓN
+═══════════════════════════════════ */
 #s6{background:var(--dark);}
-#s6 .slide-bg{background-image:url('images/slide4-prototipo.png');background-position:top center;opacity:0.15;}
-#s6 .slide-overlay{background:linear-gradient(to bottom,rgba(24,16,10,0.7) 0%,rgba(24,16,10,0.95) 100%);}
-#s6 .slide-body{flex-direction:column;align-items:center;justify-content:center;gap:0;}
-.s6-eye{font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,244,240,0.3);margin-bottom:1.5vh;text-align:center;}
-.s6-h{font-family:'Playfair Display',serif;font-size:clamp(24px,3.2vw,48px);font-weight:700;color:#F7F4F0;text-align:center;margin-bottom:1.5vh;line-height:1.1;}
-.s6-url{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.4);margin-bottom:3vh;letter-spacing:0.03em;}
-.s6-browser{
-  width:80vw;max-width:1000px;
-  border-radius:10px;overflow:hidden;
-  border:1px solid rgba(247,244,240,0.1);
-  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+#s6 .bg{background-image:url('images/slide5-docentes.png');background-position:center right;opacity:0.28;}
+#s6 .ov{background:linear-gradient(to right,rgba(14,5,2,0.97) 42%,rgba(14,5,2,0.18) 100%);}
+#s6 .body{align-items:center;justify-content:flex-start;padding-left:8vw;padding-right:50vw;}
+.p6-eye{margin-bottom:1.5vh;}
+.p6-h{
+  font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,38px);
+  font-weight:700;color:#F7F4F0;line-height:1.2;margin-bottom:3.5vh;
 }
-.s6-browser-bar{
-  background:#2a2a2a;
-  padding:10px 14px;
-  display:flex;align-items:center;gap:10px;
+.p6-finds{display:flex;flex-direction:column;gap:2.8vh;}
+.p6-find{display:flex;gap:16px;align-items:flex-start;}
+.p6-n{
+  font-family:'Playfair Display',serif;font-size:clamp(20px,2.2vw,32px);
+  font-weight:700;color:var(--bur-l);line-height:1;min-width:24px;padding-top:2px;flex-shrink:0;
 }
-.s6-dots-bar{display:flex;gap:6px;}
-.s6-dot-bar{width:10px;height:10px;border-radius:50%;}
-.s6-dot-bar:nth-child(1){background:#FF5F57;}
-.s6-dot-bar:nth-child(2){background:#FEBC2E;}
-.s6-dot-bar:nth-child(3){background:#28C840;}
-.s6-addr{
-  flex:1;background:#1a1a1a;border-radius:4px;
-  padding:4px 10px;
-  font-size:11px;color:rgba(255,255,255,0.4);
-  font-family:'Inter',sans-serif;letter-spacing:0.02em;
+.p6-title{font-size:clamp(12px,1.15vw,16px);font-weight:500;color:#F7F4F0;margin-bottom:4px;line-height:1.3;}
+.p6-desc{font-size:clamp(10.5px,0.95vw,14px);font-weight:300;color:rgba(247,244,240,0.58);line-height:1.65;}
+.p6-context{
+  margin-top:3.5vh;padding:12px 16px;
+  background:rgba(155,28,28,0.1);border:1px solid rgba(155,28,28,0.25);border-radius:4px;
+  font-size:clamp(10px,0.9vw,13px);font-weight:300;color:rgba(247,244,240,0.5);line-height:1.6;font-style:italic;
 }
-.s6-browser img{width:100%;display:block;max-height:38vh;object-fit:cover;object-position:top;}
-.s6-pts{
-  display:flex;gap:3vw;margin-top:3vh;
-}
-.s6-pt{text-align:center;}
-.s6-pt-n{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,40px);font-weight:700;color:var(--bur-ll);line-height:1;}
-.s6-pt-l{font-size:clamp(10px,0.9vw,12px);font-weight:300;color:rgba(247,244,240,0.45);margin-top:4px;}
-.s6-btn{
-  margin-top:2.5vh;
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--bur);color:#F7F4F0;
-  font-size:clamp(12px,1.1vw,15px);font-weight:500;letter-spacing:0.05em;
-  padding:12px 28px;border-radius:3px;
-  text-decoration:none;border:none;cursor:pointer;
-  transition:background 0.2s,transform 0.15s;
-}
-.s6-btn:hover{background:var(--bur-l);transform:translateY(-1px);}
-.s6-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 
-/* ══════════════════════════════════════
-   SLIDE 7 — VALIDACIÓN
-══════════════════════════════════════ */
+/* ═══════════════════════════════════
+   S7 — CONCLUSIONES
+═══════════════════════════════════ */
 #s7{background:var(--dark);}
-#s7 .slide-bg{background-image:url('images/slide5-docentes.png');background-position:center right;opacity:0.3;}
-#s7 .slide-overlay{background:linear-gradient(to right,rgba(24,16,10,0.97) 45%,rgba(24,16,10,0.2) 100%);}
-#s7 .slide-body{align-items:center;justify-content:flex-start;padding-left:8vw;padding-right:52vw;}
-.s7-inner{display:flex;flex-direction:column;gap:0;}
-.s7-eye{font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,244,240,0.3);margin-bottom:1.5vh;}
-.s7-h{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,42px);font-weight:700;color:#F7F4F0;line-height:1.15;margin-bottom:4vh;}
-.s7-finds{display:flex;flex-direction:column;gap:2.8vh;}
-.s7-find{display:flex;gap:16px;align-items:flex-start;}
-.s7-find-n{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(20px,2.2vw,32px);font-weight:700;
-  color:var(--bur-l);line-height:1;min-width:26px;padding-top:2px;
+#s7 .geo{opacity:1;}
+#s7 .body{flex-direction:column;align-items:center;justify-content:center;}
+.p7-eye{margin-bottom:2vh;text-align:center;}
+.p7-h{
+  font-family:'Playfair Display',serif;font-size:clamp(18px,2.2vw,32px);
+  font-weight:700;color:#F7F4F0;text-align:center;margin-bottom:4vh;
 }
-.s7-find-title{font-size:clamp(13px,1.2vw,16px);font-weight:500;color:#F7F4F0;margin-bottom:4px;line-height:1.3;}
-.s7-find-desc{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.58);line-height:1.6;}
-
-/* ══════════════════════════════════════
-   SLIDE 8 — CONCLUSIONES
-══════════════════════════════════════ */
-#s8{background:var(--dark);}
-#s8 .geo{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(155,28,28,0.04) 0px,rgba(155,28,28,0.04) 1px,transparent 1px,transparent 40px);}
-#s8 .slide-body{flex-direction:column;align-items:center;justify-content:center;gap:0;}
-.s8-eye{font-size:clamp(10px,0.9vw,12px);font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,244,240,0.3);margin-bottom:1.5vh;text-align:center;}
-.s8-h{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,36px);font-weight:700;color:#F7F4F0;text-align:center;margin-bottom:4vh;line-height:1.2;}
-.s8-cols{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;width:86vw;max-width:1200px;}
-.s8-sep{background:rgba(155,28,28,0.2);align-self:stretch;margin:0 3vw;}
-.s8-col-head{
-  display:flex;align-items:center;gap:10px;margin-bottom:2.5vh;
-  padding-bottom:1.5vh;border-bottom:1px solid rgba(155,28,28,0.2);
+.p7-conclusions{display:flex;flex-direction:column;gap:2.2vh;width:82vw;max-width:1080px;}
+.p7-c{
+  display:flex;gap:2vw;align-items:center;
+  border-bottom:1px solid rgba(155,28,28,0.15);padding-bottom:2vh;
 }
-.s8-col-label{font-size:clamp(11px,1vw,14px);font-weight:500;color:rgba(247,244,240,0.5);letter-spacing:0.1em;text-transform:uppercase;}
-.s8-items{display:flex;flex-direction:column;gap:2vh;}
-.s8-item{display:flex;gap:12px;align-items:flex-start;}
-.s8-item-dot{width:5px;height:5px;border-radius:50%;background:var(--bur);margin-top:8px;flex-shrink:0;}
-.s8-item-txt{font-size:clamp(11px,1.05vw,15px);font-weight:300;color:rgba(247,244,240,0.72);line-height:1.65;}
-.s8-item-txt strong{font-weight:500;color:#F7F4F0;}
-.s8-closing{
-  margin-top:4vh;
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:clamp(14px,1.5vw,22px);font-weight:400;
-  color:rgba(155,28,28,0.7);text-align:center;
-  max-width:60vw;line-height:1.5;
+.p7-c:last-child{border-bottom:none;padding-bottom:0;}
+.p7-c-num{
+  font-family:'Playfair Display',serif;font-size:clamp(36px,4.5vw,64px);
+  font-weight:700;color:rgba(155,28,28,0.18);line-height:1;
+  flex-shrink:0;width:clamp(50px,5vw,80px);text-align:right;
+}
+.p7-c-body{}
+.p7-c-title{
+  font-family:'Playfair Display',serif;font-size:clamp(14px,1.5vw,22px);
+  font-weight:700;color:#F7F4F0;line-height:1.25;margin-bottom:4px;
+}
+.p7-c-desc{font-size:clamp(11px,0.95vw,14px);font-weight:300;color:rgba(247,244,240,0.55);line-height:1.65;}
+.p7-closing{
+  margin-top:3vh;font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(13px,1.3vw,19px);font-weight:400;
+  color:rgba(155,28,28,0.6);text-align:center;max-width:60vw;line-height:1.55;
 }
 
-/* ── SLIDE LOGO STAMP ── */
-.stamp{
-  position:absolute;bottom:3.5vh;left:5vw;z-index:10;
-  display:flex;align-items:center;gap:8px;
+/* ═══════════════════════════════════
+   S8 — DESARROLLO
+═══════════════════════════════════ */
+#s8{background:var(--cream);}
+#s8 .body{flex-direction:column;align-items:center;justify-content:center;}
+.p8-eye{margin-bottom:1.5vh;text-align:center;}
+.p8-h{
+  font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,36px);
+  font-weight:700;color:var(--dark2);text-align:center;margin-bottom:4vh;line-height:1.2;
 }
-.stamp img{height:clamp(20px,2.5vh,28px);}
-.stamp.light img{filter:brightness(0) invert(1);opacity:0.7;}
-.stamp.dark-logo img{filter:brightness(0) invert(0);mix-blend-mode:multiply;opacity:0.5;}
+.p8-content{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;width:86vw;max-width:1180px;align-items:start;}
+.p8-sep{background:rgba(155,28,28,0.15);margin:0 3vw;align-self:stretch;}
+.p8-col-head{display:flex;align-items:center;gap:10px;margin-bottom:2.5vh;padding-bottom:1.5vh;border-bottom:1.5px solid rgba(155,28,28,0.12);}
+.p8-col-label{font-size:clamp(11px,1vw,14px);font-weight:500;color:var(--bur);letter-spacing:0.08em;text-transform:uppercase;}
+.p8-phases{display:flex;flex-direction:column;gap:0;}
+.p8-phase{display:flex;gap:16px;align-items:flex-start;padding-bottom:2vh;position:relative;}
+.p8-phase:not(:last-child)::after{content:'';position:absolute;left:14px;top:32px;bottom:0;width:1px;background:rgba(155,28,28,0.18);}
+.p8-phase-dot{
+  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;position:relative;z-index:1;
+}
+.p8-phase:nth-child(1) .p8-phase-dot{background:rgba(155,28,28,0.15);border:1.5px solid var(--bur);}
+.p8-phase:nth-child(2) .p8-phase-dot{background:rgba(155,28,28,0.08);border:1.5px solid rgba(155,28,28,0.4);}
+.p8-phase:nth-child(3) .p8-phase-dot{background:rgba(155,28,28,0.05);border:1.5px solid rgba(155,28,28,0.25);}
+.p8-phase-dot-inner{width:7px;height:7px;border-radius:50%;background:var(--bur);}
+.p8-phase:nth-child(2) .p8-phase-dot-inner{background:rgba(155,28,28,0.5);}
+.p8-phase:nth-child(3) .p8-phase-dot-inner{background:rgba(155,28,28,0.3);}
+.p8-phase-label{font-size:clamp(9px,0.82vw,11px);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--bur);margin-bottom:3px;}
+.p8-phase-title{font-size:clamp(12px,1.1vw,15px);font-weight:500;color:var(--dark2);margin-bottom:3px;line-height:1.3;}
+.p8-phase-desc{font-size:clamp(10px,0.9vw,13px);font-weight:300;color:var(--mid);line-height:1.65;}
+/* stack */
+.p8-stack{display:flex;flex-direction:column;gap:1.5vh;}
+.p8-stack-row{display:flex;align-items:center;gap:10px;}
+.p8-stack-label{font-size:clamp(9.5px,0.85vw,12px);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(155,28,28,0.55);width:clamp(60px,6vw,90px);flex-shrink:0;}
+.p8-stack-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.p8-stack-tag{font-size:clamp(10px,0.88vw,13px);font-weight:400;padding:3px 10px;border-radius:3px;background:rgba(155,28,28,0.07);color:var(--dark2);border:1px solid rgba(155,28,28,0.12);}
+.p8-stack-tag.current{background:rgba(155,28,28,0.13);border-color:rgba(155,28,28,0.35);color:var(--bur);font-weight:500;}
+.p8-eta{
+  margin-top:2.5vh;padding:12px 16px;background:#fff;
+  border:1px solid rgba(155,28,28,0.12);border-radius:4px;
+  font-size:clamp(10.5px,0.95vw,13px);font-weight:300;color:var(--mid);line-height:1.6;
+}
+.p8-eta strong{font-weight:500;color:var(--dark2);}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    <img src="images/logo.png" alt="CurriculaFP">
-  </div>
-  <div class="nav-divider"></div>
-  <div class="nav-items" id="navItems">
+  <div class="nav-logo"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="nav-div"></div>
+  <div class="nav-items">
     <div class="nav-item active" onclick="goTo(0)">Portada</div>
     <div class="nav-item" onclick="goTo(1)">Problema</div>
     <div class="nav-item" onclick="goTo(2)">Marco</div>
     <div class="nav-item" onclick="goTo(3)">Propuesta</div>
     <div class="nav-item" onclick="goTo(4)">Arquitectura</div>
-    <div class="nav-item" onclick="goTo(5)">Modelo</div>
-    <div class="nav-item" onclick="goTo(6)">Prototipo</div>
-    <div class="nav-item" onclick="goTo(7)">Validación</div>
-    <div class="nav-item" onclick="goTo(8)">Conclusiones</div>
+    <div class="nav-item" onclick="goTo(5)">Prototipo</div>
+    <div class="nav-item" onclick="goTo(6)">Validación</div>
+    <div class="nav-item" onclick="goTo(7)">Conclusiones</div>
+    <div class="nav-item" onclick="goTo(8)">Desarrollo</div>
   </div>
 </nav>
 
 <div class="deck">
 
-<!-- ── SLIDE 0: PORTADA ── -->
+<!-- S0 PORTADA -->
 <div class="slide active" id="s0">
-  <div class="geo"></div>
-  <div class="slide-body">
-    <div class="s0-logos">
-      <img class="nebrija" src="images/nebrija.png" alt="Universidad Nebrija">
-      <div class="logo-sep"></div>
-      <img class="curricula" src="images/logo.png" alt="CurriculaFP">
+  <div class="body">
+    <div class="p0-top">
+      <div class="p0-logo-wrap nebrija"><img src="images/nebrija.png" alt="Universidad Nebrija"></div>
+      <div class="p0-sep"></div>
+      <div class="p0-logo-wrap curricula"><img src="images/logo.png" alt="CurriculaFP"></div>
     </div>
-    <div class="s0-rule"></div>
-    <p class="s0-master">Máster Universitario en Formación del Profesorado · Especialidad Sanidad · Universidad Nebrija</p>
-    <h1 class="s0-title">CurriculaFP: plataforma web para la gestión curricular de la Formación Profesional</h1>
-    <div class="s0-meta">
-      <p class="s0-meta-row">Trabajo Fin de Máster — <span>Proyecto de Innovación</span></p>
-      <p class="s0-meta-row">Tutor: <span>Dr. Antonio Camargo García</span></p>
-      <p class="s0-meta-row">Alumno: <span>José Antonio Sola Jiménez</span></p>
+    <div class="p0-rule"></div>
+    <p class="p0-master">Máster Universitario en Formación del Profesorado · Especialidad FP Sanidad · Universidad Nebrija</p>
+    <h1 class="p0-title">CurriculaFP: plataforma web para la gestión curricular de la Formación Profesional</h1>
+    <div class="p0-meta">
+      <p class="p0-row">Trabajo Fin de Máster — <span>Proyecto de Innovación</span></p>
+      <p class="p0-row">Tutor: <span>Dr. Antonio Camargo García</span></p>
+      <p class="p0-row">Alumno: <span>José Antonio Sola Jiménez</span></p>
     </div>
-    <p class="s0-year">Junio 2026</p>
+    <p class="p0-year">Junio 2026</p>
   </div>
 </div>
 
-<!-- ── SLIDE 1: EL PROBLEMA ── -->
+<!-- S1 PROBLEMA -->
 <div class="slide" id="s1">
-  <div class="slide-bg"></div>
-  <div class="slide-overlay"></div>
-  <div class="slide-body">
-    <div class="s1-inner">
-      <p class="s1-eye">Justificación del proyecto</p>
-      <h2 class="s1-h">La Formación Profesional tiene<br>una reforma <em>sin herramientas.</em></h2>
-      <div class="s1-items">
-        <div class="s1-item"><div class="s1-dot"></div><p class="s1-txt"><strong>LO 3/2022:</strong> la reforma más profunda del sistema en décadas. Situaciones de aprendizaje, modelo dual, trazabilidad por competencias profesionales.</p></div>
-        <div class="s1-item"><div class="s1-dot"></div><p class="s1-txt"><strong>Complejidad técnica real:</strong> una programación didáctica completa en Formación Profesional incluye resultados de aprendizaje, criterios de evaluación, instrumentos, temporalización y seguimiento trimestral.</p></div>
-        <div class="s1-item"><div class="s1-dot"></div><p class="s1-txt"><strong>Vacío digital específico:</strong> Séneca, Moodle y hojas de cálculo no están diseñados desde la jerarquía curricular propia del sistema.</p></div>
-        <div class="s1-item"><div class="s1-dot"></div><p class="s1-txt"><strong>Consecuencia práctica:</strong> los docentes gestionan esa complejidad con soluciones improvisadas, rehaciendo trabajo ya hecho cada curso académico.</p></div>
+  <div class="bg"></div><div class="ov"></div>
+  <div class="body">
+    <div style="display:flex;flex-direction:column;">
+      <p class="eye eye-lt p1-eye">Justificación del proyecto</p>
+      <h2 class="p1-h">Complejidad normativa,<br>gestión digital insuficiente</h2>
+      <div class="p1-items">
+        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>LO 3/2022 y RD 659/2023:</strong> la reforma más profunda del sistema de Formación Profesional en décadas. Situaciones de aprendizaje, modelo dual, trazabilidad por competencias, acreditación parcial acumulable.</p></div>
+        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>Complejidad técnica de la programación didáctica:</strong> resultados de aprendizaje, criterios de evaluación con ponderaciones, instrumentos, temporalización, seguimiento trimestral. Un documento de considerable exigencia estructural.</p></div>
+        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>Desajuste con las herramientas disponibles:</strong> Séneca gestiona la dimensión administrativa; Moodle gestiona el aprendizaje. Ninguna herramienta toma la jerarquía curricular normativa de la Formación Profesional como eje de diseño.</p></div>
+        <div class="p1-item"><div class="p1-dot"></div><p class="p1-txt"><strong>Consecuencia práctica:</strong> los docentes gestionan la complejidad curricular con soluciones improvisadas — Word, hojas de cálculo, documentos sueltos. Trabajo que se rehace en su mayor parte cada curso académico.</p></div>
       </div>
     </div>
   </div>
-  <div class="stamp light"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
 </div>
 
-<!-- ── SLIDE 2: ESTADO DE LA CUESTIÓN ── -->
+<!-- S2 MARCO -->
 <div class="slide" id="s2">
-  <div class="slide-body">
+  <div class="geo"></div>
+  <div class="body">
     <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="s2-eye">Estado de la cuestión y marco teórico</p>
-      <h2 class="s2-h">Qué dice la investigación.<br>Qué exige la normativa.</h2>
-      <div class="s2-cols">
-        <div class="s2-col">
-          <div class="s2-col-head">
-            <div class="s2-col-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
-            <span class="s2-col-title">Investigación existente</span>
+      <p class="eye eye-lt p2-eye">Estado de la cuestión y marco teórico</p>
+      <h2 class="p2-h">Qué dice la investigación.<br>Qué exige la normativa.</h2>
+      <div class="p2-cols">
+        <div>
+          <div class="p2-col-head">
+            <div class="p2-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <span class="p2-col-title">Investigación existente</span>
           </div>
-          <div class="s2-pts">
-            <div class="s2-pt"><div class="s2-pt-dot"></div><p class="s2-pt-txt">La transformación digital de la Formación Profesional es prioridad reconocida a nivel europeo <strong>(Cedefop, 2020)</strong>.</p></div>
-            <div class="s2-pt"><div class="s2-pt-dot"></div><p class="s2-pt-txt">Existe investigación sobre gestión curricular por competencias, pero <strong>ningún sistema digital específico</strong> toma la jerarquía normativa de la Formación Profesional española como eje.</p></div>
-            <div class="s2-pt"><div class="s2-pt-dot"></div><p class="s2-pt-txt">Los sistemas existentes se centran en <strong>gestión administrativa</strong> o en <strong>plataformas de aprendizaje</strong> — no en gestión curricular estructural.</p></div>
-            <div class="s2-pt"><div class="s2-pt-dot"></div><p class="s2-pt-txt">Metodología: <strong>Design-Based Research (DBR)</strong> — investigación aplicada que integra rigor teórico con relevancia práctica.</p></div>
+          <div class="p2-pts">
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">La transformación digital de la Formación Profesional es prioridad reconocida a nivel europeo <strong>(Cedefop, 2020)</strong>. Los marcos de referencia para la digitalización educativa convergen en la necesidad de sistemas específicos por modalidad.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">Existe investigación sobre gestión curricular por competencias, pero <strong>ningún sistema digital específico</strong> toma la jerarquía normativa de la Formación Profesional española como eje vertebrador de su modelo de datos.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">Los sistemas existentes se centran en <strong>gestión administrativa</strong> (Séneca) o en <strong>plataformas de aprendizaje</strong> (Moodle) — no en gestión curricular estructural. El espacio específico queda sin cubrir.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">Metodología: <strong>Design-Based Research (DBR)</strong>. Investigación aplicada que integra rigor teórico con relevancia práctica, especialmente adecuada para el desarrollo de innovaciones educativas complejas.</p></div>
           </div>
         </div>
-        <div class="s2-sep"></div>
-        <div class="s2-col">
-          <div class="s2-col-head">
-            <div class="s2-col-icon">
-              <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M16 4v16M4 12h16"/></svg>
-            </div>
-            <span class="s2-col-title">Marco normativo</span>
+        <div class="p2-div"></div>
+        <div>
+          <div class="p2-col-head">
+            <div class="p2-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M16 4v16M4 12h16"/></svg></div>
+            <span class="p2-col-title">Marco normativo</span>
           </div>
-          <div class="s2-pts">
-            <div class="s2-pt"><div class="s2-pt-dot"></div><p class="s2-pt-txt"><strong>LO 3/2022:</strong> el resultado de aprendizaje como unidad curricular operativa. Introduce la acreditación parcial acumulable.</p></div>
-            <div class="s2-pt"><div class="s2-pt-dot"></div><p class="s2-pt-txt"><strong>RD 659/2023:</strong> desarrollo reglamentario. La situación de aprendizaje como unidad metodológica básica de la programación didáctica.</p></div>
-            <div class="s2-pt"><div class="s2-pt-dot"></div><p class="s2-pt-txt">La <strong>trazabilidad curricular</strong> — del instrumento de evaluación a la competencia profesional del título — es una exigencia normativa, no una opción de diseño.</p></div>
-            <div class="s2-pt"><div class="s2-pt-dot"></div><p class="s2-pt-txt">La heterogeneidad autonómica añade una capa de complejidad que las herramientas existentes no resuelven de forma general.</p></div>
+          <div class="p2-pts">
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt"><strong>LO 3/2022:</strong> el resultado de aprendizaje como unidad curricular operativa. Introduce la acreditación parcial acumulable como principio estructural del sistema.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt"><strong>RD 659/2023:</strong> desarrollo reglamentario. La situación de aprendizaje como unidad metodológica básica de la programación didáctica. El modelo dual como elemento estructural, no optativo.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">La <strong>trazabilidad curricular</strong> — del instrumento de evaluación aplicado en el aula a la competencia profesional del título — es una exigencia normativa. No puede añadirse a posteriori: debe estar en la arquitectura.</p></div>
+            <div class="p2-pt"><div class="p2-pt-bar"></div><p class="p2-pt-txt">La <strong>variabilidad autonómica</strong> en el desarrollo curricular de los títulos añade una capa de complejidad que los sistemas existentes no resuelven de forma general para el conjunto del territorio.</p></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="stamp dark-logo"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
 </div>
 
-<!-- ── SLIDE 3: LA PROPUESTA ── -->
+<!-- S3 PROPUESTA -->
 <div class="slide" id="s3">
-  <div class="slide-body">
+  <div class="body">
     <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="s3-eye">La propuesta</p>
-      <div class="s3-quote">Diseñar y desarrollar una plataforma web que permita a los centros de Formación Profesional gestionar de forma integral, trazable y alineada con la normativa vigente toda la cadena curricular de sus ciclos formativos.</div>
-      <div class="s3-rule"></div>
-      <div class="s3-cards">
-        <div class="s3-card">
-          <p class="s3-card-label">Qué es</p>
-          <p class="s3-card-txt">Una plataforma diseñada <strong>desde la jerarquía normativa propia de la Formación Profesional española</strong> — desde la definición estructural del ciclo hasta la calificación individualizada de cada alumno.</p>
+      <p class="eye eye-dk p3-eye">La propuesta</p>
+      <div class="p3-quote-wrap">
+        <span class="p3-quote-mark">"</span>
+        <p class="p3-quote">Diseñar y desarrollar una plataforma web que permita a los centros de Formación Profesional gestionar de forma integral, trazable y alineada con la normativa vigente toda la cadena curricular de sus ciclos formativos, desde la definición estructural del ciclo hasta la calificación individualizada de cada alumno.</p>
+      </div>
+      <div class="p3-rule"></div>
+      <div class="p3-grid">
+        <div class="p3-card">
+          <p class="p3-card-label">Qué es</p>
+          <p class="p3-card-txt">Una plataforma diseñada <strong>desde la jerarquía normativa propia de la Formación Profesional española</strong>. Gestiona la complejidad curricular específica del sistema: ciclos, módulos, resultados de aprendizaje, criterios de evaluación, situaciones de aprendizaje, formación en empresa y seguimiento del alumnado.</p>
         </div>
-        <div class="s3-card">
-          <p class="s3-card-label">Qué no es</p>
-          <p class="s3-card-txt">No es un gestor administrativo de centro ni una plataforma de aprendizaje genérica. No replica Séneca ni Moodle. <strong>Gestiona la complejidad curricular específica de la Formación Profesional.</strong></p>
+        <div class="p3-card">
+          <p class="p3-card-label">Qué no es</p>
+          <p class="p3-card-txt">No es un gestor administrativo de centro ni una plataforma de aprendizaje genérica. <strong>No replica Séneca ni Moodle.</strong> Su función principal no es facilitar la interacción docente-alumno en el proceso de aprendizaje, sino gestionar la estructura curricular normativa y su traducción en la programación de cada centro.</p>
         </div>
-        <div class="s3-card">
-          <p class="s3-card-label">Alcance</p>
-          <p class="s3-card-txt">Válida para <strong>cualquier ciclo formativo, familia profesional y comunidad autónoma</strong> de España, sin adaptaciones por territorio. Agnosticismo normativo como principio de diseño.</p>
+        <div class="p3-card">
+          <p class="p3-card-label">Alcance</p>
+          <p class="p3-card-txt">Válida para <strong>cualquier ciclo formativo, familia profesional y comunidad autónoma</strong> de España. El sistema proporciona la estructura curricular y permite al centro adaptarla a su contexto normativo concreto, sin imponer ningún marco autonómico específico.</p>
         </div>
-        <div class="s3-card">
-          <p class="s3-card-label">Metodología</p>
-          <p class="s3-card-txt"><strong>Design-Based Research (DBR):</strong> análisis de necesidades → diseño del modelo → prototipo funcional → validación con usuarios → resultados y líneas futuras.</p>
+        <div class="p3-card">
+          <p class="p3-card-label">Metodología DBR</p>
+          <p class="p3-card-txt">Design-Based Research: <strong>análisis de necesidades del sistema → diseño del modelo de datos → desarrollo del prototipo funcional → validación con docentes en activo → resultados y líneas de desarrollo futuro.</strong> Ciclo iterativo con énfasis en la relevancia práctica.</p>
         </div>
       </div>
-      <span class="s3-tag">Proyecto de Innovación · Modalidad Producto</span>
+      <span class="p3-tag">Proyecto de Innovación · Modalidad Producto · Nebrija 2026</span>
     </div>
   </div>
-  <div class="stamp dark-logo"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="stamp dk"><img src="images/logo.png" alt=""></div>
 </div>
 
-<!-- ── SLIDE 4: ARQUITECTURA ── -->
+<!-- S4 ARQUITECTURA -->
 <div class="slide" id="s4">
-  <div class="slide-body">
+  <div class="geo"></div>
+  <div class="body">
     <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="s4-eye">Decisión arquitectónica clave</p>
-      <h2 class="s4-h">Una separación que cambia todo</h2>
-      <div class="s4-arch" id="s4arch">
-        <div class="s4-block s4-b1" id="s4b1">
-          <p class="s4-blabel">Capa 1</p>
-          <h3 class="s4-btitle">Planificación del ciclo</h3>
-          <p class="s4-bdesc">Definición estructural permanente del ciclo en el centro. Independiente del año académico. Se define una vez, se reutiliza siempre. Válida mientras no cambie la normativa.</p>
-          <div class="s4-btags">
-            <span class="s4-btag">Módulos y RA</span>
-            <span class="s4-btag">Situaciones de aprendizaje</span>
-            <span class="s4-btag">Competencias</span>
-            <span class="s4-btag">Proyecto Intermodular</span>
-            <span class="s4-btag">Criterios de evaluación</span>
+      <p class="eye eye-lt p4-eye">Arquitectura del sistema · Modelo de datos</p>
+      <h2 class="p4-h">Dos capas de gestión · 49 entidades · 4 roles</h2>
+      <div class="p4-diagram">
+        <div class="p4-roles">
+          <div class="p4-role"><div class="p4-role-name">Superadmin</div><div class="p4-role-desc">Catálogo normativo nacional</div></div>
+          <div class="p4-role"><div class="p4-role-name">Administrador</div><div class="p4-role-desc">Configuración del centro</div></div>
+          <div class="p4-role"><div class="p4-role-name">Docente</div><div class="p4-role-desc">Programación y seguimiento</div></div>
+          <div class="p4-role"><div class="p4-role-name">Alumno</div><div class="p4-role-desc">Consulta de expediente</div></div>
+        </div>
+        <div class="p4-conn">
+          <div class="p4-conn-line"></div>
+          <div class="p4-conn-txt">acceso por rol</div>
+          <div class="p4-conn-line"></div>
+        </div>
+        <div class="p4-blocks">
+          <div class="p4-block cap1">
+            <div class="p4-block-n">01</div>
+            <div class="p4-block-name">Catálogo normativo</div>
+            <div class="p4-block-desc">Ciclos, títulos, familias, cualificaciones CNCP</div>
+            <div class="p4-block-roles"><span class="p4-role-tag">Superadmin</span></div>
+          </div>
+          <div class="p4-block cap1">
+            <div class="p4-block-n">02</div>
+            <div class="p4-block-name">Planificación del ciclo</div>
+            <div class="p4-block-desc">SA, RA, criterios, instrumentos de evaluación. Permanente, independiente del curso.</div>
+            <div class="p4-block-roles"><span class="p4-role-tag">Admin</span><span class="p4-role-tag">Docente</span></div>
+          </div>
+          <div class="p4-block cap1">
+            <div class="p4-block-n">03</div>
+            <div class="p4-block-name">Proyecto Intermodular</div>
+            <div class="p4-block-desc">Reto del ciclo, módulos implicados, RA asociados</div>
+            <div class="p4-block-roles"><span class="p4-role-tag">Admin</span><span class="p4-role-tag">Docente</span></div>
+          </div>
+          <div class="p4-block cap1">
+            <div class="p4-block-n">04</div>
+            <div class="p4-block-name">Centro educativo</div>
+            <div class="p4-block-desc">Configuración, espacios, festivos, especialidades docentes</div>
+            <div class="p4-block-roles"><span class="p4-role-tag">Admin</span></div>
+          </div>
+          <div class="p4-block cap2">
+            <div class="p4-block-n">05</div>
+            <div class="p4-block-name">Grupos y horarios</div>
+            <div class="p4-block-desc">Asignación docente, horarios, calendario lectivo anual</div>
+            <div class="p4-block-roles"><span class="p4-role-tag">Admin</span><span class="p4-role-tag">Docente</span></div>
+          </div>
+          <div class="p4-block cap2">
+            <div class="p4-block-n">06</div>
+            <div class="p4-block-name">Calificaciones y actas</div>
+            <div class="p4-block-desc">Notas por instrumento → RA → módulo. Cálculo ponderado automático.</div>
+            <div class="p4-block-roles"><span class="p4-role-tag">Docente</span></div>
+          </div>
+          <div class="p4-block cap2">
+            <div class="p4-block-n">07</div>
+            <div class="p4-block-name">Alumnado</div>
+            <div class="p4-block-desc">Expediente acumulable por DNI entre centros. Estado de unidades de competencia CNCP.</div>
+            <div class="p4-block-roles"><span class="p4-role-tag">Docente</span><span class="p4-role-tag">Alumno</span></div>
+          </div>
+          <div class="p4-block cap2">
+            <div class="p4-block-n">08</div>
+            <div class="p4-block-name">Formación en empresa</div>
+            <div class="p4-block-desc">Asignación, tutorías, visitas, calificación dual, exenciones individuales</div>
+            <div class="p4-block-roles"><span class="p4-role-tag">Admin</span><span class="p4-role-tag">Docente</span></div>
           </div>
         </div>
-        <div class="s4-mid" id="s4mid">
-          <div class="s4-mid-line"></div>
-          <div class="s4-mid-ico">⇅</div>
-          <div class="s4-mid-line"></div>
-        </div>
-        <div class="s4-block s4-b2" id="s4b2">
-          <p class="s4-blabel">Capa 2</p>
-          <h3 class="s4-btitle">Gestión de cursos</h3>
-          <p class="s4-bdesc">Instancia anual del ciclo con grupos reales, docentes asignados, temporalización concreta y calificaciones del alumnado. Se crea cada curso a partir de la planificación base.</p>
-          <div class="s4-btags">
-            <span class="s4-btag">Grupos y docentes</span>
-            <span class="s4-btag">Horarios y asistencia</span>
-            <span class="s4-btag">Calificaciones</span>
-            <span class="s4-btag">Formación en empresa</span>
-          </div>
+        <div class="p4-legend">
+          <div class="p4-leg-item"><div class="p4-leg-bar c1"></div>Capa 1 — Planificación del ciclo (permanente, independiente del curso académico)</div>
+          <div class="p4-leg-item"><div class="p4-leg-bar c2"></div>Capa 2 — Gestión de cursos (instancia anual con grupos reales y calificaciones)</div>
         </div>
       </div>
-      <p class="s4-insight" id="s4ins">Ninguna herramienta existente formaliza esta separación. <strong>Confundir ambas dimensiones obliga al docente a rehacer trabajo ya hecho cada curso.</strong></p>
     </div>
   </div>
-  <div class="stamp dark-logo"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
 </div>
 
-<!-- ── SLIDE 5: MODELO DE DATOS ── -->
+<!-- S5 PROTOTIPO -->
 <div class="slide" id="s5">
-  <div class="geo"></div>
-  <div class="slide-body">
+  <div class="bg"></div><div class="ov"></div>
+  <div class="body">
     <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="s5-eye">Resultado 1 — Modelo de datos</p>
-      <h2 class="s5-h">49 entidades · 8 bloques funcionales</h2>
-      <p class="s5-sub">Primera representación formal conocida de la jerarquía curricular completa de la Formación Profesional española como modelo de sistema de información</p>
-      <div class="s5-grid">
-        <div class="s5-card"><div class="s5-card-n">01</div><div class="s5-card-name">Catálogo normativo</div><div class="s5-card-desc">Ciclos, títulos, familias profesionales, cualificaciones CNCP</div></div>
-        <div class="s5-card"><div class="s5-card-n">02</div><div class="s5-card-name">Centro educativo</div><div class="s5-card-desc">Configuración del centro, espacios, festivos, calendario</div></div>
-        <div class="s5-card"><div class="s5-card-n">03</div><div class="s5-card-name">Ciclo en el centro</div><div class="s5-card-desc">Implantación del ciclo, módulos adaptados, especialidades docentes</div></div>
-        <div class="s5-card"><div class="s5-card-n">04</div><div class="s5-card-name">Planificación docente</div><div class="s5-card-desc">SA, unidades didácticas, criterios, instrumentos de evaluación</div></div>
-        <div class="s5-card"><div class="s5-card-n">05</div><div class="s5-card-name">Gestión académica</div><div class="s5-card-desc">Grupos, horarios, asistencia, calificaciones, formación en empresa</div></div>
-        <div class="s5-card"><div class="s5-card-n">06</div><div class="s5-card-name">Personas</div><div class="s5-card-desc">DNI como identificador universal. Alumnado con historial acumulable entre centros</div></div>
-        <div class="s5-card"><div class="s5-card-n">07</div><div class="s5-card-name">Comunicación</div><div class="s5-card-desc">Avisos, notificaciones y mensajería interna del centro</div></div>
-        <div class="s5-card"><div class="s5-card-n">08</div><div class="s5-card-name">Sistema</div><div class="s5-card-desc">Usuarios, roles, permisos, auditoría y configuración global</div></div>
+      <p class="eye eye-lt p5-eye">Resultado — Prototipo funcional navegable</p>
+      <h2 class="p5-h">Demostración de viabilidad</h2>
+      <p class="p5-sub">jasola.github.io/curriculafp-prototipo</p>
+      <div class="p5-browser">
+        <div class="p5-bar">
+          <div class="p5-dots"><div class="p5-d"></div><div class="p5-d"></div><div class="p5-d"></div></div>
+          <div class="p5-addr">jasola.github.io/curriculafp-prototipo</div>
+        </div>
+        <img src="images/slide4-prototipo.png" alt="CurriculaFP — Planificación del ciclo">
       </div>
-      <div class="s5-footer">
-        <div class="s5-stat"><div class="s5-stat-n">49</div><div class="s5-stat-l">entidades totales</div></div>
-        <div class="s5-stat"><div class="s5-stat-n">8</div><div class="s5-stat-l">bloques funcionales</div></div>
-        <div class="s5-stat"><div class="s5-stat-n">M:N</div><div class="s5-stat-l">RA ↔ competencias</div></div>
-        <div class="s5-stat"><div class="s5-stat-n">DNI</div><div class="s5-stat-l">id. universal personas</div></div>
+      <div class="p5-flows">
+        <div class="p5-flow"><div class="p5-flow-title">Configuración normativa</div><div class="p5-flow-desc">Catálogo nacional, implantación del ciclo en el centro, especialidades docentes y espacios mínimos.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Planificación del ciclo completa</div><div class="p5-flow-desc">Estructura normativa y programación del docente con SA vinculadas a RA y criterios de evaluación.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Gestión académica anual</div><div class="p5-flow-desc">Grupos, horarios, registro de asistencia, calificaciones con consolidación automática hacia el módulo.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Formación en empresa</div><div class="p5-flow-desc">Asignación de alumno a empresa y tutor, registro de visitas, calificación dual y exenciones individuales.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Seguimiento del alumnado</div><div class="p5-flow-desc">Expediente acumulable por DNI entre centros. Estado de unidades de competencia del CNCP en tiempo real.</div></div>
+        <div class="p5-flow"><div class="p5-flow-title">Proyecto Intermodular</div><div class="p5-flow-desc">Reto del ciclo, módulos implicados, resultados de aprendizaje asociados. Aplicable a cualquier título.</div></div>
       </div>
+      <a class="p5-btn" href="https://jasola.github.io/curriculafp-prototipo" target="_blank" rel="noopener">
+        Abrir prototipo
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
     </div>
   </div>
-  <div class="stamp light"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
 </div>
 
-<!-- ── SLIDE 6: PROTOTIPO ── -->
+<!-- S6 VALIDACIÓN -->
 <div class="slide" id="s6">
-  <div class="slide-bg"></div>
-  <div class="slide-overlay"></div>
-  <div class="slide-body">
-    <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="s6-eye">Resultado 2 — Prototipo funcional</p>
-      <h2 class="s6-h">21 pantallas en GitHub Pages</h2>
-      <p class="s6-url">jasola.github.io/curriculafp-prototipo</p>
-      <div class="s6-browser">
-        <div class="s6-browser-bar">
-          <div class="s6-dots-bar">
-            <div class="s6-dot-bar"></div>
-            <div class="s6-dot-bar"></div>
-            <div class="s6-dot-bar"></div>
+  <div class="bg"></div><div class="ov"></div>
+  <div class="body">
+    <div style="display:flex;flex-direction:column;">
+      <p class="eye eye-lt p6-eye">Evaluación del prototipo</p>
+      <h2 class="p6-h">Evaluación del prototipo con docentes<br>de Formación Profesional Sanidad</h2>
+      <div class="p6-finds">
+        <div class="p6-find">
+          <div class="p6-n">1</div>
+          <div>
+            <p class="p6-title">El modelo refleja la lógica de la práctica docente real</p>
+            <p class="p6-desc">Los docentes participantes reconocieron en la estructura de CurriculaFP la lógica de su propio trabajo. El análisis funcional previo capturó adecuadamente la naturaleza del problema.</p>
           </div>
-          <div class="s6-addr">jasola.github.io/curriculafp-prototipo</div>
         </div>
-        <img src="images/slide4-prototipo.png" alt="Prototipo CurriculaFP — Planificación del ciclo">
+        <div class="p6-find">
+          <div class="p6-n">2</div>
+          <div>
+            <p class="p6-title">Funcionalidad más valorada: SA vinculadas a RA y criterios de evaluación</p>
+            <p class="p6-desc">La cadena situación de aprendizaje → resultado de aprendizaje → criterio de evaluación fue la funcionalidad con mayor valoración. Hace visible la trazabilidad de evidencias del aprendizaje que la normativa exige.</p>
+          </div>
+        </div>
+        <div class="p6-find">
+          <div class="p6-n">3</div>
+          <div>
+            <p class="p6-title">Orientación concreta para el desarrollo siguiente</p>
+            <p class="p6-desc">Catálogos predefinidos de instrumentos de evaluación como mejora de mayor impacto percibido. Demanda real no identificada en el análisis previo — coherente con el modelo de aceptación tecnológica.</p>
+          </div>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:4vw;margin-top:2.5vh;">
-        <div class="s6-pts">
-          <div class="s6-pt"><div class="s6-pt-n">21</div><div class="s6-pt-l">pantallas</div></div>
-        </div>
-        <div class="s6-pts">
-          <div class="s6-pt"><div class="s6-pt-n">2</div><div class="s6-pt-l">capas cubiertas</div></div>
-        </div>
-        <div class="s6-pts">
-          <div class="s6-pt"><div class="s6-pt-n">DNI</div><div class="s6-pt-l">historial acumulable</div></div>
-        </div>
-        <a class="s6-btn" href="https://jasola.github.io/curriculafp-prototipo" target="_blank" rel="noopener">
-          Abrir prototipo
-          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
+      <div class="p6-context">Proceso de evaluación realizado con dos docentes en activo de ciclos formativos de la familia Sanidad, en el contexto del CIFP Salud Jerez. La evaluación se centró en la adecuación funcional del prototipo a la realidad de la gestión curricular de ese ciclo y centro concretos.</div>
     </div>
   </div>
-  <div class="stamp light"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
 </div>
 
-<!-- ── SLIDE 7: VALIDACIÓN ── -->
+<!-- S7 CONCLUSIONES -->
 <div class="slide" id="s7">
-  <div class="slide-bg"></div>
-  <div class="slide-overlay"></div>
-  <div class="slide-body">
-    <div class="s7-inner">
-      <p class="s7-eye">Resultado 3 — Validación con usuarios</p>
-      <h2 class="s7-h">Confirmado por docentes<br>de Formación Profesional en activo</h2>
-      <div class="s7-finds">
-        <div class="s7-find">
-          <div class="s7-find-n">1</div>
-          <div>
-            <p class="s7-find-title">El modelo encaja con la práctica docente real</p>
-            <p class="s7-find-desc">Dos docentes de Formación Profesional Sanidad reconocieron en la estructura de CurriculaFP la lógica de su propio trabajo. El análisis funcional capturó bien la naturaleza del problema.</p>
+  <div class="geo"></div>
+  <div class="body">
+    <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
+      <p class="eye eye-lt p7-eye">Conclusiones</p>
+      <h2 class="p7-h">Lo que el proyecto demuestra</h2>
+      <div class="p7-conclusions">
+        <div class="p7-c">
+          <div class="p7-c-num">01</div>
+          <div class="p7-c-body">
+            <p class="p7-c-title">La separación entre capas de gestión es el eje que ordena la complejidad</p>
+            <p class="p7-c-desc">Distinguir lo que es permanente — la estructura curricular del ciclo — de lo que es anual — los grupos, las asignaciones y las calificaciones de ese curso — elimina el trabajo repetido y hace visible una distinción que la práctica docente maneja implícitamente pero que ninguna herramienta había formalizado.</p>
           </div>
         </div>
-        <div class="s7-find">
-          <div class="s7-find-n">2</div>
-          <div>
-            <p class="s7-find-title">Funcionalidad más valorada: SA → RA → criterios de evaluación</p>
-            <p class="s7-find-desc">La vinculación entre situaciones de aprendizaje, resultados de aprendizaje y criterios hace visible la cadena de evidencias del aprendizaje. Precisamente la más compleja de diseñar.</p>
+        <div class="p7-c">
+          <div class="p7-c-num">02</div>
+          <div class="p7-c-body">
+            <p class="p7-c-title">La trazabilidad no se añade: emerge de la arquitectura</p>
+            <p class="p7-c-desc">Cuando el modelo de datos refleja fielmente la jerarquía normativa del sistema, la trazabilidad aparece de forma natural. No es una funcionalidad que se implementa por separado: es la consecuencia de tomar esa jerarquía como estructura central.</p>
           </div>
         </div>
-        <div class="s7-find">
-          <div class="s7-find-n">3</div>
-          <div>
-            <p class="s7-find-title">Orientación concreta para el desarrollo siguiente</p>
-            <p class="s7-find-desc">Catálogos predefinidos de instrumentos de evaluación como mejora prioritaria — demanda real no identificada en el análisis previo. Reducir la fricción inicial es condición de adopción.</p>
+        <div class="p7-c">
+          <div class="p7-c-num">03</div>
+          <div class="p7-c-body">
+            <p class="p7-c-title">Complejidad del modelo no implica complejidad de interfaz</p>
+            <p class="p7-c-desc">El prototipo refuta la hipótesis implícita de que un modelo de datos complejo produce inevitablemente una interfaz difícil de usar. La pantalla más compleja del sistema fue también la más valorada en la evaluación con docentes.</p>
           </div>
         </div>
       </div>
+      <p class="p7-closing">"CurriculaFP nació de un diagnóstico concreto. El trabajo desarrollado ha permitido verificar que el diagnóstico era correcto y que la respuesta propuesta es viable."</p>
     </div>
   </div>
-  <div class="stamp light"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="stamp lt"><img src="images/logo.png" alt=""></div>
 </div>
 
-<!-- ── SLIDE 8: CONCLUSIONES ── -->
+<!-- S8 DESARROLLO -->
 <div class="slide" id="s8">
-  <div class="geo"></div>
-  <div class="slide-body">
+  <div class="body">
     <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-      <p class="s8-eye">Conclusiones y líneas futuras</p>
-      <h2 class="s8-h">Lo que el proyecto demuestra</h2>
-      <div class="s8-cols">
+      <p class="eye eye-dk p8-eye">Estado actual del desarrollo</p>
+      <h2 class="p8-h">Del prototipo a la aplicación real</h2>
+      <div class="p8-content">
         <div>
-          <div class="s8-col-head"><span class="s8-col-label">Conclusiones</span></div>
-          <div class="s8-items">
-            <div class="s8-item"><div class="s8-item-dot"></div><p class="s8-item-txt">La distinción <strong>Planificación del ciclo / Gestión de cursos</strong> no es una decisión técnica menor — es el eje que ordena toda la complejidad del sistema.</p></div>
-            <div class="s8-item"><div class="s8-item-dot"></div><p class="s8-item-txt">La <strong>trazabilidad no se añade</strong> a un sistema de gestión: emerge de tomar la jerarquía curricular normativa como estructura de datos central.</p></div>
-            <div class="s8-item"><div class="s8-item-dot"></div><p class="s8-item-txt">La complejidad del modelo de datos <strong>no implica complejidad de interfaz</strong>. Las decisiones de diseño pueden reducir la carga cognitiva sin sacrificar profundidad.</p></div>
-            <div class="s8-item"><div class="s8-item-dot"></div><p class="s8-item-txt">CurriculaFP demuestra la <strong>viabilidad técnica y funcional</strong> de una plataforma específica para la gestión curricular de la Formación Profesional española.</p></div>
+          <div class="p8-col-head"><span class="p8-col-label">Hoja de ruta</span></div>
+          <div class="p8-phases">
+            <div class="p8-phase">
+              <div class="p8-phase-dot"><div class="p8-phase-dot-inner"></div></div>
+              <div>
+                <p class="p8-phase-label">En curso</p>
+                <p class="p8-phase-title">Fase 1 — Fundamentos de programación</p>
+                <p class="p8-phase-desc">Python iniciado con datos reales de CurriculaFP — variables, listas, diccionarios, funciones. Entorno configurado: Python 3.11.9, VS Code. Recursos: Píldoras Informáticas (Python), Midudev (SQL).</p>
+              </div>
+            </div>
+            <div class="p8-phase">
+              <div class="p8-phase-dot"><div class="p8-phase-dot-inner"></div></div>
+              <div>
+                <p class="p8-phase-label">Siguiente</p>
+                <p class="p8-phase-title">Fases 2-4 — Backend, API y frontend</p>
+                <p class="p8-phase-desc">PostgreSQL con el modelo de datos de CurriculaFP → Django (Fazt, tutorial oficial) → Django REST Framework (Codigofacilito) → React (Midudev). Estimación: 4-5 meses a 1-2 horas diarias.</p>
+              </div>
+            </div>
+            <div class="p8-phase">
+              <div class="p8-phase-dot"><div class="p8-phase-dot-inner"></div></div>
+              <div>
+                <p class="p8-phase-label">Horizonte</p>
+                <p class="p8-phase-title">Fase 5 — MVP y primer piloto</p>
+                <p class="p8-phase-desc">Despliegue en Railway o Render. Primer piloto con centro educativo de referencia ya identificado. Modelo de suscripción para centros de Formación Profesional.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="s8-sep"></div>
+        <div class="p8-sep"></div>
         <div>
-          <div class="s8-col-head"><span class="s8-col-label">Líneas futuras</span></div>
-          <div class="s8-items">
-            <div class="s8-item"><div class="s8-item-dot"></div><p class="s8-item-txt"><strong>Catálogos predefinidos</strong> de instrumentos de evaluación — mejora de mayor impacto percibido en la validación.</p></div>
-            <div class="s8-item"><div class="s8-item-dot"></div><p class="s8-item-txt"><strong>Trazabilidad de carrera docente</strong> — historial de módulos impartidos, ciclos y centros a lo largo de la trayectoria profesional.</p></div>
-            <div class="s8-item"><div class="s8-item-dot"></div><p class="s8-item-txt"><strong>Analítica curricular</strong> a escala de centro y de sistema — de herramienta de gestión a plataforma de inteligencia curricular.</p></div>
-            <div class="s8-item"><div class="s8-item-dot"></div><p class="s8-item-txt"><strong>Desarrollo como aplicación real</strong> con piloto en centro educativo — el mismo modelo de datos, con tecnología web completa.</p></div>
+          <div class="p8-col-head"><span class="p8-col-label">Stack tecnológico</span></div>
+          <div class="p8-stack">
+            <div class="p8-stack-row">
+              <div class="p8-stack-label">En curso</div>
+              <div class="p8-stack-tags">
+                <span class="p8-stack-tag current">Python 3.11</span>
+              </div>
+            </div>
+            <div class="p8-stack-row">
+              <div class="p8-stack-label">Base de datos</div>
+              <div class="p8-stack-tags">
+                <span class="p8-stack-tag">PostgreSQL</span>
+              </div>
+            </div>
+            <div class="p8-stack-row">
+              <div class="p8-stack-label">Backend</div>
+              <div class="p8-stack-tags">
+                <span class="p8-stack-tag">Django</span>
+                <span class="p8-stack-tag">Django REST Framework</span>
+              </div>
+            </div>
+            <div class="p8-stack-row">
+              <div class="p8-stack-label">Frontend</div>
+              <div class="p8-stack-tags">
+                <span class="p8-stack-tag">React</span>
+              </div>
+            </div>
+            <div class="p8-stack-row">
+              <div class="p8-stack-label">SaaS</div>
+              <div class="p8-stack-tags">
+                <span class="p8-stack-tag">django-tenants</span>
+                <span class="p8-stack-tag">Stripe</span>
+              </div>
+            </div>
+            <div class="p8-stack-row">
+              <div class="p8-stack-label">Despliegue</div>
+              <div class="p8-stack-tags">
+                <span class="p8-stack-tag">Railway / Render</span>
+              </div>
+            </div>
+          </div>
+          <div class="p8-eta">
+            <strong>Punto de partida:</strong> analista funcional con experiencia en prototipado de aplicaciones, aprendiendo a programar desde cero para construir el producto directamente. Cada ejercicio de aprendizaje usa datos reales de CurriculaFP desde el primer día.
           </div>
         </div>
       </div>
-      <p class="s8-closing">"CurriculaFP nació de un diagnóstico concreto. El trabajo desarrollado ha permitido verificar que el diagnóstico era correcto y que la respuesta propuesta es viable."</p>
     </div>
   </div>
-  <div class="stamp light"><img src="images/logo.png" alt="CurriculaFP"></div>
+  <div class="stamp dk"><img src="images/logo.png" alt=""></div>
 </div>
 
 </div><!-- /deck -->
 
-<!-- ARROWS -->
 <button class="arr prev" id="arrPrev" onclick="navigate(-1)" disabled>&#8592;</button>
 <button class="arr next" id="arrNext" onclick="navigate(1)">&#8594;</button>
-
-<!-- DOTS -->
 <div class="dots" id="dotsEl"></div>
 
 <script>
-const slides = document.querySelectorAll('.slide');
-const navItems = document.querySelectorAll('.nav-item');
-const total = slides.length;
-let cur = 0;
+const slides=document.querySelectorAll('.slide');
+const navItems=document.querySelectorAll('.nav-item');
+const total=slides.length;
+let cur=0;
+const creamSlides=new Set([0,3,8]);
 
-// cream slides (for arrow style)
-const creamSlides = new Set([2,3,4]);
-
-// Build dots
-const dotsEl = document.getElementById('dotsEl');
+const dotsEl=document.getElementById('dotsEl');
 for(let i=0;i<total;i++){
-  const d = document.createElement('div');
-  d.className = 'dot'+(i===0?' active':'');
-  d.onclick = ()=>goTo(i);
+  const d=document.createElement('div');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
   dotsEl.appendChild(d);
 }
 
@@ -790,55 +816,29 @@ function goTo(n){
   slides[cur].classList.remove('active');
   navItems[cur].classList.remove('active');
   dotsEl.children[cur].classList.remove('active');
-  cur = n;
+  cur=n;
   slides[cur].classList.add('active');
   navItems[cur].classList.add('active');
   dotsEl.children[cur].classList.add('active');
-  document.getElementById('arrPrev').disabled = cur===0;
-  document.getElementById('arrNext').disabled = cur===total-1;
+  document.getElementById('arrPrev').disabled=cur===0;
+  document.getElementById('arrNext').disabled=cur===total-1;
   updateArrows();
-  triggerAnimations(cur);
 }
 
 function updateArrows(){
-  const onCream = creamSlides.has(cur);
-  ['arrPrev','arrNext'].forEach(id=>{
-    const b = document.getElementById(id);
-    b.className = b.className.replace(/ on-cream/g,'');
-    if(onCream) b.className += ' on-cream';
-  });
-  document.getElementById('arrPrev').className =
-    document.getElementById('arrPrev').className.replace('next','').replace('prev','') + ' arr prev' + (onCream?' on-cream':'');
-  document.getElementById('arrNext').className =
-    document.getElementById('arrNext').className.replace('next','').replace('prev','') + ' arr next' + (onCream?' on-cream':'');
+  const c=creamSlides.has(cur);
+  const p=document.getElementById('arrPrev');
+  const n=document.getElementById('arrNext');
+  p.className='arr prev'+(c?' cream':'');
+  n.className='arr next'+(c?' cream':'');
 }
 
 function navigate(dir){const n=cur+dir;if(n>=0&&n<total)goTo(n);}
 
-// Slide 4 animations
-function triggerAnimations(n){
-  if(n===4){
-    setTimeout(()=>{
-      document.getElementById('s4b1').classList.add('visible');
-    },100);
-    setTimeout(()=>{
-      document.getElementById('s4b2').classList.add('visible');
-    },350);
-    setTimeout(()=>{
-      document.getElementById('s4mid').classList.add('visible');
-      document.getElementById('s4ins').classList.add('visible');
-    },600);
-  }
-}
-
 document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key==='ArrowDown') navigate(1);
-  if(e.key==='ArrowLeft'||e.key==='ArrowUp') navigate(-1);
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')navigate(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')navigate(-1);
 });
-
-// Fix arrow classes on init
-document.getElementById('arrPrev').className = 'arr prev';
-document.getElementById('arrNext').className = 'arr next';
 </script>
 </body>
 </html>
