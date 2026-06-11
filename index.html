@@ -152,16 +152,6 @@ nav{
 .p3-tag{margin-top:2vh;display:inline-block;border:1px solid rgba(155,28,28,0.25);color:var(--bur);font-size:clamp(9px,0.82vw,11px);font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:5px 14px;border-radius:2px;}
 
 /* ══════ S4 ARQUITECTURA ══════ */
-#s4{background:var(--cream);}
-#s4 .arch-wrap{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  padding:2vh 2vw 1vh;
-}
-.arch-header{text-align:center;margin-bottom:1vh;}
-.arch-eye{font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(155,28,28,0.45);margin-bottom:0.5vh;}
-.arch-title{font-family:'Playfair Display',serif;font-size:clamp(16px,1.8vw,26px);font-weight:700;color:var(--dark2);}
-.arch-hint{font-size:10px;color:rgba(155,28,28,0.4);margin-top:4px;letter-spacing:0.05em;}
 
 /* ══════ S5 PROTOTIPO ══════ */
 .p5-browser{border-radius:8px;overflow:hidden;border:1px solid rgba(155,28,28,0.12);box-shadow:0 8px 32px rgba(44,26,26,0.1);margin-bottom:2vh;}
@@ -358,245 +348,189 @@ nav{
 </div>
 
 <!-- ══ S4 ARQUITECTURA ══ -->
-<div class="slide" id="s4" style="background:var(--cream);">
-  <svg id="diag-svg"
-       viewBox="0 0 1000 580"
-       preserveAspectRatio="xMidYMid meet"
-       xmlns="http://www.w3.org/2000/svg"
-       style="position:absolute;inset:0;width:100%;height:100%;display:block;font-family:'Inter',sans-serif;">
-<defs>
-  <marker id="ar" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#9B1C1C"/></marker>
-  <marker id="ap" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#5B3A8C"/></marker>
-  <marker id="ag" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#bbb"/></marker>
-</defs>
+<div class="slide" id="s4">
+<style>
+/* ── ARCH DIAGRAM ── */
+#s4{background:var(--cream);overflow:hidden;}
+.arch-outer{position:absolute;inset:0;display:flex;flex-direction:column;padding:1.8vh 2.5vw 1.5vh;gap:0;}
+.arch-top-title{text-align:center;flex-shrink:0;margin-bottom:1vh;}
+.arch-top-title .arch-eye{font-size:9.5px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(155,28,28,0.45);margin-bottom:3px;}
+.arch-top-title h2{font-family:'Playfair Display',serif;font-size:clamp(14px,1.6vw,22px);font-weight:700;color:#2C1A1A;line-height:1.2;}
+.arch-hint{font-size:9px;color:rgba(155,28,28,0.38);margin-top:2px;letter-spacing:0.06em;}
 
-<!-- TITLE BLOCK: y0..44 -->
-<text x="500" y="16" text-anchor="middle" fill="rgba(155,28,28,0.45)" font-size="9.5" font-weight="500" letter-spacing="2">ARQUITECTURA DEL SISTEMA · MODELO DE DATOS</text>
-<text x="500" y="36" text-anchor="middle" fill="#2C1A1A" font-size="20" font-weight="700" font-family="'Playfair Display',serif">Flujo curricular de CurriculaFP</text>
-<text id="arch-hint" x="500" y="50" text-anchor="middle" fill="rgba(155,28,28,0.38)" font-size="9" letter-spacing="1">Pulsa → para revelar</text>
+/* Two zone panels */
+.arch-zones{display:flex;flex-direction:column;flex:1;gap:1.2vh;min-height:0;}
+.arch-zone{border-radius:8px;padding:1.2vh 1.5vw 1vh;display:flex;flex-direction:column;gap:0.8vh;opacity:0;transition:opacity 0.5s ease,transform 0.5s ease;transform:translateY(8px);}
+.arch-zone.visible{opacity:1;transform:translateY(0);}
+.arch-zone-plan{flex:1.55;background:rgba(155,28,28,0.04);border:1.5px solid rgba(155,28,28,0.15);}
+.arch-zone-gest{flex:1;background:rgba(91,58,140,0.04);border:1.5px solid rgba(91,58,140,0.15);}
+.arch-zone-title{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-bottom:0.3vh;}
+.arch-zone-title-text{font-family:'Playfair Display',serif;font-size:clamp(11px,1.1vw,16px);font-weight:700;}
+.arch-zone-plan .arch-zone-title-text{color:#9B1C1C;}
+.arch-zone-gest .arch-zone-title-text{color:#5B3A8C;}
+.arch-zone-sub{font-size:clamp(8px,0.75vw,10px);font-weight:300;color:#8B6B6B;margin-left:4px;}
 
-<!-- ═══════════════════════════════════════
-     LAYOUT inside viewBox 1000x580:
-     Title:             y 0 - 56
-     Superior rect:     y 56, h 280  → bottom y336
-     gap:               8px
-     Inferior rect:     y 344, h 196 → bottom y540
-     Legend:            y 550
-     Total:             580 ✓
+/* Grid inside planning zone */
+.arch-plan-grid{display:grid;grid-template-columns:1fr 2px 1.6fr 2px 1.6fr;gap:0;flex:1;min-height:0;align-items:center;}
+.arch-grid-div{background:rgba(155,28,28,0.1);align-self:stretch;margin:0 0.8vw;}
+.arch-col{display:flex;flex-direction:column;gap:0.6vh;align-items:center;justify-content:center;}
 
-     Superior internal:
-       Cat.nac zone:    x8   y68  w170 h260
-       Def.centro zone: x186 y68  w806 h260
+/* Grid inside gestión zone */
+.arch-gest-grid{display:grid;grid-template-columns:1.2fr 2px 2fr;gap:0;flex:1;min-height:0;align-items:center;}
+.arch-gest-div{background:rgba(91,58,140,0.1);align-self:stretch;margin:0 0.8vw;}
+.arch-gest-left{display:grid;grid-template-columns:1fr 1fr;gap:0.6vw;align-items:center;}
+.arch-gest-right{display:flex;flex-direction:column;gap:0.5vh;align-items:center;justify-content:center;}
 
-     Row tops (box H=38, gap=8 between rows):
-       R1: y=76   CICLO | MÓDULO | RA
-       R2: y=122  COMP  | MOD.RESP | CE
-       R3: y=180  FCT   | BLOQUE | SA
-       R4: y=226  CEE   | UNIDAD | SESIÓN+INSTR
-       R5: y=272  —     | CONTENIDO
+/* Boxes */
+.abox{border-radius:5px;padding:clamp(4px,0.6vh,8px) clamp(6px,0.8vw,12px);text-align:center;width:100%;font-size:clamp(8.5px,0.82vw,12px);font-weight:600;line-height:1.25;letter-spacing:0.02em;}
+.abox-plan{background:#fff;border:1.5px solid #9B1C1C;color:#2C1A1A;}
+.abox-plan-red{background:#9B1C1C;border:1.5px solid #9B1C1C;color:#fff;}
+.abox-plan-amber{background:#FEF3C7;border:1.5px solid #D97706;color:#92400E;}
+.abox-gest-white{background:#fff;border:1.5px solid #5B3A8C;color:#2C1A1A;}
+.abox-gest-1{background:#7C3AED;border:1.5px solid #7C3AED;color:#fff;}
+.abox-gest-2{background:#6D28D9;border:1.5px solid #6D28D9;color:#fff;}
+.abox-gest-3{background:#5B21B6;border:1.5px solid #5B21B6;color:#fff;}
+.abox-gest-4{background:#4C1D95;border:1.5px solid #4C1D95;color:#fff;}
+.abox sub{font-size:0.75em;font-weight:400;opacity:0.75;display:block;letter-spacing:0;}
 
-     Inferior internal (content y=358..536):
-       GRUPO        x12  y358 w120 h36 →y394
-       MOD.ASIG     x12  y400 w120 h36 →y436
-       PROGRAMACIÓN x142 y358 w150 h44 →y402
-       REGISTRO     x142 y406 w150 h34 →y440
-       CAL.INSTR    x450 y358 w170 h36 →y394
-       CAL.CE       x450 y400 w170 h32 →y432
-       CAL.RA       x450 y438 w170 h32 →y470
-       CAL.MOD      x450 y476 w170 h32 →y508 < y540 ✓
-═══════════════════════════════════════ -->
+/* Arrows between boxes */
+.arch-arrow{display:flex;align-items:center;justify-content:center;flex-shrink:0;color:rgba(155,28,28,0.4);font-size:clamp(8px,0.8vw,11px);line-height:1;height:clamp(8px,1.2vh,14px);}
+.arch-arrow-gest{color:rgba(91,58,140,0.4);}
+.arch-arrow-h{display:flex;align-items:center;gap:2px;color:rgba(155,28,28,0.35);font-size:clamp(7px,0.7vw,10px);}
+.arch-arrow-h-gest{color:rgba(91,58,140,0.35);}
 
-<!-- SUPERIOR CONTAINER: x4 y56 w992 h280 -->
-<rect x="4" y="56" width="992" height="280" rx="7" fill="none" stroke="#9B1C1C" stroke-width="1.8"/>
-<rect x="12" y="49" width="20" height="18" rx="3" fill="#9B1C1C"/>
-<text x="22" y="61" text-anchor="middle" fill="white" font-size="10" font-weight="700">≡</text>
-<text x="38" y="61" fill="#9B1C1C" font-size="11" font-weight="700">Planificación del ciclo</text>
-<text x="198" y="61" fill="#aaa" font-size="10"> — definición estructural permanente</text>
+/* Legend */
+.arch-legend{flex-shrink:0;display:flex;gap:2vw;margin-top:0.6vh;justify-content:center;}
+.arch-leg{display:flex;align-items:center;gap:5px;font-size:clamp(7.5px,0.7vw,9.5px);color:#8B6B6B;}
+.arch-leg-line{width:18px;height:1.5px;background:#9B1C1C;}
+.arch-leg-line.dash{background:none;border-top:1.5px dashed #9B1C1C;}
+.arch-leg-line.grey{background:none;border-top:1.5px dashed #bbb;}
 
-<!-- Cat.nac subzone: x8 y68 w170 h260 -->
-<rect x="8" y="68" width="170" height="260" rx="5" fill="none" stroke="#9B1C1C" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="93" y="80" text-anchor="middle" fill="#9B1C1C" font-size="9.5" font-weight="500">Catálogo nacional</text>
+/* Sub-label */
+.arch-sublabel{font-size:clamp(7px,0.65vw,9px);font-weight:400;opacity:0.6;font-style:italic;text-align:center;margin-top:1px;}
 
-<!-- Def.centro subzone: x186 y68 w806 h260 -->
-<rect x="186" y="68" width="806" height="260" rx="5" fill="none" stroke="#9B1C1C" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="589" y="80" text-anchor="middle" fill="#9B1C1C" font-size="9.5" font-weight="500">Definición en el centro</text>
+/* Cat nacional label */
+.arch-col-label{font-size:clamp(7.5px,0.68vw,9.5px);font-weight:500;color:rgba(155,28,28,0.55);text-align:center;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4vh;flex-shrink:0;}
+</style>
 
-<!-- INFERIOR CONTAINER: x4 y344 w992 h196 -->
-<rect x="4" y="344" width="992" height="196" rx="7" fill="none" stroke="#5B3A8C" stroke-width="1.8"/>
-<rect x="12" y="337" width="20" height="18" rx="3" fill="#5B3A8C"/>
-<text x="22" y="349" text-anchor="middle" fill="white" font-size="10" font-weight="700">♟</text>
-<text x="38" y="349" fill="#5B3A8C" font-size="11" font-weight="700">Gestión de cursos</text>
-<text x="174" y="349" fill="#aaa" font-size="10"> — instancia anual</text>
+<div class="arch-outer">
+  <div class="arch-top-title">
+    <p class="arch-eye">Arquitectura del sistema · Modelo de datos</p>
+    <h2>Flujo curricular de CurriculaFP</h2>
+    <p class="arch-hint" id="arch-hint">Pulsa → para revelar</p>
+  </div>
 
-<!-- LEGEND: y550 -->
-<g transform="translate(4,552)">
-  <line x1="0" y1="5" x2="20" y2="5" stroke="#9B1C1C" stroke-width="1.3" marker-end="url(#ar)"/>
-  <text x="26" y="9" fill="#bbb" font-size="8.5">Relación directa</text>
-  <line x1="120" y1="5" x2="140" y2="5" stroke="#9B1C1C" stroke-width="1.3" stroke-dasharray="4,2" marker-end="url(#ar)"/>
-  <text x="146" y="9" fill="#bbb" font-size="8.5">Relación condicional</text>
-  <line x1="268" y1="5" x2="288" y2="5" stroke="#ccc" stroke-width="1.3" stroke-dasharray="5,2"/>
-  <text x="294" y="9" fill="#bbb" font-size="8.5">Instancia entre niveles</text>
-</g>
+  <div class="arch-zones">
 
-<!-- ═══ GRUPO 1: CATÁLOGO NACIONAL ═══ -->
-<g id="dg1" opacity="0" style="transition:opacity 0.5s;">
-  <!-- CICLO: x18 y76 w154 h38 -->
-  <rect x="18" y="76" width="154" height="38" rx="5" fill="#9B1C1C"/>
-  <text x="95" y="99" text-anchor="middle" fill="white" font-size="12" font-weight="700">CICLO</text>
-  <!-- CICLO→COMP -->
-  <line x1="95" y1="114" x2="95" y2="122" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <!-- COMPETENCIA: x18 y122 w154 h42 -->
-  <rect x="18" y="122" width="154" height="42" rx="5" fill="#9B1C1C"/>
-  <text x="95" y="138" text-anchor="middle" fill="white" font-size="11" font-weight="700">COMPETENCIA</text>
-  <text x="95" y="153" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8.5">PROFESIONAL</text>
-  <!-- CICLO→MÓDULO -->
-  <line x1="172" y1="95" x2="194" y2="95" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-</g>
+    <!-- ZONA PLANIFICACIÓN -->
+    <div class="arch-zone arch-zone-plan" id="arch-plan">
+      <div class="arch-zone-title">
+        <span class="arch-zone-title-text">Planificación del ciclo</span>
+        <span class="arch-zone-sub">— definición estructural permanente</span>
+      </div>
+      <div class="arch-plan-grid" style="flex:1;min-height:0;">
 
-<!-- ═══ GRUPO 2: DEFINICIÓN EN EL CENTRO ═══ -->
-<g id="dg2" opacity="0" style="transition:opacity 0.5s;">
-  <!-- Col A center=271, x194..348 w=154 -->
-  <rect x="194" y="76" width="154" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="271" y="99" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">MÓDULO</text>
-  <line x1="348" y1="95" x2="414" y2="95" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+        <!-- Col 1: Catálogo nacional -->
+        <div class="arch-col">
+          <p class="arch-col-label">Catálogo nacional</p>
+          <div class="abox abox-plan-red">CICLO</div>
+          <div class="arch-arrow">↓</div>
+          <div class="abox abox-plan-red">COMPETENCIA<sub>Profesional</sub></div>
+          <div class="arch-arrow">↓</div>
+          <div class="abox abox-plan-amber">FORMACIÓN EN EMPRESA</div>
+          <div class="arch-arrow">↓</div>
+          <div class="abox abox-plan-amber">CEE<sub>Competencia en empresa</sub></div>
+        </div>
 
-  <rect x="194" y="122" width="154" height="42" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="271" y="138" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
-  <text x="271" y="153" text-anchor="middle" fill="#aaa" font-size="8.5">RESPONSABLE</text>
-  <line x1="271" y1="164" x2="271" y2="180" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+        <div class="arch-grid-div"></div>
 
-  <rect x="194" y="180" width="154" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="271" y="194" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">BLOQUE</text>
-  <text x="271" y="208" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">DIDÁCTICO</text>
-  <line x1="271" y1="218" x2="271" y2="226" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+        <!-- Col 2: Definición estructural -->
+        <div class="arch-col">
+          <p class="arch-col-label">Definición en el centro</p>
+          <div class="abox abox-plan">MÓDULO</div>
+          <div class="arch-arrow" style="color:rgba(155,28,28,0.25);">↓ ╌ ↓</div>
+          <div class="abox abox-plan">MÓDULO RESPONSABLE</div>
+          <div class="arch-arrow" style="color:rgba(155,28,28,0.25);">↓ ╌ ↓</div>
+          <div class="abox abox-plan">BLOQUE DIDÁCTICO</div>
+          <div class="arch-arrow" style="color:rgba(155,28,28,0.25);">↓ ╌ ↓</div>
+          <div class="abox abox-plan">UNIDAD DE TRABAJO</div>
+          <div class="arch-arrow" style="color:rgba(155,28,28,0.25);">↓ ╌ ↓</div>
+          <div class="abox abox-plan">CONTENIDO</div>
+        </div>
 
-  <rect x="194" y="226" width="154" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="271" y="240" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">UNIDAD</text>
-  <text x="271" y="254" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">TRABAJO</text>
-  <line x1="271" y1="264" x2="271" y2="272" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+        <div class="arch-grid-div"></div>
 
-  <rect x="194" y="272" width="154" height="36" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="271" y="294" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">CONTENIDO</text>
+        <!-- Col 3: Evaluación -->
+        <div class="arch-col">
+          <p class="arch-col-label">Evaluación</p>
+          <div class="abox abox-plan">RESULTADO DE APRENDIZAJE</div>
+          <div class="arch-arrow">↓</div>
+          <div class="abox abox-plan">CRITERIO DE EVALUACIÓN</div>
+          <div class="arch-arrow" style="color:rgba(155,28,28,0.25);">↓ ╌ ↓</div>
+          <div class="abox abox-plan">SITUACIÓN DE APRENDIZAJE</div>
+          <div class="arch-arrow">↓</div>
+          <div class="abox abox-plan">SESIÓN</div>
+          <div style="display:flex;gap:0.5vw;width:100%;margin-top:0.3vh;">
+            <div style="flex:1;"></div>
+            <div style="display:flex;align-items:center;gap:0.3vw;flex:2;">
+              <div style="height:1.5px;flex:1;border-top:1.5px solid rgba(155,28,28,0.4);"></div>
+              <div class="abox abox-plan" style="flex:2;font-size:clamp(7.5px,0.7vw,10px);">INSTRUMENTO DE EVALUACIÓN</div>
+            </div>
+          </div>
+        </div>
 
-  <!-- Col B center=501, x414..588 w=174 -->
-  <rect x="414" y="76" width="174" height="42" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="501" y="93" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">RESULTADO DE</text>
-  <text x="501" y="107" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
-  <line x1="501" y1="118" x2="501" y2="122" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+      </div>
+    </div>
 
-  <rect x="414" y="122" width="174" height="42" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="501" y="138" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">CRITERIO DE</text>
-  <text x="501" y="153" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
-  <line x1="501" y1="164" x2="501" y2="180" stroke="#9B1C1C" stroke-width="1.4" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+    <!-- ZONA GESTIÓN DE CURSOS -->
+    <div class="arch-zone arch-zone-gest" id="arch-gest">
+      <div class="arch-zone-title">
+        <span class="arch-zone-title-text">Gestión de cursos</span>
+        <span class="arch-zone-sub">— instancia anual</span>
+      </div>
+      <div class="arch-gest-grid" style="flex:1;min-height:0;">
 
-  <rect x="414" y="180" width="174" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="501" y="194" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">SITUACIÓN DE</text>
-  <text x="501" y="208" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">APRENDIZAJE</text>
-  <line x1="501" y1="218" x2="501" y2="226" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+        <!-- Left: Grupos y programación -->
+        <div class="arch-gest-left">
+          <div class="arch-col">
+            <div class="abox abox-gest-white">GRUPO</div>
+            <div class="arch-arrow arch-arrow-gest">↓</div>
+            <div class="abox abox-gest-white">MÓDULO<sub>Asignación</sub></div>
+          </div>
+          <div class="arch-col">
+            <div class="abox abox-gest-white">PROGRAMACIÓN<sub>Temporalización SA</sub></div>
+            <div class="arch-arrow arch-arrow-gest">↓</div>
+            <div class="abox abox-gest-white">REGISTRO<sub>Asistencia</sub></div>
+          </div>
+        </div>
 
-  <rect x="414" y="226" width="174" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="501" y="249" text-anchor="middle" fill="#2C1A1A" font-size="12" font-weight="600">SESIÓN</text>
-  <line x1="588" y1="245" x2="634" y2="245" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
+        <div class="arch-gest-div"></div>
 
-  <!-- SA→CONTENIDO cubre -->
-  <line x1="414" y1="290" x2="372" y2="290" stroke="#9B1C1C" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#ar)"/>
-  <text x="393" y="283" text-anchor="middle" fill="#9B1C1C" font-size="8.5" font-style="italic">cubre</text>
+        <!-- Right: Calificaciones en cascada -->
+        <div class="arch-gest-right">
+          <div class="abox abox-gest-1" style="width:80%;max-width:220px;">CALIFICACIÓN INSTRUMENTO</div>
+          <div class="arch-arrow arch-arrow-gest">↓</div>
+          <div class="abox abox-gest-2" style="width:80%;max-width:220px;">CALIFICACIÓN CE</div>
+          <div class="arch-arrow arch-arrow-gest">↓</div>
+          <div class="abox abox-gest-3" style="width:80%;max-width:220px;">CALIFICACIÓN RA</div>
+          <div class="arch-arrow arch-arrow-gest">↓</div>
+          <div class="abox abox-gest-4" style="width:80%;max-width:220px;">CALIFICACIÓN MÓDULO</div>
+        </div>
 
-  <!-- Col C center=727, x634..820 w=186 -->
-  <rect x="634" y="226" width="186" height="38" rx="5" fill="white" stroke="#9B1C1C" stroke-width="1.4"/>
-  <text x="727" y="241" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">INSTRUMENTO DE</text>
-  <text x="727" y="255" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">EVALUACIÓN</text>
+      </div>
+    </div>
 
-  <!-- evalúa arco SA→INSTR -->
-  <path d="M588,199 Q660,199 660,226" fill="none" stroke="#9B1C1C" stroke-width="1.1" stroke-dasharray="4,2" marker-end="url(#ar)"/>
-  <text x="668" y="216" fill="#9B1C1C" font-size="8.5" font-style="italic">evalúa</text>
+  </div><!-- /arch-zones -->
 
-  <!-- instancia verticals -->
-  <line x1="727" y1="264" x2="727" y2="336" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="501" y1="264" x2="501" y2="336" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <text x="614" y="332" text-anchor="middle" fill="#ccc" font-size="8.5">↓ instancia anual ↓</text>
-  <text x="732" y="304" fill="#ccc" font-size="8.5">instancia</text>
-  <text x="506" y="304" fill="#ccc" font-size="8.5">instancia</text>
-</g>
+  <!-- Legend -->
+  <div class="arch-legend">
+    <div class="arch-leg"><div class="arch-leg-line"></div>Relación directa</div>
+    <div class="arch-leg"><div class="arch-leg-line dash"></div>Relación condicional</div>
+    <div class="arch-leg"><div class="arch-leg-line grey"></div>Instancia entre niveles</div>
+  </div>
 
-<!-- ═══ GRUPO 3: FORMACIÓN EN EMPRESA ═══ -->
-<g id="dg3" opacity="0" style="transition:opacity 0.5s;">
-  <line x1="95" y1="164" x2="95" y2="180" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <rect x="18" y="180" width="154" height="38" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.4"/>
-  <text x="95" y="194" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">FORMACIÓN EN</text>
-  <text x="95" y="208" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">EMPRESA</text>
-  <line x1="95" y1="218" x2="95" y2="226" stroke="#9B1C1C" stroke-width="1.4" marker-end="url(#ar)"/>
-  <rect x="18" y="226" width="154" height="38" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.4"/>
-  <text x="95" y="241" text-anchor="middle" fill="#92400E" font-size="11" font-weight="600">CEE</text>
-  <text x="95" y="255" text-anchor="middle" fill="#92400E" font-size="8.5">Competencia en empresa</text>
-</g>
-
-<!-- ═══ GRUPO 4: GESTIÓN DE CURSOS ═══
-  Container: x4 y344 w992 h196 → bottom y540
-  Content rows start y358
-  Left:  GRUPO y358 h36→y394 | MOD.ASIG y400 h36→y436
-         PROG  y358 h44→y402 | REGISTRO y408 h34→y442
-  Cal:   CAL.INSTR y358 h36→y394
-         CAL.CE    y400 h32→y432
-         CAL.RA    y438 h32→y470
-         CAL.MOD   y476 h32→y508 → inside y540 ✓
-═══ -->
-<g id="dg4" opacity="0" style="transition:opacity 0.5s;">
-  <!-- instancia connections from superior -->
-  <line x1="727" y1="336" x2="727" y2="346" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="727" y1="346" x2="596" y2="346" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="596" y1="346" x2="562" y2="358" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#ag)"/>
-  <line x1="501" y1="336" x2="501" y2="346" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="501" y1="346" x2="224" y2="346" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3"/>
-  <line x1="224" y1="346" x2="224" y2="358" stroke="#ccc" stroke-width="1.1" stroke-dasharray="5,3" marker-end="url(#ag)"/>
-
-  <!-- GRUPO x12 y358 w120 h36 -->
-  <rect x="12" y="358" width="120" height="36" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
-  <text x="72" y="380" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">GRUPO</text>
-  <line x1="72" y1="394" x2="72" y2="400" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
-  <line x1="132" y1="376" x2="148" y2="376" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
-
-  <!-- MOD.ASIG x12 y400 w120 h36 -->
-  <rect x="12" y="400" width="120" height="36" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
-  <text x="72" y="414" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">MÓDULO</text>
-  <text x="72" y="427" text-anchor="middle" fill="#888" font-size="8.5">ASIGNACIÓN</text>
-  <line x1="132" y1="418" x2="148" y2="418" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
-
-  <!-- PROGRAMACIÓN x148 y358 w150 h44 -->
-  <rect x="148" y="358" width="150" height="44" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
-  <text x="223" y="376" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">PROGRAMACIÓN</text>
-  <text x="223" y="390" text-anchor="middle" fill="#888" font-size="8.5">temporalización SA</text>
-  <!-- CAL.INSTR→PROG condicional -->
-  <line x1="450" y1="376" x2="298" y2="376" stroke="#5B3A8C" stroke-width="1.3" stroke-dasharray="4,2" marker-end="url(#ap)"/>
-
-  <!-- REGISTRO x148 y408 w150 h34 -->
-  <rect x="148" y="408" width="150" height="34" rx="5" fill="white" stroke="#5B3A8C" stroke-width="1.4"/>
-  <text x="223" y="421" text-anchor="middle" fill="#2C1A1A" font-size="11" font-weight="600">REGISTRO</text>
-  <text x="223" y="433" text-anchor="middle" fill="#888" font-size="8.5">ASISTENCIA</text>
-
-  <!-- CAL.INSTR x450 y358 w180 h36 → bottom y394 -->
-  <rect x="450" y="358" width="180" height="36" rx="5" fill="#7C3AED"/>
-  <text x="540" y="372" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN</text>
-  <text x="540" y="385" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="8.5">INSTRUMENTO</text>
-  <line x1="540" y1="394" x2="540" y2="400" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
-
-  <!-- CAL.CE x450 y400 w180 h32 → bottom y432 -->
-  <rect x="450" y="400" width="180" height="32" rx="5" fill="#6D28D9"/>
-  <text x="540" y="420" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN CE</text>
-  <line x1="540" y1="432" x2="540" y2="438" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
-
-  <!-- CAL.RA x450 y438 w180 h32 → bottom y470 -->
-  <rect x="450" y="438" width="180" height="32" rx="5" fill="#5B21B6"/>
-  <text x="540" y="458" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN RA</text>
-  <line x1="540" y1="470" x2="540" y2="476" stroke="#5B3A8C" stroke-width="1.3" marker-end="url(#ap)"/>
-
-  <!-- CAL.MOD x450 y476 w180 h32 → bottom y508 < container y540 ✓ -->
-  <rect x="450" y="476" width="180" height="32" rx="5" fill="#4C1D95"/>
-  <text x="540" y="496" text-anchor="middle" fill="white" font-size="11" font-weight="600">CALIFICACIÓN MÓDULO</text>
-</g>
-
-  </svg>
-  <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
+</div><!-- /arch-outer -->
+<div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
 
 <!-- ══ S5 PROTOTIPO ══ -->
@@ -776,12 +710,10 @@ let cur = 0;
 
 // Diagram state
 let diagStep = 0;
-const diagGroups = ['dg1','dg2','dg3','dg4'];
+const diagGroups = ['arch-plan','arch-gest'];
 const diagHints = [
   'Pulsa → para revelar',
-  'Catálogo nacional — pulsa → para continuar',
-  'Definición en el centro — pulsa → para continuar',
-  'Formación en empresa — pulsa → para continuar',
+  'Planificación del ciclo — pulsa → para continuar',
   'Diagrama completo — pulsa → para avanzar'
 ];
 
@@ -789,7 +721,7 @@ function resetDiagram(){
   diagStep = 0;
   diagGroups.forEach(id => {
     const el = document.getElementById(id);
-    if(el){ el.style.opacity = '0'; el.style.transition = 'none'; }
+    if(el){ el.classList.remove('visible'); }
   });
   const hint = document.getElementById('arch-hint');
   if(hint) hint.textContent = diagHints[0];
@@ -798,13 +730,13 @@ function resetDiagram(){
 function advanceDiagram(){
   if(diagStep < diagGroups.length){
     const el = document.getElementById(diagGroups[diagStep]);
-    if(el){ el.style.transition = 'opacity 0.5s'; el.style.opacity = '1'; }
+    if(el){ el.classList.add('visible'); }
     diagStep++;
     const hint = document.getElementById('arch-hint');
     if(hint) hint.textContent = diagHints[diagStep];
-    return true; // consumed
+    return true;
   }
-  return false; // diagram complete, let navigation proceed
+  return false;
 }
 
 function handleNext(){
@@ -817,10 +749,9 @@ function handleNext(){
 
 function handlePrev(){
   if(cur === 4 && diagStep > 0){
-    // step back one group
     diagStep--;
     const el = document.getElementById(diagGroups[diagStep]);
-    if(el){ el.style.transition = 'opacity 0.3s'; el.style.opacity = '0'; }
+    if(el){ el.classList.remove('visible'); }
     const hint = document.getElementById('arch-hint');
     if(hint) hint.textContent = diagHints[diagStep];
   } else {
