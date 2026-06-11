@@ -110,23 +110,22 @@ nav{
 .p0-logo-box{padding:14px 32px;display:flex;align-items:center;justify-content:center;}
 .p0-logo-box img{height:clamp(38px,5.5vh,66px);width:auto;filter:brightness(0) invert(1);opacity:0.90;}
 .p0-logo-sep{width:1px;height:clamp(46px,7vh,78px);background:rgba(247,244,240,0.2);}
-.p0-rule{width:56px;height:1px;background:rgba(155,28,28,0.7);margin:0 auto 3vh;}
-.p0-master{font-size:clamp(10px,0.88vw,12px);font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,244,240,0.45);margin-bottom:2.5vh;}
-.p0-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3.2vw,50px);font-weight:700;color:#F7F4F0;line-height:1.15;max-width:72vw;margin-bottom:4vh;}
+.p0-rule{width:56px;height:2px;background:var(--bur);margin:0 auto 3vh;opacity:0.9;}
+.p0-master{font-size:clamp(10px,0.88vw,12px);font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,244,240,0.38);margin-bottom:2.5vh;}
+.p0-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3.2vw,50px);font-weight:700;color:var(--bur);line-height:1.15;max-width:72vw;margin-bottom:4vh;text-shadow:0 2px 24px rgba(155,28,28,0.3);}
 .p0-meta{display:flex;flex-direction:column;gap:1vh;align-items:center;}
-.p0-row{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.55);}
-.p0-row span{font-weight:500;color:rgba(247,244,240,0.85);}
-.p0-year{margin-top:2.5vh;font-size:clamp(10px,0.85vw,11px);font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,244,240,0.3);}
+.p0-row{font-size:clamp(11px,1vw,14px);font-weight:300;color:rgba(247,244,240,0.38);}
+.p0-row span{font-weight:500;color:rgba(247,244,240,0.75);}
+.p0-year{margin-top:2.5vh;font-size:clamp(10px,0.85vw,11px);font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,244,240,0.22);}
 /* App float */
 .p0-app{
   position:absolute;bottom:4vh;right:4vw;z-index:3;
   width:clamp(280px,28vw,460px);
   border-radius:10px;overflow:hidden;
   box-shadow:0 20px 60px rgba(0,0,0,0.5),0 4px 16px rgba(0,0,0,0.3);
-  opacity:0.18;
+  opacity:0.28;
   transform:perspective(800px) rotateY(-6deg) rotateX(3deg);
 }
-.p0-app img{width:100%;display:block;}
 
 /* ══════ S1 PROBLEMA ══════ */
 .p1-items{display:flex;flex-direction:column;gap:2vh;margin-top:0.5vh;}
@@ -263,7 +262,7 @@ nav{
       <div class="p0-logo-box"><img src="images/logo.png" alt="CurriculaFP"></div>
     </div>
     <div class="p0-rule"></div>
-    <p class="p0-master">Máster Universitario en Formación del Profesorado · Especialidad FP Sanidad · Universidad Nebrija</p>
+    <p class="p0-master">Máster Universitario en Formación del Profesorado · Especialidad FP Procesos Sanitarios · Universidad Nebrija</p>
     <h1 class="p0-title">CurriculaFP: plataforma web para la gestión curricular de la Formación Profesional</h1>
     <div class="p0-meta">
       <p class="p0-row">Trabajo Fin de Máster — <span>Proyecto de Innovación</span></p>
