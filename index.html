@@ -693,97 +693,69 @@ nav{
 
 <!-- ══ S8 DESARROLLO ══ -->
 <div class="slide" id="s8">
-  <!-- Imagen de fondo servidor -->
-  <div style="position:absolute;inset:0;background-color:#0d1a2b;background-image:url('images/slide8-servidor.png');background-size:cover;background-position:center top;"></div>
-  <!-- Overlay suave para legibilidad -->
-  <div style="position:absolute;inset:0;background:rgba(247,244,240,0.72);"></div>
+  <div style="position:absolute;inset:0;background-image:url('images/slide8-servidor.png');background-size:cover;background-position:center right;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(100deg, rgba(247,244,240,0.98) 0%, rgba(247,244,240,0.94) 50%, rgba(247,244,240,0.3) 72%, rgba(247,244,240,0.0) 100%);"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;padding:0 7vw;">
+    <div style="max-width:55%;">
 
-  <div style="position:relative;z-index:2;display:flex;align-items:center;height:100%;padding:0 6vw;">
-    <div style="width:100%;max-width:1020px;margin:0 auto;">
+      <p class="eyebrow">Líneas de desarrollo</p>
+      <div class="rule"></div>
+      <h2 class="section-title">Del prototipo a la<br>aplicación real</h2>
 
-      <p class="eyebrow" style="text-align:center;">Líneas de desarrollo</p>
-      <div class="rule" style="margin:1.2vh auto 2vh;"></div>
-      <h2 class="section-title" style="text-align:center;margin-bottom:3.5vh;">Del prototipo a la aplicación real</h2>
-
-      <div class="p8-grid">
-
-        <!-- HOJA DE RUTA -->
-        <div>
-          <div class="p8-col-head"><span class="p8-col-label">Hoja de ruta</span></div>
-          <div class="p8-phases">
-            <div class="p8-phase">
-              <div class="p8-dot"><div class="p8-dot-inner"></div></div>
-              <div>
-                <p class="p8-phase-title">Fase 1 — Fundamentos de programación</p>
-                <p class="p8-phase-desc">Python con datos reales de CurriculaFP. Entorno configurado: Python 3.11.9, VS Code.</p>
-              </div>
-            </div>
-            <div class="p8-phase">
-              <div class="p8-dot"><div class="p8-dot-inner"></div></div>
-              <div>
-                <p class="p8-phase-title">Fases 2–4 — Backend, API y frontend</p>
-                <p class="p8-phase-desc">PostgreSQL → Django → Django REST Framework → React.</p>
-              </div>
-            </div>
-            <div class="p8-phase">
-              <div class="p8-dot"><div class="p8-dot-inner"></div></div>
-              <div>
-                <p class="p8-phase-title">Fase 5 — MVP y primer piloto</p>
-                <p class="p8-phase-desc">Despliegue en Railway o Render. Primer piloto con centro educativo ya identificado.</p>
-              </div>
-            </div>
+      <!-- HOJA DE RUTA -->
+      <div class="p8-col-head" style="margin-bottom:1.5vh;padding-bottom:1vh;border-bottom:1.5px solid rgba(155,28,28,0.12);"><span class="p8-col-label">Hoja de ruta</span></div>
+      <div class="p8-phases" style="margin-bottom:2.5vh;">
+        <div class="p8-phase">
+          <div class="p8-dot"><div class="p8-dot-inner"></div></div>
+          <div>
+            <p class="p8-phase-title">Fase 1 — Fundamentos de programación</p>
+            <p class="p8-phase-desc">Python con datos reales de CurriculaFP. Entorno configurado: Python 3.11.9, VS Code.</p>
           </div>
         </div>
-
-        <div class="p8-sep"></div>
-
-        <!-- ARQUITECTURA DE CAPAS -->
-        <div>
-          <div class="p8-col-head"><span class="p8-col-label">Arquitectura de la aplicación</span></div>
-          <div class="p8-layers">
-
-            <div class="p8-layer">
-              <div class="p8-layer-box p8-layer-accent">
-                <p class="p8-layer-tag">Capa de presentación</p>
-                <p class="p8-layer-name">Frontend</p>
-                <p class="p8-layer-tech"><strong>React</strong> — interfaz web para docentes y coordinadores</p>
-              </div>
-            </div>
-
-            <div class="p8-arrow">↓</div>
-
-            <div class="p8-layer">
-              <div class="p8-layer-box p8-layer-accent2">
-                <p class="p8-layer-tag">Capa de negocio</p>
-                <p class="p8-layer-name">Backend + API REST</p>
-                <p class="p8-layer-tech"><strong>Django</strong> + <strong>Django REST Framework</strong> · lógica curricular y multicentro</p>
-              </div>
-            </div>
-
-            <div class="p8-arrow">↓</div>
-
-            <div class="p8-layer">
-              <div class="p8-layer-box p8-layer-accent3">
-                <p class="p8-layer-tag">Capa de datos</p>
-                <p class="p8-layer-name">Base de datos</p>
-                <p class="p8-layer-tech"><strong>PostgreSQL</strong> + <strong>django-tenants</strong> · un esquema por centro</p>
-              </div>
-            </div>
-
-            <div class="p8-arrow">↓</div>
-
-            <div class="p8-layer">
-              <div class="p8-layer-box p8-layer-accent4">
-                <p class="p8-layer-tag">Capa de infraestructura</p>
-                <p class="p8-layer-name">Despliegue SaaS</p>
-                <p class="p8-layer-tech"><strong>Railway / Render</strong> · suscripción por centro vía <strong>Stripe</strong></p>
-              </div>
-            </div>
-
+        <div class="p8-phase">
+          <div class="p8-dot"><div class="p8-dot-inner"></div></div>
+          <div>
+            <p class="p8-phase-title">Fases 2–4 — Backend, API y frontend</p>
+            <p class="p8-phase-desc">PostgreSQL → Django → Django REST Framework → React.</p>
           </div>
         </div>
-
+        <div class="p8-phase">
+          <div class="p8-dot"><div class="p8-dot-inner"></div></div>
+          <div>
+            <p class="p8-phase-title">Fase 5 — MVP y primer piloto</p>
+            <p class="p8-phase-desc">Despliegue en Railway o Render. Primer piloto con centro educativo ya identificado.</p>
+          </div>
+        </div>
       </div>
+
+      <!-- ARQUITECTURA DE CAPAS -->
+      <div class="p8-col-head" style="margin-bottom:1.5vh;padding-bottom:1vh;border-bottom:1.5px solid rgba(155,28,28,0.12);"><span class="p8-col-label">Arquitectura de la aplicación</span></div>
+      <div style="display:flex;align-items:center;gap:0.8vw;flex-wrap:nowrap;">
+        <div class="p8-layer-box p8-layer-accent" style="flex:1;">
+          <p class="p8-layer-tag">Presentación</p>
+          <p class="p8-layer-name" style="font-size:clamp(11px,1vw,14px);">Frontend</p>
+          <p class="p8-layer-tech" style="font-size:clamp(9px,0.8vw,11px);"><strong>React</strong></p>
+        </div>
+        <div style="color:rgba(155,28,28,0.35);font-size:14px;flex-shrink:0;">→</div>
+        <div class="p8-layer-box p8-layer-accent2" style="flex:1;">
+          <p class="p8-layer-tag">Negocio</p>
+          <p class="p8-layer-name" style="font-size:clamp(11px,1vw,14px);">Backend + API</p>
+          <p class="p8-layer-tech" style="font-size:clamp(9px,0.8vw,11px);"><strong>Django</strong> + <strong>DRF</strong></p>
+        </div>
+        <div style="color:rgba(155,28,28,0.35);font-size:14px;flex-shrink:0;">→</div>
+        <div class="p8-layer-box p8-layer-accent3" style="flex:1;">
+          <p class="p8-layer-tag">Datos</p>
+          <p class="p8-layer-name" style="font-size:clamp(11px,1vw,14px);">Base de datos</p>
+          <p class="p8-layer-tech" style="font-size:clamp(9px,0.8vw,11px);"><strong>PostgreSQL</strong> + django-tenants</p>
+        </div>
+        <div style="color:rgba(155,28,28,0.35);font-size:14px;flex-shrink:0;">→</div>
+        <div class="p8-layer-box p8-layer-accent4" style="flex:1;">
+          <p class="p8-layer-tag">Infraestructura</p>
+          <p class="p8-layer-name" style="font-size:clamp(11px,1vw,14px);">Despliegue SaaS</p>
+          <p class="p8-layer-tech" style="font-size:clamp(9px,0.8vw,11px);"><strong>Railway</strong> · <strong>Stripe</strong></p>
+        </div>
+      </div>
+
     </div>
   </div>
   <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
