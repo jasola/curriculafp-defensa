@@ -351,126 +351,144 @@ nav{
 <div class="slide" id="s4">
 <style>
 #s4{background:#F7F4F0;overflow:hidden;}
-.ao{position:absolute;inset:0;display:flex;flex-direction:column;padding:1.6vh 2.8vw 1.2vh;gap:0.8vh;}
-
-/* Title */
+.ao{position:absolute;inset:0;display:flex;flex-direction:column;padding:1.4vh 2.2vw 1vh;gap:0.6vh;}
 .ao-head{text-align:center;flex-shrink:0;}
-.ao-eye{font-size:9px;font-weight:600;letter-spacing:0.26em;text-transform:uppercase;color:rgba(155,28,28,0.4);margin-bottom:3px;}
-.ao-title{font-family:'Playfair Display',serif;font-size:clamp(16px,1.8vw,26px);font-weight:700;color:#1a0a0a;line-height:1.15;}
-.ao-hint{font-size:8.5px;color:rgba(155,28,28,0.35);margin-top:3px;letter-spacing:0.08em;}
+.ao-eye2{font-size:9px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:rgba(155,28,28,0.4);margin-bottom:2px;}
+.ao-title2{font-family:'Playfair Display',serif;font-size:clamp(14px,1.6vw,22px);font-weight:700;color:#1a0a0a;}
+.ao-hint2{font-size:8px;color:rgba(155,28,28,0.35);margin-top:2px;letter-spacing:0.08em;}
 
-/* Zone cards */
-.ao-zones{display:flex;flex-direction:column;flex:1;gap:1vh;min-height:0;}
-.ao-zone{border-radius:10px;display:flex;flex-direction:column;overflow:hidden;opacity:0;transition:opacity 0.6s ease,transform 0.6s ease;transform:translateY(10px);flex:1;min-height:0;}
-.ao-zone.visible{opacity:1;transform:translateY(0);}
+.ao-zones2{display:flex;flex-direction:column;flex:1;gap:0.8vh;min-height:0;}
+.ao-zone2{border-radius:8px;overflow:hidden;display:flex;flex-direction:column;opacity:0;transition:opacity 0.6s ease,transform 0.5s ease;transform:translateY(8px);min-height:0;}
+.ao-zone2.visible{opacity:1;transform:translateY(0);}
+.ao-zone2-plan{flex:1.6;}
+.ao-zone2-gest{flex:1;}
 
-/* Zone header strip */
-.ao-zone-hdr{display:flex;align-items:center;gap:10px;padding:clamp(6px,0.9vh,12px) clamp(12px,1.5vw,20px);flex-shrink:0;}
-.ao-zone-plan .ao-zone-hdr{background:#9B1C1C;}
-.ao-zone-gest .ao-zone-hdr{background:#1E3A5F;}
-.ao-zone-hdr-title{font-family:'Playfair Display',serif;font-size:clamp(11px,1.1vw,16px);font-weight:700;color:#fff;letter-spacing:0.01em;}
-.ao-zone-hdr-sub{font-size:clamp(8px,0.72vw,10px);font-weight:300;color:rgba(255,255,255,0.6);margin-left:2px;}
+/* Zone headers */
+.ao-zhdr{padding:clamp(5px,0.7vh,9px) clamp(12px,1.4vw,18px);display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.ao-zone2-plan .ao-zhdr{background:#9B1C1C;}
+.ao-zone2-gest .ao-zhdr{background:#1E3A5F;}
+.ao-zhdr-t{font-family:'Playfair Display',serif;font-size:clamp(10px,1vw,15px);font-weight:700;color:#fff;}
+.ao-zhdr-s{font-size:clamp(7.5px,0.68vw,9.5px);font-weight:300;color:rgba(255,255,255,0.55);}
 
-/* Zone body */
-.ao-zone-body{flex:1;min-height:0;padding:clamp(8px,1.2vh,16px) clamp(10px,1.2vw,18px);display:flex;align-items:center;}
-.ao-zone-plan .ao-zone-body{background:#fff;}
-.ao-zone-gest .ao-zone-body{background:#F0F4F9;}
+/* Zone bodies */
+.ao-zbody{flex:1;min-height:0;display:flex;padding:clamp(6px,0.9vh,12px) clamp(8px,1vw,14px);}
+.ao-zone2-plan .ao-zbody{background:#fff;}
+.ao-zone2-gest .ao-zbody{background:#EEF3FA;}
 
-/* Planning grid: 3 columns */
-.ao-plan-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5vw;width:100%;align-items:start;}
-.ao-col{display:flex;flex-direction:column;align-items:center;gap:0;}
-.ao-col-lbl{font-size:clamp(7.5px,0.68vw,9.5px);font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(155,28,28,0.5);margin-bottom:0.6vh;padding-bottom:0.4vh;border-bottom:1.5px solid rgba(155,28,28,0.15);width:100%;text-align:center;}
-.ao-col-lbl.blue{color:rgba(30,58,95,0.5);border-color:rgba(30,58,95,0.15);}
+/* PLANNING: 3 col layout */
+.ao-pgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.4fr);gap:0;width:100%;height:100%;}
+
+/* Divider between cols */
+.ao-coldiv{width:1px;background:rgba(155,28,28,0.1);margin:0 0.6vw;align-self:stretch;}
+
+.ao-col2{display:flex;flex-direction:column;align-items:center;padding:0 0.3vw;}
+.ao-collbl{font-size:clamp(7px,0.62vw,9px);font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(155,28,28,0.45);margin-bottom:0.5vh;padding-bottom:0.3vh;border-bottom:1px solid rgba(155,28,28,0.12);width:100%;text-align:center;flex-shrink:0;}
+.ao-collbl.bl{color:rgba(30,58,95,0.45);border-color:rgba(30,58,95,0.12);}
 
 /* Boxes */
-.ab{border-radius:5px;padding:clamp(4px,0.55vh,8px) clamp(8px,1vw,14px);text-align:center;font-size:clamp(8px,0.76vw,11px);font-weight:700;letter-spacing:0.05em;text-transform:uppercase;line-height:1.2;width:100%;box-sizing:border-box;}
-.ab sub{display:block;font-size:0.8em;font-weight:400;text-transform:none;letter-spacing:0;opacity:0.7;margin-top:1px;}
-.ab-red{background:#9B1C1C;color:#fff;box-shadow:0 2px 6px rgba(155,28,28,0.25);}
-.ab-amber{background:#FEF3C7;border:1.5px solid #D97706;color:#92400E;}
-.ab-plan{background:#fff;border:1.5px solid rgba(155,28,28,0.25);color:#2C1A1A;box-shadow:0 1px 4px rgba(155,28,28,0.06);}
-.ab-plan:hover{border-color:rgba(155,28,28,0.5);box-shadow:0 2px 8px rgba(155,28,28,0.12);}
-.ab-gest{background:#fff;border:1.5px solid rgba(30,58,95,0.25);color:#1E3A5F;box-shadow:0 1px 4px rgba(30,58,95,0.06);}
-.ab-cal1{background:#1E3A5F;color:#fff;box-shadow:0 2px 6px rgba(30,58,95,0.3);}
-.ab-cal2{background:#2A5298;color:#fff;box-shadow:0 2px 6px rgba(42,82,152,0.3);}
-.ab-cal3{background:#3A6BC7;color:#fff;box-shadow:0 2px 6px rgba(58,107,199,0.28);}
-.ab-cal4{background:#5B8FE8;color:#fff;box-shadow:0 2px 6px rgba(91,143,232,0.28);}
+.ab2{border-radius:4px;padding:clamp(3px,0.45vh,6px) clamp(6px,0.7vw,10px);text-align:center;font-size:clamp(7.5px,0.7vw,10px);font-weight:700;letter-spacing:0.04em;text-transform:uppercase;line-height:1.2;width:100%;box-sizing:border-box;flex-shrink:0;}
+.ab2 small{display:block;font-size:0.8em;font-weight:400;text-transform:none;opacity:0.65;letter-spacing:0;}
+.ab2-red{background:#9B1C1C;color:#fff;}
+.ab2-amber{background:#FEF3C7;border:1.5px solid #D97706;color:#92400E;}
+.ab2-plan{background:#fff;border:1.5px solid rgba(155,28,28,0.22);color:#2C1A1A;}
+.ab2-gest{background:#fff;border:1.5px solid rgba(30,58,95,0.22);color:#1a2a3a;}
+.ab2-c1{background:#1E3A5F;color:#fff;}
+.ab2-c2{background:#2C5282;color:#fff;}
+.ab2-c3{background:#3B82C4;color:#fff;}
+.ab2-c4{background:#60A5FA;color:#1a2a3a;}
 
 /* Arrows */
-.aa{text-align:center;color:rgba(155,28,28,0.3);font-size:clamp(8px,0.75vw,11px);line-height:1;padding:clamp(1px,0.3vh,4px) 0;flex-shrink:0;}
-.aa.dash{color:rgba(155,28,28,0.2);letter-spacing:1px;}
-.aa.blue{color:rgba(30,58,95,0.3);}
+.aa2{text-align:center;font-size:clamp(7px,0.65vw,9px);line-height:1;padding:clamp(1px,0.25vh,3px) 0;flex-shrink:0;}
+.aa2-red{color:rgba(155,28,28,0.35);}
+.aa2-dash{color:rgba(155,28,28,0.2);}
+.aa2-bl{color:rgba(30,58,95,0.35);}
 
-/* Gest grid */
-.ao-gest-cols{display:grid;grid-template-columns:1fr 40px 1.6fr;width:100%;align-items:center;gap:0;}
-.ao-gest-left{display:grid;grid-template-columns:1fr 1fr;gap:1vw;align-items:start;}
-.ao-gest-connector{display:flex;align-items:center;justify-content:center;color:rgba(30,58,95,0.2);font-size:clamp(12px,1.2vw,18px);}
-.ao-gest-right{display:flex;flex-direction:column;align-items:center;gap:0;width:100%;}
-.ao-gest-right .ab{max-width:220px;}
+/* Col C bottom row: SESIÓN + INSTRUMENTO side by side */
+.ao-rowpair{display:flex;gap:0.4vw;width:100%;align-items:flex-start;}
+.ao-rowpair .ab2{flex:1;}
+.ao-arr-h{display:flex;align-items:center;padding:0 2px;color:rgba(155,28,28,0.3);font-size:clamp(7px,0.65vw,9px);flex-shrink:0;padding-top:clamp(3px,0.45vh,6px);}
+
+/* Instancia arrows (vertical connectors between zones) */
+.ao-inst-row{display:flex;justify-content:flex-end;padding-right:4vw;gap:6vw;flex-shrink:0;height:0.8vh;position:relative;}
+
+/* GEST grid */
+.ao-ggrid{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;width:100%;height:100%;}
+.ao-gleft{display:grid;grid-template-columns:1fr 1fr;gap:0.8vw;padding-right:0.5vw;align-content:center;}
+.ao-gdiv{background:rgba(30,58,95,0.1);margin:0 0.8vw;align-self:stretch;}
+.ao-gright{display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:0.5vw;}
 
 /* Legend */
-.ao-legend{flex-shrink:0;display:flex;gap:2vw;justify-content:center;padding-top:0.4vh;}
-.ao-leg{display:flex;align-items:center;gap:5px;font-size:clamp(7px,0.65vw,9px);color:#8B6B6B;}
-.ao-leg-line{width:16px;height:1.5px;background:#9B1C1C;}
-.ao-leg-line.dash{background:none;border-top:1.5px dashed #9B1C1C;}
-.ao-leg-line.grey{background:none;border-top:1.5px dashed #bbb;}
+.ao-leg2{flex-shrink:0;display:flex;gap:1.8vw;justify-content:center;padding-top:0.3vh;}
+.ao-li{display:flex;align-items:center;gap:4px;font-size:clamp(6.5px,0.6vw,8.5px);color:#8B6B6B;}
+.ao-ll{width:14px;height:1.5px;background:#9B1C1C;}
+.ao-ll.d{background:none;border-top:1.5px dashed rgba(155,28,28,0.6);}
+.ao-ll.g{background:none;border-top:1.5px dashed #bbb;}
 </style>
 
 <div class="ao">
   <div class="ao-head">
-    <p class="ao-eye">Arquitectura del sistema · Modelo de datos</p>
-    <h2 class="ao-title">Flujo curricular de CurriculaFP</h2>
-    <p class="ao-hint" id="arch-hint">Pulsa → para revelar</p>
+    <p class="ao-eye2">Arquitectura del sistema · Modelo de datos</p>
+    <h2 class="ao-title2">Flujo curricular de CurriculaFP</h2>
+    <p class="ao-hint2" id="arch-hint">Pulsa → para revelar</p>
   </div>
 
-  <div class="ao-zones">
+  <div class="ao-zones2">
 
     <!-- PLANIFICACIÓN -->
-    <div class="ao-zone ao-zone-plan" id="arch-plan">
-      <div class="ao-zone-hdr">
-        <span class="ao-zone-hdr-title">Planificación del ciclo</span>
-        <span class="ao-zone-hdr-sub">— definición estructural permanente</span>
+    <div class="ao-zone2 ao-zone2-plan" id="arch-plan">
+      <div class="ao-zhdr">
+        <span class="ao-zhdr-t">Planificación del ciclo</span>
+        <span class="ao-zhdr-s">— definición estructural permanente</span>
       </div>
-      <div class="ao-zone-body">
-        <div class="ao-plan-cols">
+      <div class="ao-zbody">
+        <div class="ao-pgrid">
 
-          <!-- Col 1: Catálogo nacional -->
-          <div class="ao-col">
-            <p class="ao-col-lbl">Catálogo nacional</p>
-            <div class="ab ab-red">Ciclo</div>
-            <div class="aa">↓</div>
-            <div class="ab ab-red">Competencia<sub>Profesional</sub></div>
-            <div class="aa">↓</div>
-            <div class="ab ab-amber">Formación en empresa</div>
-            <div class="aa">↓</div>
-            <div class="ab ab-amber">CEE<sub>Competencia en empresa</sub></div>
+          <!-- Col A: Catálogo nacional -->
+          <div style="display:flex;">
+            <div class="ao-col2" style="flex:1;">
+              <p class="ao-collbl">Catálogo nacional</p>
+              <div class="ab2 ab2-red">Ciclo</div>
+              <div class="aa2 aa2-red">↓</div>
+              <div class="ab2 ab2-red">Competencia<small>Profesional</small></div>
+              <div class="aa2 aa2-red">↓</div>
+              <div class="ab2 ab2-amber">Formación en empresa</div>
+              <div class="aa2 aa2-red">↓</div>
+              <div class="ab2 ab2-amber">CEE<small>Competencia en empresa</small></div>
+            </div>
+            <div class="ao-coldiv"></div>
           </div>
 
-          <!-- Col 2: Definición en el centro -->
-          <div class="ao-col">
-            <p class="ao-col-lbl">Definición en el centro</p>
-            <div class="ab ab-plan">Módulo</div>
-            <div class="aa dash">╌╌╌</div>
-            <div class="ab ab-plan">Módulo responsable</div>
-            <div class="aa dash">╌╌╌</div>
-            <div class="ab ab-plan">Bloque didáctico</div>
-            <div class="aa dash">╌╌╌</div>
-            <div class="ab ab-plan">Unidad de trabajo</div>
-            <div class="aa dash">╌╌╌</div>
-            <div class="ab ab-plan">Contenido</div>
+          <!-- Col B: Definición en el centro izq -->
+          <div style="display:flex;">
+            <div class="ao-col2" style="flex:1;">
+              <p class="ao-collbl">Definición en el centro</p>
+              <div class="ab2 ab2-plan">Módulo</div>
+              <div class="aa2 aa2-dash">╌╌</div>
+              <div class="ab2 ab2-plan">Módulo responsable</div>
+              <div class="aa2 aa2-dash">╌╌</div>
+              <div class="ab2 ab2-plan">Bloque didáctico</div>
+              <div class="aa2 aa2-dash">╌╌</div>
+              <div class="ab2 ab2-plan">Unidad de trabajo</div>
+              <div class="aa2 aa2-dash">╌╌</div>
+              <div class="ab2 ab2-plan">Contenido</div>
+            </div>
+            <div class="ao-coldiv"></div>
           </div>
 
-          <!-- Col 3: Evaluación -->
-          <div class="ao-col">
-            <p class="ao-col-lbl">Evaluación</p>
-            <div class="ab ab-plan">Resultado de aprendizaje</div>
-            <div class="aa">↓</div>
-            <div class="ab ab-plan">Criterio de evaluación</div>
-            <div class="aa dash">╌╌╌</div>
-            <div class="ab ab-plan">Situación de aprendizaje</div>
-            <div class="aa">↓</div>
-            <div class="ab ab-plan">Sesión</div>
-            <div class="aa">→</div>
-            <div class="ab ab-plan">Instrumento de evaluación</div>
+          <!-- Col C: Definición en el centro der -->
+          <div class="ao-col2">
+            <p class="ao-collbl">&nbsp;</p>
+            <div class="ab2 ab2-plan">Resultado de aprendizaje</div>
+            <div class="aa2 aa2-red">↓</div>
+            <div class="ab2 ab2-plan">Criterio de evaluación</div>
+            <div class="aa2 aa2-dash">╌╌</div>
+            <div class="ab2 ab2-plan">Situación de aprendizaje</div>
+            <div class="aa2 aa2-red">↓</div>
+            <div class="ao-rowpair">
+              <div class="ab2 ab2-plan">Sesión</div>
+              <div class="ao-arr-h">→</div>
+              <div class="ab2 ab2-plan">Instrumento de evaluación</div>
+            </div>
           </div>
 
         </div>
@@ -478,42 +496,42 @@ nav{
     </div>
 
     <!-- GESTIÓN DE CURSOS -->
-    <div class="ao-zone ao-zone-gest" id="arch-gest">
-      <div class="ao-zone-hdr">
-        <span class="ao-zone-hdr-title">Gestión de cursos</span>
-        <span class="ao-zone-hdr-sub">— instancia anual</span>
+    <div class="ao-zone2 ao-zone2-gest" id="arch-gest">
+      <div class="ao-zhdr">
+        <span class="ao-zhdr-t">Gestión de cursos</span>
+        <span class="ao-zhdr-s">— instancia anual</span>
       </div>
-      <div class="ao-zone-body">
-        <div class="ao-gest-cols">
+      <div class="ao-zbody">
+        <div class="ao-ggrid">
 
-          <!-- Left -->
-          <div class="ao-gest-left">
-            <div class="ao-col">
-              <p class="ao-col-lbl blue">Grupos</p>
-              <div class="ab ab-gest">Grupo</div>
-              <div class="aa blue">↓</div>
-              <div class="ab ab-gest">Módulo<sub>Asignación</sub></div>
+          <!-- Left: grupos + programación -->
+          <div class="ao-gleft">
+            <div class="ao-col2">
+              <p class="ao-collbl bl">&nbsp;</p>
+              <div class="ab2 ab2-gest">Grupo</div>
+              <div class="aa2 aa2-bl">↓</div>
+              <div class="ab2 ab2-gest">Módulo<small>Asignación</small></div>
             </div>
-            <div class="ao-col">
-              <p class="ao-col-lbl blue">Programación</p>
-              <div class="ab ab-gest">Programación<sub>Temporalización SA</sub></div>
-              <div class="aa blue">↓</div>
-              <div class="ab ab-gest">Registro<sub>Asistencia</sub></div>
+            <div class="ao-col2">
+              <p class="ao-collbl bl">&nbsp;</p>
+              <div class="ab2 ab2-gest">Programación<small>Temporalización SA</small></div>
+              <div class="aa2 aa2-bl">↓</div>
+              <div class="ab2 ab2-gest">Registro<small>Asistencia</small></div>
             </div>
           </div>
 
-          <div class="ao-gest-connector">⟶</div>
+          <div class="ao-gdiv"></div>
 
-          <!-- Right: Calificaciones -->
-          <div class="ao-gest-right">
-            <p class="ao-col-lbl blue" style="width:100%;max-width:220px;margin-bottom:0.6vh;">Calificaciones</p>
-            <div class="ab ab-cal1" style="max-width:220px;width:100%;">Calificación instrumento</div>
-            <div class="aa blue">↓</div>
-            <div class="ab ab-cal2" style="max-width:220px;width:100%;">Calificación CE</div>
-            <div class="aa blue">↓</div>
-            <div class="ab ab-cal3" style="max-width:220px;width:100%;">Calificación RA</div>
-            <div class="aa blue">↓</div>
-            <div class="ab ab-cal4" style="max-width:220px;width:100%;">Calificación módulo</div>
+          <!-- Right: calificaciones -->
+          <div class="ao-col2" style="justify-content:center;">
+            <p class="ao-collbl bl">Calificaciones</p>
+            <div class="ab2 ab2-c1">Calificación instrumento</div>
+            <div class="aa2 aa2-bl">↓</div>
+            <div class="ab2 ab2-c2">Calificación CE</div>
+            <div class="aa2 aa2-bl">↓</div>
+            <div class="ab2 ab2-c3">Calificación RA</div>
+            <div class="aa2 aa2-bl">↓</div>
+            <div class="ab2 ab2-c4">Calificación módulo</div>
           </div>
 
         </div>
@@ -522,10 +540,10 @@ nav{
 
   </div>
 
-  <div class="ao-legend">
-    <div class="ao-leg"><div class="ao-leg-line"></div>Relación directa</div>
-    <div class="ao-leg"><div class="ao-leg-line dash"></div>Relación condicional</div>
-    <div class="ao-leg"><div class="ao-leg-line grey"></div>Instancia entre niveles</div>
+  <div class="ao-leg2">
+    <div class="ao-li"><div class="ao-ll"></div>Relación directa</div>
+    <div class="ao-li"><div class="ao-ll d"></div>Relación condicional</div>
+    <div class="ao-li"><div class="ao-ll g"></div>Instancia entre niveles</div>
   </div>
 </div>
 
