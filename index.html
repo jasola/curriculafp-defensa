@@ -538,11 +538,7 @@ nav{
 
   </div>
 
-  <div class="ao-leg2">
-    <div class="ao-li"><div class="ao-ll"></div>Relación directa</div>
-    <div class="ao-li"><div class="ao-ll d"></div>Relación condicional</div>
-    <div class="ao-li"><div class="ao-ll g"></div>Instancia entre niveles</div>
-  </div>
+
 </div>
 
 <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
@@ -550,32 +546,65 @@ nav{
 
 <!-- ══ S5 PROTOTIPO ══ -->
 <div class="slide" id="s5">
-  <div class="editorial">
-    <div class="editorial-content">
-      <p class="eyebrow">Resultado — Prototipo funcional navegable</p>
-      <div class="rule"></div>
-      <h2 class="section-title">Demostración<br>de viabilidad</h2>
-      <div class="p5-browser">
-        <div class="p5-bar">
-          <div class="p5-dots"><div class="p5-d"></div><div class="p5-d"></div><div class="p5-d"></div></div>
-          <div class="p5-addr">jasola.github.io/curriculafp-prototipo</div>
-        </div>
-        <img src="images/slide4-prototipo.png" alt="Prototipo CurriculaFP">
-      </div>
-      <div class="p5-flows">
-        <div class="p5-flow"><div class="p5-flow-title">Configuración normativa</div><div class="p5-flow-desc">Catálogo nacional, implantación del ciclo, especialidades y espacios.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Planificación completa</div><div class="p5-flow-desc">SA vinculadas a RA y criterios de evaluación con ponderaciones.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Gestión académica anual</div><div class="p5-flow-desc">Grupos, horarios, asistencia y calificaciones consolidadas.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Formación en empresa</div><div class="p5-flow-desc">Asignación, tutorías, calificación dual y exenciones individuales.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Expediente del alumno</div><div class="p5-flow-desc">Historial acumulable por DNI entre centros. Competencias CNCP.</div></div>
-        <div class="p5-flow"><div class="p5-flow-title">Proyecto Intermodular</div><div class="p5-flow-desc">Reto del ciclo, módulos y RA asociados. Aplicable a cualquier título.</div></div>
-      </div>
-      <a class="p5-btn" href="https://jasola.github.io/curriculafp-prototipo" target="_blank" rel="noopener">
-        Abrir prototipo
-        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:3vh 6vw 2.5vh;gap:1.8vh;">
+
+    <!-- Header -->
+    <div style="text-align:center;flex-shrink:0;">
+      <p class="eyebrow" style="text-align:center;">Resultado — Prototipo funcional navegable</p>
+      <div class="rule" style="margin:1vh auto;"></div>
+      <h2 class="section-title" style="font-size:clamp(22px,2.6vw,38px);margin-bottom:0;">Demostración de viabilidad</h2>
     </div>
-    <div class="editorial-img"><img src="images/slide4-prototipo.png" alt="" style="object-position:top;"></div>
+
+    <!-- Browser frame -->
+    <div style="width:72%;max-width:900px;flex-shrink:0;border-radius:10px;overflow:hidden;border:1px solid rgba(155,28,28,0.12);box-shadow:0 8px 40px rgba(44,26,26,0.12),0 2px 8px rgba(44,26,26,0.06);">
+      <div style="background:#e8e4df;padding:9px 14px;display:flex;align-items:center;gap:8px;">
+        <div style="display:flex;gap:5px;">
+          <div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div>
+          <div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div>
+          <div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div>
+        </div>
+        <div style="flex:1;background:rgba(255,255,255,0.55);border-radius:4px;padding:3px 10px;font-size:10px;color:var(--mid-l);font-family:'Inter',sans-serif;letter-spacing:0.02em;">jasola.github.io/curriculafp-prototipo</div>
+      </div>
+      <img src="images/slide4-prototipo.png" alt="Prototipo CurriculaFP" style="width:100%;display:block;max-height:26vh;object-fit:cover;object-position:top;">
+    </div>
+
+    <!-- Flows grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8vh 1.5vw;width:72%;max-width:900px;flex-shrink:0;">
+      <div style="background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:5px;padding:clamp(7px,0.9vh,12px) clamp(10px,1.1vw,16px);box-shadow:0 1px 4px rgba(155,28,28,0.06);">
+        <p style="font-size:clamp(10px,0.9vw,13px);font-weight:600;color:var(--dark2);margin-bottom:3px;">Configuración normativa</p>
+        <p style="font-size:clamp(9px,0.8vw,11px);font-weight:300;color:var(--mid-l);line-height:1.5;">Catálogo nacional, implantación del ciclo, especialidades y espacios.</p>
+      </div>
+      <div style="background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:5px;padding:clamp(7px,0.9vh,12px) clamp(10px,1.1vw,16px);box-shadow:0 1px 4px rgba(155,28,28,0.06);">
+        <p style="font-size:clamp(10px,0.9vw,13px);font-weight:600;color:var(--dark2);margin-bottom:3px;">Planificación completa</p>
+        <p style="font-size:clamp(9px,0.8vw,11px);font-weight:300;color:var(--mid-l);line-height:1.5;">SA vinculadas a RA y criterios de evaluación con ponderaciones.</p>
+      </div>
+      <div style="background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:5px;padding:clamp(7px,0.9vh,12px) clamp(10px,1.1vw,16px);box-shadow:0 1px 4px rgba(155,28,28,0.06);">
+        <p style="font-size:clamp(10px,0.9vw,13px);font-weight:600;color:var(--dark2);margin-bottom:3px;">Gestión académica anual</p>
+        <p style="font-size:clamp(9px,0.8vw,11px);font-weight:300;color:var(--mid-l);line-height:1.5;">Grupos, horarios, asistencia y calificaciones consolidadas.</p>
+      </div>
+      <div style="background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:5px;padding:clamp(7px,0.9vh,12px) clamp(10px,1.1vw,16px);box-shadow:0 1px 4px rgba(155,28,28,0.06);">
+        <p style="font-size:clamp(10px,0.9vw,13px);font-weight:600;color:var(--dark2);margin-bottom:3px;">Formación en empresa</p>
+        <p style="font-size:clamp(9px,0.8vw,11px);font-weight:300;color:var(--mid-l);line-height:1.5;">Asignación, tutorías, calificación dual y exenciones individuales.</p>
+      </div>
+      <div style="background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:5px;padding:clamp(7px,0.9vh,12px) clamp(10px,1.1vw,16px);box-shadow:0 1px 4px rgba(155,28,28,0.06);">
+        <p style="font-size:clamp(10px,0.9vw,13px);font-weight:600;color:var(--dark2);margin-bottom:3px;">Expediente del alumno</p>
+        <p style="font-size:clamp(9px,0.8vw,11px);font-weight:300;color:var(--mid-l);line-height:1.5;">Historial acumulable por DNI entre centros. Competencias CNCP.</p>
+      </div>
+      <div style="background:#fff;border:1px solid rgba(155,28,28,0.1);border-radius:5px;padding:clamp(7px,0.9vh,12px) clamp(10px,1.1vw,16px);box-shadow:0 1px 4px rgba(155,28,28,0.06);">
+        <p style="font-size:clamp(10px,0.9vw,13px);font-weight:600;color:var(--dark2);margin-bottom:3px;">Proyecto Intermodular</p>
+        <p style="font-size:clamp(9px,0.8vw,11px);font-weight:300;color:var(--mid-l);line-height:1.5;">Reto del ciclo, módulos y RA asociados. Aplicable a cualquier título.</p>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <a href="https://jasola.github.io/curriculafp-prototipo" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:9px;background:var(--bur);color:#F7F4F0;font-size:clamp(12px,1.1vw,15px);font-weight:500;letter-spacing:0.06em;padding:12px 36px;border-radius:4px;text-decoration:none;box-shadow:0 4px 16px rgba(155,28,28,0.25);transition:background 0.2s,transform 0.15s;flex-shrink:0;"
+       onmouseover="this.style.background='#C13333';this.style.transform='translateY(-1px)'"
+       onmouseout="this.style.background='#9B1C1C';this.style.transform='translateY(0)'">
+      Abrir prototipo
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+
   </div>
   <div class="stamp"><img src="images/logo.png" alt="CurriculaFP"></div>
 </div>
