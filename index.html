@@ -123,9 +123,13 @@ nav{
   position:absolute;bottom:4vh;right:3vw;z-index:3;
   width:clamp(160px,15vw,240px);
   border-radius:8px;overflow:hidden;
-  box-shadow:0 12px 40px rgba(0,0,0,0.4),0 2px 10px rgba(0,0,0,0.25);
-  opacity:0.15;
+  opacity:0.22;
+  mix-blend-mode:luminosity;
   transform:perspective(800px) rotateY(-6deg) rotateX(3deg);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 8%,black 85%,transparent 100%),linear-gradient(to right,transparent 0%,black 5%,black 90%,transparent 100%);
+  -webkit-mask-composite:destination-in;
+  mask-image:linear-gradient(to bottom,transparent 0%,black 8%,black 85%,transparent 100%),linear-gradient(to right,transparent 0%,black 5%,black 90%,transparent 100%);
+  mask-composite:intersect;
 }
 
 /* ══════ S1 PROBLEMA ══════ */
@@ -251,7 +255,7 @@ nav{
   <!-- Imagen de fondo aula -->
   <div style="position:absolute;inset:0;background-image:url('images/portada.png');background-size:cover;background-position:center;"></div>
   <!-- Gradiente oscuro dramático -->
-  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(13,10,8,0.82) 0%,rgba(13,10,8,0.65) 50%,rgba(13,10,8,0.78) 100%);"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(13,10,8,0.72) 0%,rgba(13,10,8,0.52) 50%,rgba(13,10,8,0.68) 100%);"></div>
   <!-- Línea granate sutil en la parte inferior -->
   <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 0%,rgba(155,28,28,0.8) 30%,rgba(155,28,28,0.8) 70%,transparent 100%);z-index:3;"></div>
 
@@ -270,7 +274,7 @@ nav{
       <p class="p0-row">Tutor: <span>Dr. Antonio Camargo García</span></p>
       <p class="p0-row">Alumno: <span>José Antonio Sola Jiménez</span></p>
     </div>
-    <p class="p0-year">Junio 2026</p>
+    <p class="p0-year">Julio 2026</p>
   </div>
 
   <!-- App flotante esquina inferior derecha -->
